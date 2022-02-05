@@ -1,25 +1,27 @@
 package myProject;
 
 import java.io.*;
+import java.util.ArrayList;
 
 public class FileManager {
+    public static final String PATH_DICCIONARIO = "src/myProject/files/diccionario.txt";
+    public static final String PATH_USUARIO = "src/myProject/files/usuario.txt";
     private FileReader fileReader;
     private BufferedReader input;
     private FileWriter fileWriter;
     private BufferedWriter output;
 
 
-    public String lecturaDiccionario() {
-        String texto="";
+    public ArrayList <String> lecturaDiccionario() {
+        ArrayList <String> palabra = new ArrayList<String>();
 
         try {
-            fileReader = new FileReader("src/myProject/files/diccionario.txt");
+            fileReader = new FileReader(PATH_DICCIONARIO);
             input = new BufferedReader(fileReader);
             String line = input.readLine();
             while(line!=null){
-                texto+=line;
-                texto+="\n";
-                line=input.readLine();
+                palabra.add(line);
+                line = input.readLine();
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -32,20 +34,19 @@ public class FileManager {
                 e.printStackTrace();
             }
         }
-        return texto;
+        return palabra;
     }
 
-    public String lecturaUsuario() {
-        String texto="";
+    public ArrayList <String> lecturaUsuario() {
+        ArrayList <String> usuario = new ArrayList<String>();
 
         try {
-            fileReader = new FileReader("src/myProject/files/usuario.txt");
+            fileReader = new FileReader(PATH_USUARIO);
             input = new BufferedReader(fileReader);
             String line = input.readLine();
-            while(line!=null){
-                texto+=line;
-                texto+="\n";
-                line=input.readLine();
+            while(line != null){
+                usuario.add(line);
+                line = input.readLine();
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -58,12 +59,12 @@ public class FileManager {
                 e.printStackTrace();
             }
         }
-        return texto;
+        return usuario;
     }
 
     public void escribirUsuario(String linea){
         try {
-            fileWriter = new FileWriter("src/myProject/files/usuario.txt",true);
+            fileWriter = new FileWriter(PATH_USUARIO,true);
             output = new BufferedWriter(fileWriter);
             output.write(linea);
             output.newLine();
