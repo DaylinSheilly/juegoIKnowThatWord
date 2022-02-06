@@ -14,7 +14,6 @@ import java.awt.*;
 public class GUIINowThatWord extends JFrame {
 
     private Header headerProject;
-    private Usuario usuario;
 
     /**
      * Constructor of GUI class

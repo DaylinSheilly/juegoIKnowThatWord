@@ -6,9 +6,12 @@ import java.util.ArrayList;
 public class Usuario {
     private ArrayList<String> usuario = new ArrayList<String>();
     private ArrayList<String> usuarioRegistrado = new ArrayList<String>();
-    private int unUsuario;
-    private String usuarioIngresado, nivelUsuario;
+    private int unUsuario, nivelUsuario;
+    private String usuarioIngresado;
 
+    /**
+     * Constructor
+     */
     public Usuario() {
 
         FileManager fileManager = new FileManager();
@@ -16,24 +19,38 @@ public class Usuario {
         fileManager.escribirUsuario(usuarioIngresado);
 
         unUsuario = 0;
-        nivelUsuario = "1";
+        nivelUsuario = 1;
         usuarioIngresado = " ";
 
     }
+
+    //---------------------------------------------------------------------------------------------------------------------------------------
+
+    /**
+     * This function saves the information of a new user.
+     */
 
     public void registrarUsuario(){
         usuarioIngresado = JOptionPane.showInputDialog(null, "Ingresa tu nombre",
                 "Solicitud de datos", JOptionPane.QUESTION_MESSAGE);
         usuarioRegistrado.add(usuarioIngresado);
-        usuarioRegistrado.add(nivelUsuario);
+        usuarioRegistrado.add(String.valueOf(nivelUsuario));
     }
 
-    public String getNivelUsuario(String usuarioIngresado) {
+    //---------------------------------------------------------------------------------------------------------------------------------------
+
+    /**
+     * This function gets the user level.
+     * @param usuarioIngresado
+     * @return user level
+     */
+
+    public int getNivelUsuario(String usuarioIngresado) {
         for (unUsuario = 0; unUsuario < usuario.size(); unUsuario++) {
             if (usuario.get(unUsuario) == usuarioIngresado) {
-                nivelUsuario = (usuario.get(unUsuario+1));
+                nivelUsuario = Integer.parseInt(usuario.get(unUsuario+1));
             } else {
-                nivelUsuario = "1";
+                nivelUsuario = 1;
             }
         }
         return nivelUsuario;

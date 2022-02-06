@@ -4,8 +4,11 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class Diccionario {
-
     private ArrayList<String> diccionario = new ArrayList <String> ();
+
+    /**
+     * Constructor
+     */
 
     public Diccionario(){
 
@@ -13,6 +16,13 @@ public class Diccionario {
         diccionario = fileManager.lecturaDiccionario();
 
     }
+
+    //---------------------------------------------------------------------------------------------------------------------------------------
+
+    /**
+     * This function gets a random word from dictionary.
+     * @return a word
+     */
 
     public String getPalabra(){
         Random aleatorio = new Random();

@@ -12,6 +12,10 @@ public class FileManager {
     private FileWriter fileWriter;
     private BufferedWriter output;
 
+    /**
+     * This function reads the words to memorize that are in dictionary.
+     * @return the word
+     */
 
     public ArrayList <String> lecturaDiccionario() {
         ArrayList <String> palabra = new ArrayList<String>();
@@ -38,6 +42,13 @@ public class FileManager {
         return palabra;
     }
 
+    //---------------------------------------------------------------------------------------------------------------------------------------
+
+    /**
+     * This function reads the saved information of the user.
+     * @return
+     */
+
     public ArrayList <String> lecturaUsuario() {
         ArrayList <String> usuario = new ArrayList<String>();
 
@@ -62,6 +73,13 @@ public class FileManager {
         }
         return usuario;
     }
+
+    //---------------------------------------------------------------------------------------------------------------------------------------
+
+    /**
+     * This function writes the user informaction in usuario.txt
+     * @param linea
+     */
 
     public void escribirUsuario(String linea){
         try {
