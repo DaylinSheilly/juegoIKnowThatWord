@@ -17,7 +17,7 @@ public class Diccionario {
     public String getPalabra(){
         Random aleatorio = new Random();
         //diccionario.size() obtiene el tamaño del arraylist, comienza en 0
-        return diccionario.get(aleatorio.nextInt(diccionario.size())); //retorna un entero entre 0 y 7
+        return diccionario.get(aleatorio.nextInt(diccionario.size())); //retorna un entero entre 0 y 199
 
     }
 }

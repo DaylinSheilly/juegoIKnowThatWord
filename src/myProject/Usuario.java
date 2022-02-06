@@ -1,5 +1,6 @@
 package myProject;
 
+import javax.swing.*;
 import java.util.ArrayList;
 
 public class Usuario {
@@ -12,15 +13,17 @@ public class Usuario {
 
         FileManager fileManager = new FileManager();
         usuario = fileManager.lecturaUsuario();
-        usuarioRegistrado = fileManager.escribirUsuario(String usuarioIngresado);
+        fileManager.escribirUsuario(usuarioIngresado);
 
         unUsuario = 0;
-        nivelUsuario = " ";
+        nivelUsuario = "1";
         usuarioIngresado = " ";
 
     }
 
-    public void registrarUsuario(String usuarioIngresado){
+    public void registrarUsuario(){
+        usuarioIngresado = JOptionPane.showInputDialog(null, "Ingresa tu nombre",
+                "Solicitud de datos", JOptionPane.QUESTION_MESSAGE);
         usuarioRegistrado.add(usuarioIngresado);
         usuarioRegistrado.add(nivelUsuario);
     }

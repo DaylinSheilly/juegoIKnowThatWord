@@ -1,11 +1,12 @@
 package myProject;
 
+import javax.swing.*;
 import java.io.*;
 import java.util.ArrayList;
 
 public class FileManager {
-    public static final String PATH_DICCIONARIO = "src/myProject/files/diccionario.txt";
-    public static final String PATH_USUARIO = "src/myProject/files/usuario.txt";
+    public static final String PATH_DICCIONARIO = "src/files/diccionario.txt";
+    public static final String PATH_USUARIO = "src/files/usuario.txt";
     private FileReader fileReader;
     private BufferedReader input;
     private FileWriter fileWriter;

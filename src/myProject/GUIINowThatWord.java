@@ -14,6 +14,7 @@ import java.awt.*;
 public class GUIINowThatWord extends JFrame {
 
     private Header headerProject;
+    private Usuario usuario;
 
     /**
      * Constructor of GUI class
@@ -43,6 +44,7 @@ public class GUIINowThatWord extends JFrame {
         headerProject = new Header("Header ...", Color.BLACK);
 
         this.add(headerProject,BorderLayout.NORTH); //Change this line if you change JFrame Container's Layout
+
     }
 
     /**
