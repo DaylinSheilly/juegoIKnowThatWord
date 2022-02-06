@@ -16,11 +16,12 @@ import java.awt.event.MouseEvent;
 public class GUIINowThatWord extends JFrame {
 
     private Header headerProject;
-    private JPanel panelPalabras, panelEspacioEnBlanco1, panelEspacioEnBlanco2, panelEspacioEnBlanco3, panelEspacioEnBlanco4, panelEspacioEnBlanco5, panelInfo;
+    private JPanel panelPalabras, panelEspacioEnBlanco1, panelEspacioEnBlanco2, panelEspacioEnBlanco3, panelEspacioEnBlanco4, panelEspacioEnBlanco5, panelInfo, panelInstrucciones;
     private JButton ayuda, salir, botonSI, botonNO;
-    private JTextArea nivel, aciertos,errores;
+    private JTextArea nivel, aciertos,errores, instrucciones;
 
     int numeroNivel, numeroAciertos, numeroErrores = 0;
+    String INSTRUCCIONES = "instrucciones"; //RELLENAR
 
     private Escucha escucha;
 
@@ -55,9 +56,23 @@ public class GUIINowThatWord extends JFrame {
         escucha = new Escucha();
         //Set up JComponents
 
-        //createPalabrasAMemorizarGUI(constraints);
+        panelInstrucciones = new JPanel();
+        panelInstrucciones.setPreferredSize(new Dimension(410,1005));
+        panelInstrucciones.setBackground(Color.WHITE);
+        panelInstrucciones.setBorder(BorderFactory.createTitledBorder("Instrucciones del juego."));
+        panelInstrucciones.setLayout(new BorderLayout());
+
+        instrucciones = new JTextArea();
+        instrucciones.setText(INSTRUCCIONES);
+        instrucciones.setLineWrap(true);
+        instrucciones.setPreferredSize(new Dimension(408, 1000));
+        instrucciones.setWrapStyleWord(true);
+        instrucciones.setLineWrap(true);
+        instrucciones.setEditable(false);
+
+        createPalabrasAMemorizarGUI(constraints);
         //createPalabrasAVerificarGUI(constraints);
-        createConclusionGUI(constraints);
+        //createConclusionGUI(constraints);
     }
 
     //------------------------------------------------------------------------------------------------------------------------------------------
@@ -90,7 +105,6 @@ public class GUIINowThatWord extends JFrame {
      */
 
     public void createHeader(GridBagConstraints constraints) {
-        System.out.println("creé eñ header");
         headerProject = new Header("I Know that Word", new Color(128, 96, 0));
         constraints.gridx = 0;
         constraints.gridy = 0;
@@ -111,6 +125,7 @@ public class GUIINowThatWord extends JFrame {
         ayuda = new JButton(" ? ");
         ayuda.setFont(new Font("SansSerif", Font.BOLD + Font.PLAIN, 14));
         ayuda.setForeground(Color.white);
+        ayuda.removeMouseListener(escucha);
         ayuda.addMouseListener(escucha);
         ayuda.setBackground(new Color(0, 112, 192));
         constraints.gridx = 0;
@@ -202,6 +217,7 @@ public class GUIINowThatWord extends JFrame {
         salir = new JButton("Salir");
         salir.setFont(new Font("SansSerif", Font.BOLD + Font.PLAIN, 14));
         salir.setForeground(Color.WHITE);
+        salir.removeMouseListener(escucha);
         salir.addMouseListener(escucha);
         salir.setBackground(new Color(192, 0, 0));
         constraints.gridx = 4;
@@ -295,6 +311,7 @@ public class GUIINowThatWord extends JFrame {
         botonSI.setPreferredSize(new Dimension(100, 40));
         botonSI.setFont(new Font("SansSerif", Font.BOLD + Font.PLAIN, 25));
         botonSI.setForeground(new Color(32, 50, 20));
+        botonSI.removeMouseListener(escucha);
         botonSI.addMouseListener(escucha);
         botonSI.setBackground(new Color(146, 208, 80));
 
@@ -319,6 +336,7 @@ public class GUIINowThatWord extends JFrame {
         botonNO.setPreferredSize(new Dimension(100, 40));
         botonNO.setFont(new Font("SansSerif", Font.BOLD + Font.PLAIN, 25));
         botonNO.setForeground(new Color(62, 0, 0));
+        botonNO.removeMouseListener(escucha);
         botonNO.addMouseListener(escucha);
         botonNO.setBackground(new Color(255, 0, 0));
 
@@ -515,6 +533,19 @@ public class GUIINowThatWord extends JFrame {
         @Override
         public void mouseClicked(MouseEvent e)
         {
+            if(e.getSource()==salir)
+            {
+                System.exit(0);
+            }
+            else if(e.getSource()==ayuda)
+            {
+                panelInstrucciones.add(instrucciones, BorderLayout.LINE_START);
+
+                JScrollPane scroll = new JScrollPane(panelInstrucciones);
+                scroll.setPreferredSize(new Dimension(440, 455));
+
+                JOptionPane.showMessageDialog(null, scroll, "Instrucciones del juego", JOptionPane.INFORMATION_MESSAGE);
+            }
         }
     }
 }
