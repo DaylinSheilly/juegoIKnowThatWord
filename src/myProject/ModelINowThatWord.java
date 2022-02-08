@@ -1,6 +1,7 @@
 package myProject;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class ModelINowThatWord {
 
@@ -8,6 +9,8 @@ public class ModelINowThatWord {
     private Usuario usuario;
     private int conteoErrores, conteoAciertos, nivel, unaPalabra;
     private boolean fallo, ganar;
+    private String palabra, nuevaPalabra;
+    private ArrayList<String> palabrasDelNivel, palabrasAMemorizar;
 
     /**
      * Constructor
@@ -19,41 +22,48 @@ public class ModelINowThatWord {
         conteoAciertos = 0;
         nivel = 1;
         unaPalabra = 0;
-    }
-
-    public void listaDePalabras(int cantidadDePalabras){
-        for(unaPalabra = 0; unaPalabra < cantidadDePalabras; unaPalabra++){
-            palabras.getPalabra();
-        }
-
+        palabrasDelNivel = new ArrayList<String>();
+        palabrasAMemorizar = new ArrayList<String>();
     }
 
     public void palabrasPorNivel(int nivel){
         switch (nivel){
-            case 1: palabras.getPalabra(); //del 0 al 19
+            case 1: palabrasDelNivel=palabras.getPalabra(19); //del 0 al 19
                 break;
-            case 2: palabras.getPalabra(); //del 0 al 39
+            case 2: palabrasDelNivel=palabras.getPalabra(39); //del 0 al 39
                 break;
-            case 3: palabras.getPalabra(); //del 0 al 49
+            case 3: palabrasDelNivel=palabras.getPalabra(49); //del 0 al 49
                 break;
-            case 4: palabras.getPalabra(); //del 0 al 59
+            case 4: palabrasDelNivel=palabras.getPalabra(59); //del 0 al 59
                 break;
-            case 5: palabras.getPalabra(); //del 0 al 69
+            case 5: palabrasDelNivel=palabras.getPalabra(69); //del 0 al 69
                 break;
-            case 6: palabras.getPalabra(); //del 0 al 79
+            case 6: palabrasDelNivel=palabras.getPalabra(79); //del 0 al 79
                 break;
-            case 7: palabras.getPalabra(); //del 0 al 99
+            case 7: palabrasDelNivel=palabras.getPalabra(99); //del 0 al 99
                 break;
-            case 8: palabras.getPalabra(); //del 0 al 119
+            case 8: palabrasDelNivel=palabras.getPalabra(119); //del 0 al 119
                 break;
-            case 9: palabras.getPalabra(); //del 0 al 139
+            case 9: palabrasDelNivel=palabras.getPalabra(139); //del 0 al 139
                 break;
-            case 10: palabras.getPalabra(); //del 0 al 199
+            case 10: palabrasDelNivel=palabras.getPalabra(199); //del 0 al 199
                 break;
-
-
         }
+        for(int i=0;i<palabrasDelNivel.size();i++)
+        {
+            System.out.println(palabrasDelNivel.get(i));
+        }
+        palabrasAMemorizar();
+    }
 
+    public void palabrasAMemorizar()
+    {
+        Random aleatorio = new Random();
+        int cantidadPalabrasAMemorizar = (palabrasDelNivel.size())/2;
+        for(int flag=0;flag<cantidadPalabrasAMemorizar;flag++)
+        {
+            palabrasAMemorizar.add(palabrasDelNivel.get(flag));
+        }
     }
 
     /**
@@ -61,14 +71,36 @@ public class ModelINowThatWord {
      * @param palabra
      */
 
-    public void validarPalabra(String palabra){
-        fallo = false;
-        if(palabras.getPalabra() == palabra){
+    public void validarPalabra(String palabra, boolean respuestaAfirmativa) {
+        boolean correcta = false;
+        int flag = 0;
+        if (respuestaAfirmativa == true) {
+            for (flag = 0; flag < palabrasAMemorizar.size(); flag++) ;
+            {
+                if (palabra == palabrasAMemorizar.get(flag)) {
+                    correcta = true;
+                } else {
+                    correcta = false;
+                }
+            }
+        } else {
+            if (respuestaAfirmativa == false) {
+                for (flag = 0; flag < palabrasAMemorizar.size(); flag++) ;
+                {
+                    if (palabra == palabrasAMemorizar.get(flag)) {
+                        correcta = false;
+                    } else {
+                        correcta = true;
+                    }
+                }
+            }
+        }
+        if (correcta) {
             conteoAciertos++;
-        }else{
-            fallo = true;
+        } else {
             conteoErrores++;
         }
+
     }
 
     /**

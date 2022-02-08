@@ -23,6 +23,7 @@ public class GUIINowThatWord extends JFrame {
     int numeroNivel, numeroAciertos, numeroErrores = 0;
     String INSTRUCCIONES = "instrucciones"; //RELLENAR
 
+    private ModelINowThatWord game;
     private Escucha escucha;
 
     /**
@@ -69,6 +70,9 @@ public class GUIINowThatWord extends JFrame {
         instrucciones.setWrapStyleWord(true);
         instrucciones.setLineWrap(true);
         instrucciones.setEditable(false);
+
+
+        //game.palabrasPorNivel(1);
 
         createPalabrasAMemorizarGUI(constraints);
         //createPalabrasAVerificarGUI(constraints);

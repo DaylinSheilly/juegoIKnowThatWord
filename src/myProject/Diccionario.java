@@ -2,9 +2,13 @@ package myProject;
 
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.Vector;
 
 public class Diccionario {
     private ArrayList<String> diccionario = new ArrayList <String> ();
+    private ArrayList<String> palabrasDelNivel;
+
+    private String palabra, nuevaPalabra;
 
     /**
      * Constructor
@@ -24,10 +28,40 @@ public class Diccionario {
      * @return a word
      */
 
-    public String getPalabra(){
+    public ArrayList<String> getPalabra(int cantidadPalabras){
         Random aleatorio = new Random();
+        boolean añadir = true;
         //diccionario.size() obtiene el tamaño del arraylist, comienza en 0
-        return diccionario.get(aleatorio.nextInt(diccionario.size())); //retorna un entero entre 0 y 199
-
+        for(int flag=0;flag<cantidadPalabras;flag++)
+        {
+            nuevaPalabra = palabrasDelNivel.get(aleatorio.nextInt(palabrasDelNivel.size()));
+            if(palabrasDelNivel.size()!=0)
+            {
+                for (int flag1 = 0; flag1 < palabrasDelNivel.size(); flag1++)
+                {
+                    if (palabrasDelNivel.get(flag1) == nuevaPalabra)
+                    {
+                        añadir = false;
+                    }
+                    else
+                    {
+                        añadir = true;
+                    }
+                }
+                if (añadir)
+                {
+                    palabrasDelNivel.add(nuevaPalabra);
+                }
+                else
+                {
+                    flag--;
+                }
+            }
+            else
+            {
+                palabrasDelNivel.add(nuevaPalabra);
+            }
+        }
+        return palabrasDelNivel;
     }
 }
