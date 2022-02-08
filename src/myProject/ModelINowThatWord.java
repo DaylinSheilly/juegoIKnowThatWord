@@ -1,5 +1,6 @@
 package myProject;
 
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -7,9 +8,9 @@ public class ModelINowThatWord {
 
     private Diccionario palabras;
     private Usuario usuario;
-    private int conteoErrores, conteoAciertos, nivel, unaPalabra;
+    private int conteoErrores, conteoAciertos, nivel, unaPalabra, suNivel;
     private boolean fallo, ganar;
-    private String palabra, nuevaPalabra;
+    private String palabra, nuevaPalabra, elUsuario, nombreUsuario;
     private ArrayList<String> palabrasDelNivel, palabrasAMemorizar;
 
     /**
@@ -24,6 +25,7 @@ public class ModelINowThatWord {
         unaPalabra = 0;
         palabrasDelNivel = new ArrayList<String>();
         palabrasAMemorizar = new ArrayList<String>();
+        nombreUsuario = "";
     }
 
     public void palabrasPorNivel(int nivel){
@@ -48,10 +50,6 @@ public class ModelINowThatWord {
                 break;
             case 10: palabrasDelNivel=palabras.getPalabra(200); //del 0 al 199
                 break;
-        }
-        for(int i=0;i<palabrasDelNivel.size();i++)
-        {
-            System.out.println(palabrasDelNivel.get(i));
         }
         palabrasAMemorizar();
     }
@@ -102,11 +100,29 @@ public class ModelINowThatWord {
 
     }
 
+    public void pedirDatos(){
+        usuario.pedirDatos();
+    }
+
+    /**
+     * This function saves the information of a new user.
+     */
+
+    public void registrarUsuario(){
+        usuario.registrarUsuario();
+    }
+
+    public void detectNewOrOldUser()
+    {
+        elUsuario = usuario.getUsuarioIngresado();
+        suNivel = usuario.getNivelUsuario();
+    }
+
     /**
      * This function level ups user.
      * @return new level
      */
-    public int subirNivelUsuario(String usuarioIngresado){
-        return usuario.getNivelUsuario(usuarioIngresado)+1;
+    public int subirNivelUsuario(){
+        return suNivel+1;
     }
 }

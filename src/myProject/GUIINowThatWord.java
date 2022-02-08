@@ -72,10 +72,10 @@ public class GUIINowThatWord extends JFrame {
         instrucciones.setLineWrap(true);
         instrucciones.setEditable(false);
 
+        game.palabrasPorNivel(1);
 
-        game.palabrasPorNivel(2);
-
-        //createPalabrasAMemorizarGUI(constraints);
+        game.pedirDatos();
+        createPalabrasAMemorizarGUI(constraints);
         //createPalabrasAVerificarGUI(constraints);
         //createConclusionGUI(constraints);
     }
@@ -540,6 +540,7 @@ public class GUIINowThatWord extends JFrame {
         {
             if(e.getSource()==salir)
             {
+                game.registrarUsuario();
                 System.exit(0);
             }
             else if(e.getSource()==ayuda)

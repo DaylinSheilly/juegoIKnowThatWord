@@ -36,7 +36,6 @@ public class Diccionario {
         for(int flag=0;flag<cantidadPalabras;flag++)
         {
             añadir = true;
-            //System.out.println(palabrasDelNivel.size());
             nuevaPalabra = diccionario.get(aleatorio.nextInt(cantidadPalabras));
             if(palabrasDelNivel.size() != 0)
             {

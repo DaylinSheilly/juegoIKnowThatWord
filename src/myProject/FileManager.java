@@ -80,7 +80,7 @@ public class FileManager {
      * This function writes the user informaction in usuario.txt
      * @param linea
      */
-/*
+
     public void escribirUsuario(String linea){
         try {
             fileWriter = new FileWriter(PATH_USUARIO,true);
@@ -97,5 +97,26 @@ public class FileManager {
             }
         }
     }
-*/
+
+    /**
+     * This function writes the user informaction in usuario.txt
+     * @param linea
+     */
+
+    public void escribirNivelUsuario(int linea){
+        try {
+            fileWriter = new FileWriter(PATH_USUARIO,true);
+            output = new BufferedWriter(fileWriter);
+            output.write(linea);
+            output.newLine();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }finally{
+            try {
+                output.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 }
