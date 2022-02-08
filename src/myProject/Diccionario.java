@@ -8,7 +8,7 @@ public class Diccionario {
     private ArrayList<String> diccionario = new ArrayList <String> ();
     private ArrayList<String> palabrasDelNivel;
 
-    private String palabra, nuevaPalabra;
+    private String nuevaPalabra;
 
     /**
      * Constructor
@@ -18,6 +18,7 @@ public class Diccionario {
 
         FileManager fileManager = new FileManager();
         diccionario = fileManager.lecturaDiccionario();
+        palabrasDelNivel = new ArrayList<String>();
 
     }
 
@@ -34,18 +35,16 @@ public class Diccionario {
         //diccionario.size() obtiene el tamaño del arraylist, comienza en 0
         for(int flag=0;flag<cantidadPalabras;flag++)
         {
-            nuevaPalabra = palabrasDelNivel.get(aleatorio.nextInt(palabrasDelNivel.size()));
-            if(palabrasDelNivel.size()!=0)
+            añadir = true;
+            //System.out.println(palabrasDelNivel.size());
+            nuevaPalabra = diccionario.get(aleatorio.nextInt(cantidadPalabras));
+            if(palabrasDelNivel.size() != 0)
             {
                 for (int flag1 = 0; flag1 < palabrasDelNivel.size(); flag1++)
                 {
                     if (palabrasDelNivel.get(flag1) == nuevaPalabra)
                     {
                         añadir = false;
-                    }
-                    else
-                    {
-                        añadir = true;
                     }
                 }
                 if (añadir)
@@ -61,6 +60,7 @@ public class Diccionario {
             {
                 palabrasDelNivel.add(nuevaPalabra);
             }
+            //System.out.println(palabrasDelNivel.get(flag));
         }
         return palabrasDelNivel;
     }

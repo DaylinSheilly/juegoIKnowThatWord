@@ -16,7 +16,7 @@ public class Usuario {
 
         FileManager fileManager = new FileManager();
         usuario = fileManager.lecturaUsuario();
-        fileManager.escribirUsuario(usuarioIngresado);
+        //fileManager.escribirUsuario(usuarioIngresado);
 
         unUsuario = 0;
         nivelUsuario = 1;

@@ -28,25 +28,25 @@ public class ModelINowThatWord {
 
     public void palabrasPorNivel(int nivel){
         switch (nivel){
-            case 1: palabrasDelNivel=palabras.getPalabra(19); //del 0 al 19
+            case 1: palabrasDelNivel=palabras.getPalabra(20); //del 0 al 19
                 break;
-            case 2: palabrasDelNivel=palabras.getPalabra(39); //del 0 al 39
+            case 2: palabrasDelNivel=palabras.getPalabra(40); //del 0 al 39
                 break;
-            case 3: palabrasDelNivel=palabras.getPalabra(49); //del 0 al 49
+            case 3: palabrasDelNivel=palabras.getPalabra(50); //del 0 al 49
                 break;
-            case 4: palabrasDelNivel=palabras.getPalabra(59); //del 0 al 59
+            case 4: palabrasDelNivel=palabras.getPalabra(60); //del 0 al 59
                 break;
-            case 5: palabrasDelNivel=palabras.getPalabra(69); //del 0 al 69
+            case 5: palabrasDelNivel=palabras.getPalabra(70); //del 0 al 69
                 break;
-            case 6: palabrasDelNivel=palabras.getPalabra(79); //del 0 al 79
+            case 6: palabrasDelNivel=palabras.getPalabra(80); //del 0 al 79
                 break;
-            case 7: palabrasDelNivel=palabras.getPalabra(99); //del 0 al 99
+            case 7: palabrasDelNivel=palabras.getPalabra(100); //del 0 al 99
                 break;
-            case 8: palabrasDelNivel=palabras.getPalabra(119); //del 0 al 119
+            case 8: palabrasDelNivel=palabras.getPalabra(120); //del 0 al 119
                 break;
-            case 9: palabrasDelNivel=palabras.getPalabra(139); //del 0 al 139
+            case 9: palabrasDelNivel=palabras.getPalabra(140); //del 0 al 139
                 break;
-            case 10: palabrasDelNivel=palabras.getPalabra(199); //del 0 al 199
+            case 10: palabrasDelNivel=palabras.getPalabra(200); //del 0 al 199
                 break;
         }
         for(int i=0;i<palabrasDelNivel.size();i++)
@@ -58,7 +58,6 @@ public class ModelINowThatWord {
 
     public void palabrasAMemorizar()
     {
-        Random aleatorio = new Random();
         int cantidadPalabrasAMemorizar = (palabrasDelNivel.size())/2;
         for(int flag=0;flag<cantidadPalabrasAMemorizar;flag++)
         {

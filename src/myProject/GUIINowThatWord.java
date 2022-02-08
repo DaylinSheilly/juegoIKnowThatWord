@@ -55,6 +55,7 @@ public class GUIINowThatWord extends JFrame {
         GridBagConstraints constraints = new GridBagConstraints();
         //Create Listener Object and Control Object
         escucha = new Escucha();
+        game = new ModelINowThatWord();
         //Set up JComponents
 
         panelInstrucciones = new JPanel();
@@ -72,9 +73,9 @@ public class GUIINowThatWord extends JFrame {
         instrucciones.setEditable(false);
 
 
-        //game.palabrasPorNivel(1);
+        game.palabrasPorNivel(2);
 
-        createPalabrasAMemorizarGUI(constraints);
+        //createPalabrasAMemorizarGUI(constraints);
         //createPalabrasAVerificarGUI(constraints);
         //createConclusionGUI(constraints);
     }
