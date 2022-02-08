@@ -6,7 +6,7 @@ import java.util.Random;
 
 public class ModelINowThatWord {
 
-    private Diccionario palabras;
+    private PalabrasDelNivel palabras;
     private Usuario usuario;
     private int conteoErrores, conteoAciertos, nivel, unaPalabra, suNivel;
     private boolean fallo, ganar;
@@ -17,7 +17,7 @@ public class ModelINowThatWord {
      * Constructor
      */
     public ModelINowThatWord(){
-        palabras = new Diccionario();
+        palabras = new PalabrasDelNivel();
         usuario = new Usuario();
         conteoErrores = 0;
         conteoAciertos = 0;
