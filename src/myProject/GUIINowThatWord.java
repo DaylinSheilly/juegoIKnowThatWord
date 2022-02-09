@@ -23,6 +23,7 @@ public class GUIINowThatWord extends JFrame {
     int numeroNivel, numeroAciertos, numeroErrores = 0;
     String INSTRUCCIONES = "instrucciones"; //RELLENAR
 
+    private ModelINowThatWord game;
     private Escucha escucha;
 
     /**
@@ -54,6 +55,7 @@ public class GUIINowThatWord extends JFrame {
         GridBagConstraints constraints = new GridBagConstraints();
         //Create Listener Object and Control Object
         escucha = new Escucha();
+        game = new ModelINowThatWord();
         //Set up JComponents
 
         panelInstrucciones = new JPanel();
@@ -70,6 +72,9 @@ public class GUIINowThatWord extends JFrame {
         instrucciones.setLineWrap(true);
         instrucciones.setEditable(false);
 
+        game.palabrasPorNivel(1);
+
+        game.pedirDatos();
         createPalabrasAMemorizarGUI(constraints);
         //createPalabrasAVerificarGUI(constraints);
         //createConclusionGUI(constraints);
@@ -535,6 +540,7 @@ public class GUIINowThatWord extends JFrame {
         {
             if(e.getSource()==salir)
             {
+                game.registrarUsuario();
                 System.exit(0);
             }
             else if(e.getSource()==ayuda)
