@@ -16,11 +16,12 @@ import java.awt.event.MouseEvent;
 public class GUIINowThatWord extends JFrame {
 
     private Header headerProject;
-    private JPanel panelPalabras, panelEspacioEnBlanco1, panelEspacioEnBlanco2, panelEspacioEnBlanco3, panelEspacioEnBlanco4, panelEspacioEnBlanco5, panelInfo, panelInstrucciones;
-    private JButton ayuda, salir, botonSI, botonNO;
+    private JPanel panelEspacioEnBlanco1, panelEspacioEnBlanco2, panelEspacioEnBlanco3, panelEspacioEnBlanco4, panelEspacioEnBlanco5, panelInfo, panelInstrucciones;
+    private PanelPalabra panelPalabras;
+    private JButton ayuda, salir, botonSI, botonNO, empezarNivel;
     private JTextArea nivel, aciertos,errores, instrucciones;
 
-    int numeroNivel, numeroAciertos, numeroErrores = 0;
+    int numeroNivel, numeroAciertos, numeroErrores, cualGUI = 0;
     String INSTRUCCIONES = "instrucciones"; //RELLENAR
 
     private ModelINowThatWord game;
@@ -72,12 +73,36 @@ public class GUIINowThatWord extends JFrame {
         instrucciones.setLineWrap(true);
         instrucciones.setEditable(false);
 
-        game.palabrasPorNivel(1);
-
         game.pedirDatos();
+        numeroNivel = game.getSuNivel();
+        game.palabrasPorNivel(numeroNivel);
+
+        comenzarNivel();
+    }
+
+    public void comenzarNivel()
+    {
+        GridBagConstraints constraints = new GridBagConstraints();
+        removeAll();
+
+        numeroNivel = game.getSuNivel();
+        game.palabrasPorNivel(numeroNivel);
+
         createPalabrasAMemorizarGUI(constraints);
-        //createPalabrasAVerificarGUI(constraints);
-        //createConclusionGUI(constraints);
+    }
+    public void verificarPalabras()
+    {
+        GridBagConstraints constraints = new GridBagConstraints();
+        removeAll();
+
+        createPalabrasAVerificarGUI(constraints);
+    }
+    public void terminarNivel()
+    {
+        GridBagConstraints constraints = new GridBagConstraints();
+        removeAll();
+
+        createConclusionGUI(constraints);
     }
 
     //------------------------------------------------------------------------------------------------------------------------------------------
@@ -97,6 +122,10 @@ public class GUIINowThatWord extends JFrame {
         createSpace1(constraints);
         createSpace2(constraints);
         createPanelPalabrasAMemorizar(constraints);
+
+        comenzarNivel();
+
+        cualGUI = 1;
 
         revalidate();
         repaint();
@@ -242,10 +271,9 @@ public class GUIINowThatWord extends JFrame {
      */
     public void createPanelPalabrasAMemorizar(GridBagConstraints constraints)
     {
-        panelPalabras = new JPanel();
+        panelPalabras = new PanelPalabra();
         panelPalabras.setPreferredSize(new Dimension(390, 240));
         panelPalabras.setBorder(BorderFactory.createTitledBorder("Palabras"));
-        panelPalabras.setBackground(new Color(0,0,0,0));
 
         constraints.gridx = 0;
         constraints.gridy = 2;
@@ -278,6 +306,8 @@ public class GUIINowThatWord extends JFrame {
         createBotonNO(constraints);
         createSpace4(constraints);
 
+        cualGUI=2;
+
         revalidate();
         repaint();
     }
@@ -290,7 +320,7 @@ public class GUIINowThatWord extends JFrame {
      */
     public void createPanelPalabrasAVerificar(GridBagConstraints constraints)
     {
-        panelPalabras = new JPanel();
+        panelPalabras = new PanelPalabra();
         panelPalabras.setPreferredSize(new Dimension(390, 140));
         panelPalabras.setBorder(BorderFactory.createTitledBorder("Palabras"));
         panelPalabras.setBackground(new Color(0,0,0,0));
@@ -409,7 +439,7 @@ public class GUIINowThatWord extends JFrame {
     public void createConclusionGUI(GridBagConstraints constraints) {
 
         createHeader(constraints);
-        createHelpButton(constraints);
+        createStartLevelButton(constraints);
         createSpace1(constraints);
         createLevelCounter(constraints);
         createSpace2(constraints);
@@ -418,6 +448,8 @@ public class GUIINowThatWord extends JFrame {
         createSuccessCounter(constraints);
         createMistakesCounter(constraints);
         createPanelInfo(constraints);
+
+        cualGUI=3;
 
         revalidate();
         repaint();
@@ -504,7 +536,7 @@ public class GUIINowThatWord extends JFrame {
     public void createPanelInfo(GridBagConstraints constraints)
     {
         panelInfo = new JPanel();
-        panelInfo.setPreferredSize(new Dimension(390, 170));
+        panelInfo.setPreferredSize(new Dimension(390, 240));
         panelInfo.setBorder(BorderFactory.createTitledBorder("Información"));
         panelInfo.setBackground(new Color(0,0,0,0));
 
@@ -518,6 +550,27 @@ public class GUIINowThatWord extends JFrame {
     }
 
     //------------------------------------------------------------------------------------------------------------------------------------------
+
+    /**
+     * This function creates the empezarNivel button.
+     * @param constraints
+     */
+
+    public void createStartLevelButton(GridBagConstraints constraints) {
+        empezarNivel = new JButton("Empezar Nivel");
+        empezarNivel.setFont(new Font("SansSerif", Font.BOLD + Font.PLAIN, 14));
+        empezarNivel.setForeground(Color.white);
+        empezarNivel.removeMouseListener(escucha);
+        empezarNivel.addMouseListener(escucha);
+        empezarNivel.setBackground(new Color(255, 242, 204));
+        constraints.gridx = 1;
+        constraints.gridy = 5;
+        constraints.gridwidth = 3;
+        constraints.fill = GridBagConstraints.CENTER;
+        constraints.anchor = GridBagConstraints.CENTER;
+
+        add(empezarNivel, constraints);
+    }
 
     /**
      * Main process of the Java program
@@ -538,6 +591,7 @@ public class GUIINowThatWord extends JFrame {
         @Override
         public void mouseClicked(MouseEvent e)
         {
+            GridBagConstraints constraints = new GridBagConstraints();
             if(e.getSource()==salir)
             {
                 game.registrarUsuario();
@@ -551,6 +605,16 @@ public class GUIINowThatWord extends JFrame {
                 scroll.setPreferredSize(new Dimension(440, 455));
 
                 JOptionPane.showMessageDialog(null, scroll, "Instrucciones del juego", JOptionPane.INFORMATION_MESSAGE);
+            }
+            else if(e.getSource()==empezarNivel)
+            {
+                game.subirNivelUsuario(game.getCantidadPalabrasDelNivel(),game.getAciertos());
+                //removeAll();
+                comenzarNivel();
+            }
+            else
+            {
+
             }
         }
     }

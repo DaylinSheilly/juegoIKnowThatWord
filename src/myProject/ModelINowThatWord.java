@@ -8,7 +8,7 @@ public class ModelINowThatWord {
 
     private PalabrasDelNivel palabras;
     private Usuario usuario;
-    private int conteoErrores, conteoAciertos, nivel, unaPalabra, suNivel;
+    private int conteoErrores, conteoAciertos, unaPalabra, suNivel;
     private boolean fallo, ganar;
     private String palabra, nuevaPalabra, elUsuario, nombreUsuario;
     private ArrayList<String> palabrasDelNivel, palabrasAMemorizar;
@@ -21,8 +21,8 @@ public class ModelINowThatWord {
         usuario = new Usuario();
         conteoErrores = 0;
         conteoAciertos = 0;
-        nivel = 1;
         unaPalabra = 0;
+        suNivel = usuario.getNivelUsuario();
         palabrasDelNivel = new ArrayList<String>();
         palabrasAMemorizar = new ArrayList<String>();
         nombreUsuario = "";
@@ -30,37 +30,28 @@ public class ModelINowThatWord {
 
     public void palabrasPorNivel(int nivel){
         switch (nivel){
-            case 1: palabrasDelNivel=palabras.getPalabra(20); //del 0 al 19
+            case 1: palabras.getPalabrasDelNivel(140); //del 0 al 19
                 break;
-            case 2: palabrasDelNivel=palabras.getPalabra(40); //del 0 al 39
+            case 2: palabras.getPalabrasDelNivel(140); //del 0 al 39
                 break;
-            case 3: palabrasDelNivel=palabras.getPalabra(50); //del 0 al 49
+            case 3: palabras.getPalabrasDelNivel(140); //del 0 al 49
                 break;
-            case 4: palabrasDelNivel=palabras.getPalabra(60); //del 0 al 59
+            case 4: palabras.getPalabrasDelNivel(140); //del 0 al 59
                 break;
-            case 5: palabrasDelNivel=palabras.getPalabra(70); //del 0 al 69
+            case 5: palabras.getPalabrasDelNivel(140); //del 0 al 69
                 break;
-            case 6: palabrasDelNivel=palabras.getPalabra(80); //del 0 al 79
+            case 6: palabras.getPalabrasDelNivel(140); //del 0 al 79
                 break;
-            case 7: palabrasDelNivel=palabras.getPalabra(100); //del 0 al 99
+            case 7: palabras.getPalabrasDelNivel(140); //del 0 al 99
                 break;
-            case 8: palabrasDelNivel=palabras.getPalabra(120); //del 0 al 119
+            case 8: palabras.getPalabrasDelNivel(140); //del 0 al 119
                 break;
-            case 9: palabrasDelNivel=palabras.getPalabra(140); //del 0 al 139
+            case 9: palabras.getPalabrasDelNivel(140); //del 0 al 139
                 break;
-            case 10: palabrasDelNivel=palabras.getPalabra(200); //del 0 al 199
+            case 10: palabras.getPalabrasDelNivel(200); //del 0 al 199
                 break;
         }
-        palabrasAMemorizar();
-    }
-
-    public void palabrasAMemorizar()
-    {
-        int cantidadPalabrasAMemorizar = (palabrasDelNivel.size())/2;
-        for(int flag=0;flag<cantidadPalabrasAMemorizar;flag++)
-        {
-            palabrasAMemorizar.add(palabrasDelNivel.get(flag));
-        }
+        palabras.palabrasAMemorizar();
     }
 
     /**
@@ -102,6 +93,7 @@ public class ModelINowThatWord {
 
     public void pedirDatos(){
         usuario.pedirDatos();
+        detectNewOrOldUser();
     }
 
     /**
@@ -109,7 +101,7 @@ public class ModelINowThatWord {
      */
 
     public void registrarUsuario(){
-        usuario.registrarUsuario();
+        usuario.registrarUsuario(elUsuario,suNivel);
     }
 
     public void detectNewOrOldUser()
@@ -120,9 +112,34 @@ public class ModelINowThatWord {
 
     /**
      * This function level ups user.
+     */
+    public void subirNivelUsuario(int totalPalabras, int palabrasAcertadas){
+        if(palabrasAcertadas >= totalPalabras/2) {
+            suNivel++;
+        }
+        else
+        {
+            suNivel = suNivel;
+        }
+    }
+
+    /**
+     * This function gets the user level.
      * @return new level
      */
-    public int subirNivelUsuario(){
-        return suNivel+1;
+    public int getSuNivel() {
+        return suNivel;
+    }
+
+    public int getCantidadPalabrasDelNivel() {
+        return palabras.getCantidadPalabrasDelNivel();
+    }
+
+    public int getErrores() {
+        return conteoErrores;
+    }
+
+    public int getAciertos() {
+        return conteoAciertos;
     }
 }

@@ -77,7 +77,7 @@ public class FileManager {
     //---------------------------------------------------------------------------------------------------------------------------------------
 
     /**
-     * This function writes the user informaction in usuario.txt
+     * This function writes the user name in usuario.txt
      * @param linea
      */
 
@@ -99,15 +99,16 @@ public class FileManager {
     }
 
     /**
-     * This function writes the user informaction in usuario.txt
+     * This function writes the user level in usuario.txt
      * @param linea
      */
 
     public void escribirNivelUsuario(int linea){
+        String nivel = String.valueOf(linea);
         try {
             fileWriter = new FileWriter(PATH_USUARIO,true);
             output = new BufferedWriter(fileWriter);
-            output.write(linea);
+            output.write(nivel);
             output.newLine();
         } catch (IOException e) {
             e.printStackTrace();
@@ -118,5 +119,24 @@ public class FileManager {
                 e.printStackTrace();
             }
         }
+    }
+
+    /**
+     * This function writes the user name in usuario.txt
+     * @param linea
+     */
+    public void borrarUsuario(String linea)
+    {
+
+    }
+
+    /**
+     * This function errase the user level in usuario.txt
+     * @param linea
+     */
+    public void borrarNivelUsuario(int linea)
+    {
+        String nivel = String.valueOf(linea);
+
     }
 }
