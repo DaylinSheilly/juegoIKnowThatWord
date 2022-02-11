@@ -13,11 +13,9 @@ public class PanelPalabra extends JPanel {
         setBackground(new Color(0,0,0,0));
     }
 
-    public String determinateNextWord()
+    public String determinateNextWord(int cantidadPalabras)
     {
-        int cualPalabra = 0;
         int flag = 0;
-        int cantidadPalabras = palabras.getCantidadPalabrasDelNivel();
 
         if(flag < cantidadPalabras)
         {
@@ -36,8 +34,20 @@ public class PanelPalabra extends JPanel {
     protected void paintComponent(Graphics g)
     {
         super.paintComponent(g);
+        int cantidadPalabras = palabras.getCantidadPalabrasDelNivel();
 
         g.setFont(new Font(Font.DIALOG,Font.BOLD,27));
-        g.drawString(determinateNextWord(),100,100);
+
+        for(int palabras=0;palabras<cantidadPalabras/2;palabras++)
+        {
+            g.drawString(determinateNextWord(cantidadPalabras/2), 100, 100);
+        }
+
+
+
+        for(int palabras=0;palabras<cantidadPalabras;palabras++)
+        {
+            g.drawString(determinateNextWord(cantidadPalabras), 100, 100);
+        }
     }
 }
