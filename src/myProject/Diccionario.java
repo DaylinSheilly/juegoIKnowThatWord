@@ -15,11 +15,9 @@ public class Diccionario {
      */
 
     public Diccionario(){
-
         FileManager fileManager = new FileManager();
         diccionario = fileManager.lecturaDiccionario();
         palabrasDelNivel = new ArrayList<String>();
-
     }
 
     //---------------------------------------------------------------------------------------------------------------------------------------
