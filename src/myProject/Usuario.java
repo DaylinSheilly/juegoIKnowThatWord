@@ -4,8 +4,7 @@ import javax.swing.*;
 import java.util.ArrayList;
 
 public class Usuario {
-    private ArrayList<String> usuario = new ArrayList<String>();
-    private ArrayList<String> usuarioRegistrado = new ArrayList<String>();
+    private ArrayList<String> usuarios = new ArrayList<String>();
     private int unUsuario, nivelUsuario;
     private String usuarioIngresado, nombreUsuario;
 
@@ -15,9 +14,8 @@ public class Usuario {
      * Constructor
      */
     public Usuario() {
-
         fileManager = new FileManager();
-        usuario = fileManager.lecturaUsuario();
+        usuarios = fileManager.lecturaUsuario();
 
         unUsuario = 0;
         nivelUsuario = 1;
@@ -27,25 +25,21 @@ public class Usuario {
 
     //---------------------------------------------------------------------------------------------------------------------------------------
 
+    /**
+     * This function ask an username at the user.
+     */
     public void pedirDatos(){
         nombreUsuario = JOptionPane.showInputDialog(null, "Ingresa tu nombre",
                 "Solicitud de datos", JOptionPane.QUESTION_MESSAGE);
-        System.out.println("-"+nombreUsuario+"-");
         if(nombreUsuario == null || nombreUsuario.equals("")){
             pedirDatos();
-        }
-        else{
-            nombreUsuario = nombreUsuario;
         }
     }
 
     /**
-     * This function saves the information of a new user.
+     * This function saves the information of an user.
      */
-
-    public void registrarUsuario(){
-        usuarioRegistrado.add(nombreUsuario);
-        usuarioRegistrado.add(String.valueOf(nivelUsuario));
+    public void registrarUsuario(String nombreUsuario, int nivelUsuario){
         fileManager.escribirUsuario(nombreUsuario);
         fileManager.escribirNivelUsuario(nivelUsuario);
     }
@@ -56,11 +50,11 @@ public class Usuario {
      * This function gets the user level.
      * @return user level
      */
-
     public int getNivelUsuario() {
-        for (unUsuario = 0; unUsuario < usuario.size(); unUsuario++) {
-            if (usuario.get(unUsuario) == usuarioIngresado) {
-                nivelUsuario = Integer.parseInt(usuario.get(unUsuario+1));
+        for (unUsuario = 0; unUsuario < usuarios.size(); unUsuario++) {
+            if (usuarios.get(unUsuario) == usuarioIngresado) {
+                nivelUsuario = Integer.parseInt(usuarios.get(unUsuario+1));
+
             } else {
                 nivelUsuario = 1;
             }
@@ -68,6 +62,10 @@ public class Usuario {
         return nivelUsuario;
     }
 
+    /**
+     * This function gets the user name.
+     * @return user level
+     */
     public String getUsuarioIngresado() {
         return usuarioIngresado;
     }
