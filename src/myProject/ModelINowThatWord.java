@@ -29,29 +29,41 @@ public class ModelINowThatWord {
     }
 
     public void palabrasPorNivel(int nivel){
-        switch (nivel){
-            case 1: palabras.getPalabrasDelNivel(140); //del 0 al 19
-                break;
-            case 2: palabras.getPalabrasDelNivel(140); //del 0 al 39
-                break;
-            case 3: palabras.getPalabrasDelNivel(140); //del 0 al 49
-                break;
-            case 4: palabras.getPalabrasDelNivel(140); //del 0 al 59
-                break;
-            case 5: palabras.getPalabrasDelNivel(140); //del 0 al 69
-                break;
-            case 6: palabras.getPalabrasDelNivel(140); //del 0 al 79
-                break;
-            case 7: palabras.getPalabrasDelNivel(140); //del 0 al 99
-                break;
-            case 8: palabras.getPalabrasDelNivel(140); //del 0 al 119
-                break;
-            case 9: palabras.getPalabrasDelNivel(140); //del 0 al 139
-                break;
-            case 10: palabras.getPalabrasDelNivel(200); //del 0 al 199
-                break;
+        if(nivel >= 1 && nivel <= 10) {
+            switch (nivel) {
+                case 1:
+                    palabras.getPalabrasDelNivel(20); //del 0 al 19
+                    break;
+                case 2:
+                    palabras.getPalabrasDelNivel(40); //del 0 al 39
+                    break;
+                case 3:
+                    palabras.getPalabrasDelNivel(50); //del 0 al 49
+                    break;
+                case 4:
+                    palabras.getPalabrasDelNivel(60); //del 0 al 59
+                    break;
+                case 5:
+                    palabras.getPalabrasDelNivel(70); //del 0 al 69
+                    break;
+                case 6:
+                    palabras.getPalabrasDelNivel(80); //del 0 al 79
+                    break;
+                case 7:
+                    palabras.getPalabrasDelNivel(100); //del 0 al 99
+                    break;
+                case 8:
+                    palabras.getPalabrasDelNivel(120); //del 0 al 119
+                    break;
+                case 9:
+                    palabras.getPalabrasDelNivel(140); //del 0 al 139
+                    break;
+                case 10:
+                    palabras.getPalabrasDelNivel(200); //del 0 al 199
+                    break;
+            }
+            palabras.palabrasAMemorizar();
         }
-        palabras.palabrasAMemorizar();
     }
 
     /**
@@ -113,14 +125,18 @@ public class ModelINowThatWord {
     /**
      * This function level ups user.
      */
-    public void subirNivelUsuario(int totalPalabras, int palabrasAcertadas){
-        if(palabrasAcertadas >= totalPalabras/2) {
-            suNivel++;
+    public int subirNivelUsuario(int totalPalabras, int palabrasAcertadas){
+        if(suNivel==10) {
+            suNivel=suNivel;
         }
-        else
-        {
-            suNivel = suNivel;
+        else {
+            if (palabrasAcertadas >= totalPalabras / 2) {
+                suNivel++;
+            } else {
+                suNivel = suNivel;
+            }
         }
+        return suNivel;
     }
 
     /**

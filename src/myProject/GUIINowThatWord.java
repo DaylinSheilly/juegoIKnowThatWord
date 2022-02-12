@@ -74,8 +74,6 @@ public class GUIINowThatWord extends JFrame {
         instrucciones.setEditable(false);
 
         game.pedirDatos();
-        numeroNivel = game.getSuNivel();
-        game.palabrasPorNivel(numeroNivel);
 
         comenzarNivel();
     }
@@ -83,13 +81,13 @@ public class GUIINowThatWord extends JFrame {
     public void comenzarNivel()
     {
         GridBagConstraints constraints = new GridBagConstraints();
-        removeAll();
 
         numeroNivel = game.getSuNivel();
         game.palabrasPorNivel(numeroNivel);
 
         createPalabrasAMemorizarGUI(constraints);
     }
+
     public void verificarPalabras()
     {
         GridBagConstraints constraints = new GridBagConstraints();
@@ -122,8 +120,6 @@ public class GUIINowThatWord extends JFrame {
         createSpace1(constraints);
         createSpace2(constraints);
         createPanelPalabrasAMemorizar(constraints);
-
-        comenzarNivel();
 
         cualGUI = 1;
 

@@ -19,7 +19,6 @@ public class FileManager {
 
     public ArrayList <String> lecturaDiccionario() {
         ArrayList <String> palabra = new ArrayList<String>();
-
         try {
             fileReader = new FileReader(PATH_DICCIONARIO);
             input = new BufferedReader(fileReader);
@@ -77,13 +76,36 @@ public class FileManager {
     //---------------------------------------------------------------------------------------------------------------------------------------
 
     /**
-     * This function writes the user name in usuario.txt
+     * This function writes a new user name in usuario.txt
      * @param linea
      */
 
     public void escribirUsuario(String linea){
         try {
             fileWriter = new FileWriter(PATH_USUARIO,true);
+            output = new BufferedWriter(fileWriter);
+            output.write(linea);
+            output.newLine();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }finally{
+            try {
+                output.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    /**
+     * This function change the level of an old user in usuario.txt
+     * @param linea
+     */
+
+    public void escribirUsuarioConocido(String linea, boolean conservarTxt)
+    {
+        try {
+            fileWriter = new FileWriter(PATH_USUARIO,conservarTxt);
             output = new BufferedWriter(fileWriter);
             output.write(linea);
             output.newLine();

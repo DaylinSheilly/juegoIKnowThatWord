@@ -10,6 +10,7 @@ public class PanelPalabra extends JPanel {
 
     public PanelPalabra()
     {
+        palabras = new PalabrasDelNivel();
         setBackground(new Color(0,0,0,0));
     }
 

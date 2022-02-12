@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.util.ArrayList;
 
 public class Usuario {
-    private ArrayList<String> usuarios = new ArrayList<String>();
+    private ArrayList<String> usuarios, editarUsuarios = new ArrayList<String>();
     private int unUsuario, nivelUsuario;
     private String usuarioIngresado, nombreUsuario;
 
@@ -37,11 +37,28 @@ public class Usuario {
     }
 
     /**
-     * This function saves the information of an user.
+     * This function saves the information of a new user or upload the level to an old user.
      */
-    public void registrarUsuario(String nombreUsuario, int nivelUsuario){
-        fileManager.escribirUsuario(nombreUsuario);
-        fileManager.escribirNivelUsuario(nivelUsuario);
+
+    public void registrarUsuario(String nombreUsuario, int nivelUsuario) {
+        usuarios = fileManager.lecturaUsuario();
+        for (int flag = 0; flag < usuarios.size(); flag++) {
+            if(nombreUsuario.equals(usuarios.get(flag))) {
+                boolean conservarUsuarios = false;
+                usuarios.add(flag+1,String.valueOf(nivelUsuario));
+                for(int flag1=0;flag<usuarios.size();flag1++)
+                {
+                    fileManager.escribirUsuarioConocido(nombreUsuario, conservarUsuarios);
+                    conservarUsuarios = true;
+                }
+                break;
+            }
+            else
+            {
+                fileManager.escribirUsuario(nombreUsuario);
+                fileManager.escribirNivelUsuario(nivelUsuario);
+            }
+        }
     }
 
     //---------------------------------------------------------------------------------------------------------------------------------------
@@ -52,9 +69,8 @@ public class Usuario {
      */
     public int getNivelUsuario() {
         for (unUsuario = 0; unUsuario < usuarios.size(); unUsuario++) {
-            if (usuarios.get(unUsuario) == usuarioIngresado) {
+            if (usuarios.get(unUsuario).equals(nombreUsuario)) {
                 nivelUsuario = Integer.parseInt(usuarios.get(unUsuario+1));
-
             } else {
                 nivelUsuario = 1;
             }

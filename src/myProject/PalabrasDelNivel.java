@@ -7,12 +7,16 @@ public class PalabrasDelNivel {
     private boolean memory;
     private String palabra;
     private Diccionario diccionario;
-    private ArrayList<String> todasLasPalabras;
-    private ArrayList<PalabrasDelNivel> palabrasDelNivel;
+    private ArrayList<String> todasLasPalabras, palabrasDelNivel;
+    private ArrayList<> memorizar;
 
     public PalabrasDelNivel(){
+        memory = false;
+        palabra = "";
+
         diccionario = new Diccionario();
-        palabrasDelNivel = new ArrayList<PalabrasDelNivel>();
+        palabrasDelNivel = new ArrayList<String>();
+        memorizar = new ArrayList<boolean>();
         todasLasPalabras = diccionario.getDiccionario();
     }
 
@@ -23,18 +27,19 @@ public class PalabrasDelNivel {
 
     public void getPalabrasDelNivel(int cantidadPalabras){
         Random aleatorio = new Random();
-        PalabrasDelNivel nuevaPalabra = new PalabrasDelNivel();
+        String nuevaPalabra = new String();
         boolean añadir = true;
         //diccionario.size() obtiene el tamaño del arraylist, comienza en 0
         for(int flag=0;flag<cantidadPalabras;flag++)
         {
             añadir = true;
-            nuevaPalabra.setPalabra(todasLasPalabras.get(aleatorio.nextInt(cantidadPalabras)));
+            nuevaPalabra = todasLasPalabras.get(aleatorio.nextInt(cantidadPalabras));
             if(palabrasDelNivel.size() != 0)
             {
-                for (int flag1 = 0; flag1 < palabrasDelNivel.size(); flag1++)
+                System.out.println(flag+" "+cantidadPalabras);
+                for (int flag1=0; flag1 < palabrasDelNivel.size(); flag1++)
                 {
-                    if (palabrasDelNivel.get(flag1).getPalabra() == nuevaPalabra.getPalabra())
+                    if ((palabrasDelNivel.get(flag1)).equals(nuevaPalabra))
                     {
                         añadir = false;
                     }
@@ -52,6 +57,11 @@ public class PalabrasDelNivel {
             {
                 palabrasDelNivel.add(nuevaPalabra);
             }
+            System.out.println(nuevaPalabra);
+        }
+        for(int kk=0;kk<palabrasDelNivel.size();kk++)
+        {
+            System.out.println(palabrasDelNivel.get(kk));
         }
     }
 
@@ -67,6 +77,10 @@ public class PalabrasDelNivel {
             {
                 palabrasDelNivel.get(flag1).setMemory(false);
             }
+        }
+        for(int kk=0;kk<palabrasDelNivel.size();kk++)
+        {
+            System.out.println(palabrasDelNivel.get(kk).getPalabra()+" | "+palabrasDelNivel.get(kk).getIsMemory());
         }
     }
 
@@ -85,6 +99,10 @@ public class PalabrasDelNivel {
 
     public void setMemory(boolean memory) {
         this.memory = memory;
+    }
+
+    public boolean getIsMemory() {
+        return memory;
     }
 
     public String getPalabra() {
