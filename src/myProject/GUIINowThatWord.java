@@ -2,6 +2,8 @@ package myProject;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -20,6 +22,7 @@ public class GUIINowThatWord extends JFrame {
     private PanelPalabra panelPalabras;
     private JButton ayuda, salir, botonSI, botonNO, empezarNivel;
     private JTextArea nivel, aciertos,errores, instrucciones;
+    private Timer timer;
 
     int numeroNivel, numeroAciertos, numeroErrores, cualGUI = 0;
     String INSTRUCCIONES = "instrucciones"; //RELLENAR
@@ -73,7 +76,7 @@ public class GUIINowThatWord extends JFrame {
         instrucciones.setLineWrap(true);
         instrucciones.setEditable(false);
 
-        game.pedirDatos();
+        //game.pedirDatos();
 
         comenzarNivel();
     }
@@ -585,7 +588,7 @@ public class GUIINowThatWord extends JFrame {
     private class Escucha extends MouseAdapter
     {
         @Override
-        public void mouseClicked(MouseEvent e)
+        public void mousePressed(MouseEvent e)
         {
             GridBagConstraints constraints = new GridBagConstraints();
             if(e.getSource()==salir)
@@ -607,6 +610,8 @@ public class GUIINowThatWord extends JFrame {
                 game.subirNivelUsuario(game.getCantidadPalabrasDelNivel(),game.getAciertos());
                 //removeAll();
                 comenzarNivel();
+
+                super.mousePressed(e);
             }
             else
             {
@@ -614,4 +619,6 @@ public class GUIINowThatWord extends JFrame {
             }
         }
     }
+
+
 }

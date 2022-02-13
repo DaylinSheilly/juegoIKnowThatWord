@@ -5,6 +5,7 @@ import java.awt.*;
 
 public class PanelPalabra extends JPanel {
     private String palabra = "";
+    private boolean cambiar;
 
     private PalabrasDelNivel palabras;
 
@@ -12,6 +13,7 @@ public class PanelPalabra extends JPanel {
     {
         palabras = new PalabrasDelNivel();
         setBackground(new Color(0,0,0,0));
+        boolean cambiar=false;
     }
 
     public String determinateNextWord(int cantidadPalabras)
@@ -31,6 +33,11 @@ public class PanelPalabra extends JPanel {
         return palabra;
     }
 
+    public boolean getCambiar()
+    {
+        return cambiar;
+    }
+
     @Override
     protected void paintComponent(Graphics g)
     {
@@ -44,7 +51,7 @@ public class PanelPalabra extends JPanel {
             g.drawString(determinateNextWord(cantidadPalabras/2), 100, 100);
         }
 
-
+        cambiar=true;
 
         for(int palabras=0;palabras<cantidadPalabras;palabras++)
         {

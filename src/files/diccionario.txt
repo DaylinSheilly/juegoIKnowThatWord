@@ -125,7 +125,7 @@ Finca
 Copia
 Campana
 Acampar
-Colot
+Color
 Nube
 Cielito
 Gasolina
@@ -151,7 +151,7 @@ Sombrero
 Cabeza
 Calor
 Pollo
-Damilia
+Familia
 Hogar
 Caballo
 Hora

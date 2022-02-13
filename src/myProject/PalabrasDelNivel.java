@@ -4,20 +4,14 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class PalabrasDelNivel {
-    private boolean memory;
-    private String palabra;
     private Diccionario diccionario;
-    private ArrayList<String> todasLasPalabras, palabrasDelNivel;
-    private ArrayList<> memorizar;
+    private ArrayList<String> todasLasPalabras, palabrasDelNivel, palabrasAMemorizar;
 
     public PalabrasDelNivel(){
-        memory = false;
-        palabra = "";
-
         diccionario = new Diccionario();
-        palabrasDelNivel = new ArrayList<String>();
-        memorizar = new ArrayList<boolean>();
         todasLasPalabras = diccionario.getDiccionario();
+        palabrasDelNivel = new ArrayList<String>();
+        palabrasAMemorizar = new ArrayList<String>();
     }
 
     /**
@@ -27,26 +21,26 @@ public class PalabrasDelNivel {
 
     public void getPalabrasDelNivel(int cantidadPalabras){
         Random aleatorio = new Random();
-        String nuevaPalabra = new String();
         boolean añadir = true;
         //diccionario.size() obtiene el tamaño del arraylist, comienza en 0
         for(int flag=0;flag<cantidadPalabras;flag++)
         {
-            añadir = true;
-            nuevaPalabra = todasLasPalabras.get(aleatorio.nextInt(cantidadPalabras));
+            String unaPalabra = todasLasPalabras.get(aleatorio.nextInt(199));
             if(palabrasDelNivel.size() != 0)
             {
-                System.out.println(flag+" "+cantidadPalabras);
-                for (int flag1=0; flag1 < palabrasDelNivel.size(); flag1++)
+                añadir=true;
+                for(int flag1=0;flag1<palabrasDelNivel.size();flag1++)
                 {
-                    if ((palabrasDelNivel.get(flag1)).equals(nuevaPalabra))
+                    if(palabrasDelNivel.get(flag1)==unaPalabra)
                     {
+                        unaPalabra = todasLasPalabras.get(aleatorio.nextInt(199));
                         añadir = false;
+                        break;
                     }
                 }
-                if (añadir)
+                if(añadir)
                 {
-                    palabrasDelNivel.add(nuevaPalabra);
+                    palabrasDelNivel.add(unaPalabra);
                 }
                 else
                 {
@@ -55,32 +49,17 @@ public class PalabrasDelNivel {
             }
             else
             {
-                palabrasDelNivel.add(nuevaPalabra);
+                palabrasDelNivel.add(unaPalabra);
             }
-            System.out.println(nuevaPalabra);
-        }
-        for(int kk=0;kk<palabrasDelNivel.size();kk++)
-        {
-            System.out.println(palabrasDelNivel.get(kk));
         }
     }
 
     public void palabrasAMemorizar()
     {
-        for (int flag1 = 0; flag1 < palabrasDelNivel.size(); flag1++)
+        System.out.println("-----------------------------------------");
+        for (int flag=0; flag < palabrasDelNivel.size()/2; flag++)
         {
-            if(flag1 <= palabrasDelNivel.size()/2)
-            {
-                palabrasDelNivel.get(flag1).setMemory(true);
-            }
-            else
-            {
-                palabrasDelNivel.get(flag1).setMemory(false);
-            }
-        }
-        for(int kk=0;kk<palabrasDelNivel.size();kk++)
-        {
-            System.out.println(palabrasDelNivel.get(kk).getPalabra()+" | "+palabrasDelNivel.get(kk).getIsMemory());
+            palabrasAMemorizar.add(palabrasDelNivel.get(flag));
         }
     }
 
@@ -92,25 +71,9 @@ public class PalabrasDelNivel {
     {
         String unaPalabra = "";
 
-        unaPalabra = palabrasDelNivel.get(cualPalabra).getPalabra();
+        unaPalabra = palabrasDelNivel.get(cualPalabra);
 
         return unaPalabra;
-    }
-
-    public void setMemory(boolean memory) {
-        this.memory = memory;
-    }
-
-    public boolean getIsMemory() {
-        return memory;
-    }
-
-    public String getPalabra() {
-        return palabra;
-    }
-
-    public void setPalabra(String palabra) {
-        this.palabra = palabra;
     }
 }
 
