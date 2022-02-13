@@ -76,7 +76,7 @@ public class GUIINowThatWord extends JFrame {
         instrucciones.setLineWrap(true);
         instrucciones.setEditable(false);
 
-        //game.pedirDatos();
+        game.pedirDatos();
 
         comenzarNivel();
     }

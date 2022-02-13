@@ -40,24 +40,31 @@ public class Usuario {
      * This function saves the information of a new user or upload the level to an old user.
      */
 
-    public void registrarUsuario(String nombreUsuario, int nivelUsuario) {
+    public void registrarUsuario(int nivelUsuario) {
         usuarios = fileManager.lecturaUsuario();
+        boolean añadir = true;
         for (int flag = 0; flag < usuarios.size(); flag++) {
-            if(nombreUsuario.equals(usuarios.get(flag))) {
+            if(usuarios.get(flag).equals(nombreUsuario)) {
                 boolean conservarUsuarios = false;
+                usuarios.remove(flag+1);
                 usuarios.add(flag+1,String.valueOf(nivelUsuario));
-                for(int flag1=0;flag<usuarios.size();flag1++)
+                for(int flag1=0;flag1<usuarios.size();flag1++)
                 {
-                    fileManager.escribirUsuarioConocido(nombreUsuario, conservarUsuarios);
+                    fileManager.escribirUsuarioConocido(usuarios.get(flag1), conservarUsuarios);
                     conservarUsuarios = true;
+                    añadir = false;
                 }
-                break;
             }
             else
             {
-                fileManager.escribirUsuario(nombreUsuario);
-                fileManager.escribirNivelUsuario(nivelUsuario);
+                añadir =true;
             }
+            break;
+        }
+        if(añadir)
+        {
+            fileManager.escribirUsuario(nombreUsuario);
+            fileManager.escribirNivelUsuario(nivelUsuario);
         }
     }
 

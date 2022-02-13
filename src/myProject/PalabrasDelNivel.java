@@ -56,7 +56,6 @@ public class PalabrasDelNivel {
 
     public void palabrasAMemorizar()
     {
-        System.out.println("-----------------------------------------");
         for (int flag=0; flag < palabrasDelNivel.size()/2; flag++)
         {
             palabrasAMemorizar.add(palabrasDelNivel.get(flag));

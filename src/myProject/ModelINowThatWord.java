@@ -113,7 +113,7 @@ public class ModelINowThatWord {
      */
 
     public void registrarUsuario(){
-        usuario.registrarUsuario(elUsuario,suNivel);
+        usuario.registrarUsuario(suNivel);
     }
 
     public void detectNewOrOldUser()
