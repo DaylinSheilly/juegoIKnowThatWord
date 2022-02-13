@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.Random;
 
 /**
  * This class is used for ...
@@ -19,7 +20,8 @@ public class GUIINowThatWord extends JFrame {
 
     private Header headerProject;
     private JPanel panelEspacioEnBlanco1, panelEspacioEnBlanco2, panelEspacioEnBlanco3, panelEspacioEnBlanco4, panelEspacioEnBlanco5, panelInfo, panelInstrucciones;
-    private PanelPalabra panelPalabras;
+    private PanelPalabrasMemorizar panelPalabras;
+    private PanelPalabrasNivel panelPalabrasNivel;
     private JButton ayuda, salir, botonSI, botonNO, empezarNivel;
     private JTextArea nivel, aciertos,errores, instrucciones;
     private Timer timer;
@@ -89,17 +91,27 @@ public class GUIINowThatWord extends JFrame {
         game.palabrasPorNivel(numeroNivel);
 
         createPalabrasAMemorizarGUI(constraints);
+
+        timer = new Timer(5000,escucha);
+        timer.start();
     }
 
     public void verificarPalabras()
     {
+        timer.stop();
+
         GridBagConstraints constraints = new GridBagConstraints();
         removeAll();
 
         createPalabrasAVerificarGUI(constraints);
+
+        timer = new Timer(7000,escucha);
+        timer.start();
     }
     public void terminarNivel()
     {
+        timer.stop();
+
         GridBagConstraints constraints = new GridBagConstraints();
         removeAll();
 
@@ -158,8 +170,8 @@ public class GUIINowThatWord extends JFrame {
         ayuda = new JButton(" ? ");
         ayuda.setFont(new Font("SansSerif", Font.BOLD + Font.PLAIN, 14));
         ayuda.setForeground(Color.white);
-        ayuda.removeMouseListener(escucha);
-        ayuda.addMouseListener(escucha);
+        ayuda.removeActionListener(escucha);
+        ayuda.addActionListener(escucha);
         ayuda.setBackground(new Color(0, 112, 192));
         constraints.gridx = 0;
         constraints.gridy = 1;
@@ -250,8 +262,8 @@ public class GUIINowThatWord extends JFrame {
         salir = new JButton("Salir");
         salir.setFont(new Font("SansSerif", Font.BOLD + Font.PLAIN, 14));
         salir.setForeground(Color.WHITE);
-        salir.removeMouseListener(escucha);
-        salir.addMouseListener(escucha);
+        salir.removeActionListener(escucha);
+        salir.addActionListener(escucha);
         salir.setBackground(new Color(192, 0, 0));
         constraints.gridx = 4;
         constraints.gridy = 1;
@@ -270,7 +282,7 @@ public class GUIINowThatWord extends JFrame {
      */
     public void createPanelPalabrasAMemorizar(GridBagConstraints constraints)
     {
-        panelPalabras = new PanelPalabra();
+        panelPalabras = new PanelPalabrasMemorizar();
         panelPalabras.setPreferredSize(new Dimension(390, 240));
         panelPalabras.setBorder(BorderFactory.createTitledBorder("Palabras"));
 
@@ -319,10 +331,9 @@ public class GUIINowThatWord extends JFrame {
      */
     public void createPanelPalabrasAVerificar(GridBagConstraints constraints)
     {
-        panelPalabras = new PanelPalabra();
-        panelPalabras.setPreferredSize(new Dimension(390, 140));
-        panelPalabras.setBorder(BorderFactory.createTitledBorder("Palabras"));
-        panelPalabras.setBackground(new Color(0,0,0,0));
+        panelPalabrasNivel = new PanelPalabrasNivel();
+        panelPalabrasNivel.setPreferredSize(new Dimension(390, 140));
+        panelPalabrasNivel.setBorder(BorderFactory.createTitledBorder("Palabras"));
 
         constraints.gridx = 0;
         constraints.gridy = 2;
@@ -330,7 +341,7 @@ public class GUIINowThatWord extends JFrame {
         constraints.fill = GridBagConstraints.CENTER;
         constraints.anchor = GridBagConstraints.CENTER;
 
-        add(panelPalabras, constraints);
+        add(panelPalabrasNivel, constraints);
     }
 
     //------------------------------------------------------------------------------------------------------------------------------------------
@@ -345,8 +356,8 @@ public class GUIINowThatWord extends JFrame {
         botonSI.setPreferredSize(new Dimension(100, 40));
         botonSI.setFont(new Font("SansSerif", Font.BOLD + Font.PLAIN, 25));
         botonSI.setForeground(new Color(32, 50, 20));
-        botonSI.removeMouseListener(escucha);
-        botonSI.addMouseListener(escucha);
+        botonSI.removeActionListener(escucha);
+        botonSI.addActionListener(escucha);
         botonSI.setBackground(new Color(146, 208, 80));
 
         constraints.gridx = 1;
@@ -370,8 +381,8 @@ public class GUIINowThatWord extends JFrame {
         botonNO.setPreferredSize(new Dimension(100, 40));
         botonNO.setFont(new Font("SansSerif", Font.BOLD + Font.PLAIN, 25));
         botonNO.setForeground(new Color(62, 0, 0));
-        botonNO.removeMouseListener(escucha);
-        botonNO.addMouseListener(escucha);
+        botonNO.removeActionListener(escucha);
+        botonNO.addActionListener(escucha);
         botonNO.setBackground(new Color(255, 0, 0));
 
         constraints.gridx = 3;
@@ -559,8 +570,8 @@ public class GUIINowThatWord extends JFrame {
         empezarNivel = new JButton("Empezar Nivel");
         empezarNivel.setFont(new Font("SansSerif", Font.BOLD + Font.PLAIN, 14));
         empezarNivel.setForeground(Color.white);
-        empezarNivel.removeMouseListener(escucha);
-        empezarNivel.addMouseListener(escucha);
+        empezarNivel.removeActionListener(escucha);
+        empezarNivel.addActionListener(escucha);
         empezarNivel.setBackground(new Color(255, 242, 204));
         constraints.gridx = 1;
         constraints.gridy = 5;
@@ -585,40 +596,48 @@ public class GUIINowThatWord extends JFrame {
     /**
      * inner class that extends an Adapter Class or implements Listeners used by GUI class
      */
-    private class Escucha extends MouseAdapter
-    {
+    private class Escucha extends MouseAdapter implements ActionListener {
+
         @Override
-        public void mousePressed(MouseEvent e)
-        {
+        public void actionPerformed(ActionEvent e) {
+
+        }
+
+        @Override
+        public void mousePressed(MouseEvent e) {
+            int conter = 0;
             GridBagConstraints constraints = new GridBagConstraints();
-            if(e.getSource()==salir)
-            {
+
+            if (e.getSource() == salir) {
                 game.registrarUsuario();
                 System.exit(0);
-            }
-            else if(e.getSource()==ayuda)
-            {
+
+            } else if (e.getSource() == ayuda) {
                 panelInstrucciones.add(instrucciones, BorderLayout.LINE_START);
 
                 JScrollPane scroll = new JScrollPane(panelInstrucciones);
                 scroll.setPreferredSize(new Dimension(440, 455));
 
                 JOptionPane.showMessageDialog(null, scroll, "Instrucciones del juego", JOptionPane.INFORMATION_MESSAGE);
-            }
-            else if(e.getSource()==empezarNivel)
-            {
-                game.subirNivelUsuario(game.getCantidadPalabrasDelNivel(),game.getAciertos());
+
+            } else if (e.getSource() == empezarNivel) {
+                game.subirNivelUsuario(game.getCantidadPalabrasDelNivel(), game.getAciertos());
                 //removeAll();
                 comenzarNivel();
+                empezarNivel.setVisible(false);
 
-                super.mousePressed(e);
-            }
-            else
-            {
-
+            } else if (e.getSource()==timer) {
+                if (conter < game.getCantidadPalabrasDelNivel() / 2) {
+                    super.mousePressed(e);
+                } else {
+                    verificarPalabras();
+                }
+                conter++;
+                if(conter < game.getCantidadPalabrasDelNivel())
+                {
+                    super.mousePressed(e);
+                }
             }
         }
     }
-
-
 }
