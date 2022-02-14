@@ -19,7 +19,7 @@ public class PalabrasDelNivel {
      * @return a word
      */
 
-    public void getPalabrasDelNivel(int cantidadPalabras){
+    public ArrayList<String> getPalabrasDelNivel(int cantidadPalabras){
         Random aleatorio = new Random();
         boolean añadir = true;
         //diccionario.size() obtiene el tamaño del arraylist, comienza en 0
@@ -52,14 +52,16 @@ public class PalabrasDelNivel {
                 palabrasDelNivel.add(unaPalabra);
             }
         }
+        return palabrasAMemorizar;
     }
 
-    public void palabrasAMemorizar()
+    public ArrayList<String> palabrasAMemorizar()
     {
         for (int flag=0; flag < palabrasDelNivel.size()/2; flag++)
         {
             palabrasAMemorizar.add(palabrasDelNivel.get(flag));
         }
+        return palabrasAMemorizar;
     }
 
     public int getCantidadPalabrasDelNivel() {

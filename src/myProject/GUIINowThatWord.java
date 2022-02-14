@@ -19,15 +19,14 @@ import java.util.Random;
 public class GUIINowThatWord extends JFrame {
 
     private Header headerProject;
-    private JPanel panelEspacioEnBlanco1, panelEspacioEnBlanco2, panelEspacioEnBlanco3, panelEspacioEnBlanco4, panelEspacioEnBlanco5, panelInfo, panelInstrucciones;
-    private PanelPalabrasMemorizar panelPalabras;
-    private PanelPalabrasNivel panelPalabrasNivel;
+    private JPanel panelPalabras, panelEspacioEnBlanco1, panelEspacioEnBlanco2, panelEspacioEnBlanco3, panelEspacioEnBlanco4, panelEspacioEnBlanco5, panelInfo, panelInstrucciones;
     private JButton ayuda, salir, botonSI, botonNO, empezarNivel;
-    private JTextArea nivel, aciertos,errores, instrucciones;
+    private JTextArea nivel, aciertos,errores, instrucciones, palabra;
     private Timer timer;
 
     int numeroNivel, numeroAciertos, numeroErrores, cualGUI = 0;
     String INSTRUCCIONES = "instrucciones"; //RELLENAR
+    boolean verificarRespuesta;
 
     private ModelINowThatWord game;
     private Escucha escucha;
@@ -77,6 +76,10 @@ public class GUIINowThatWord extends JFrame {
         instrucciones.setWrapStyleWord(true);
         instrucciones.setLineWrap(true);
         instrucciones.setEditable(false);
+        palabra = new JTextArea("");
+        palabra.setBackground(null);
+        palabra.setEditable(false);
+        //palabra.setFont();
 
         game.pedirDatos();
 
@@ -85,6 +88,7 @@ public class GUIINowThatWord extends JFrame {
 
     public void comenzarNivel()
     {
+        cualGUI=1;
         GridBagConstraints constraints = new GridBagConstraints();
 
         numeroNivel = game.getSuNivel();
@@ -98,10 +102,10 @@ public class GUIINowThatWord extends JFrame {
 
     public void verificarPalabras()
     {
+        cualGUI=2;
         timer.stop();
 
         GridBagConstraints constraints = new GridBagConstraints();
-        removeAll();
 
         createPalabrasAVerificarGUI(constraints);
 
@@ -110,10 +114,10 @@ public class GUIINowThatWord extends JFrame {
     }
     public void terminarNivel()
     {
+        cualGUI=3;
         timer.stop();
 
         GridBagConstraints constraints = new GridBagConstraints();
-        removeAll();
 
         createConclusionGUI(constraints);
     }
@@ -157,6 +161,9 @@ public class GUIINowThatWord extends JFrame {
         constraints.fill = GridBagConstraints.HORIZONTAL;
 
         this.add(headerProject, constraints); //Change this line if you change JFrame Container's Layout
+
+        revalidate();
+        repaint();
     }
 
     //------------------------------------------------------------------------------------------------------------------------------------------
@@ -170,8 +177,8 @@ public class GUIINowThatWord extends JFrame {
         ayuda = new JButton(" ? ");
         ayuda.setFont(new Font("SansSerif", Font.BOLD + Font.PLAIN, 14));
         ayuda.setForeground(Color.white);
-        ayuda.removeActionListener(escucha);
-        ayuda.addActionListener(escucha);
+        ayuda.removeMouseListener(escucha);
+        ayuda.addMouseListener(escucha);
         ayuda.setBackground(new Color(0, 112, 192));
         constraints.gridx = 0;
         constraints.gridy = 1;
@@ -262,8 +269,8 @@ public class GUIINowThatWord extends JFrame {
         salir = new JButton("Salir");
         salir.setFont(new Font("SansSerif", Font.BOLD + Font.PLAIN, 14));
         salir.setForeground(Color.WHITE);
-        salir.removeActionListener(escucha);
-        salir.addActionListener(escucha);
+        salir.removeMouseListener(escucha);
+        salir.addMouseListener(escucha);
         salir.setBackground(new Color(192, 0, 0));
         constraints.gridx = 4;
         constraints.gridy = 1;
@@ -282,9 +289,10 @@ public class GUIINowThatWord extends JFrame {
      */
     public void createPanelPalabrasAMemorizar(GridBagConstraints constraints)
     {
-        panelPalabras = new PanelPalabrasMemorizar();
+        panelPalabras = new JPanel();
         panelPalabras.setPreferredSize(new Dimension(390, 240));
         panelPalabras.setBorder(BorderFactory.createTitledBorder("Palabras"));
+        panelPalabras.setBackground(new Color(0,0,0,0));
 
         constraints.gridx = 0;
         constraints.gridy = 2;
@@ -331,9 +339,10 @@ public class GUIINowThatWord extends JFrame {
      */
     public void createPanelPalabrasAVerificar(GridBagConstraints constraints)
     {
-        panelPalabrasNivel = new PanelPalabrasNivel();
-        panelPalabrasNivel.setPreferredSize(new Dimension(390, 140));
-        panelPalabrasNivel.setBorder(BorderFactory.createTitledBorder("Palabras"));
+        panelPalabras = new JPanel();
+        panelPalabras.setBackground(new Color(0,0,0,0));
+        panelPalabras.setPreferredSize(new Dimension(390, 140));
+        panelPalabras.setBorder(BorderFactory.createTitledBorder("Palabras"));
 
         constraints.gridx = 0;
         constraints.gridy = 2;
@@ -341,7 +350,7 @@ public class GUIINowThatWord extends JFrame {
         constraints.fill = GridBagConstraints.CENTER;
         constraints.anchor = GridBagConstraints.CENTER;
 
-        add(panelPalabrasNivel, constraints);
+        add(panelPalabras, constraints);
     }
 
     //------------------------------------------------------------------------------------------------------------------------------------------
@@ -356,8 +365,8 @@ public class GUIINowThatWord extends JFrame {
         botonSI.setPreferredSize(new Dimension(100, 40));
         botonSI.setFont(new Font("SansSerif", Font.BOLD + Font.PLAIN, 25));
         botonSI.setForeground(new Color(32, 50, 20));
-        botonSI.removeActionListener(escucha);
-        botonSI.addActionListener(escucha);
+        botonSI.removeMouseListener(escucha);
+        botonSI.addMouseListener(escucha);
         botonSI.setBackground(new Color(146, 208, 80));
 
         constraints.gridx = 1;
@@ -381,8 +390,8 @@ public class GUIINowThatWord extends JFrame {
         botonNO.setPreferredSize(new Dimension(100, 40));
         botonNO.setFont(new Font("SansSerif", Font.BOLD + Font.PLAIN, 25));
         botonNO.setForeground(new Color(62, 0, 0));
-        botonNO.removeActionListener(escucha);
-        botonNO.addActionListener(escucha);
+        botonNO.removeMouseListener(escucha);
+        botonNO.addMouseListener(escucha);
         botonNO.setBackground(new Color(255, 0, 0));
 
         constraints.gridx = 3;
@@ -570,8 +579,8 @@ public class GUIINowThatWord extends JFrame {
         empezarNivel = new JButton("Empezar Nivel");
         empezarNivel.setFont(new Font("SansSerif", Font.BOLD + Font.PLAIN, 14));
         empezarNivel.setForeground(Color.white);
-        empezarNivel.removeActionListener(escucha);
-        empezarNivel.addActionListener(escucha);
+        empezarNivel.removeMouseListener(escucha);
+        empezarNivel.addMouseListener(escucha);
         empezarNivel.setBackground(new Color(255, 242, 204));
         constraints.gridx = 1;
         constraints.gridy = 5;
@@ -600,12 +609,51 @@ public class GUIINowThatWord extends JFrame {
 
         @Override
         public void actionPerformed(ActionEvent e) {
+            int conter = 0;
+            int flag = 0;
 
+            switch (cualGUI)
+            {
+                case 1:
+                    if(e.getSource()==timer) {
+                        panelPalabras.removeAll();
+                        if (conter < game.getCantidadPalabrasDelNivel() / 2) {
+                            palabra.setText(game.getPalabrasAMemorizar().get(conter));
+                            panelPalabras.add(palabra);
+                            System.out.println("imprime una palabra cada 5s");
+                            conter++;
+                        } else {
+                            conter = 0;
+                            removeAll();
+                            verificarPalabras();
+                        }
+                    }
+                    repaint();
+                    revalidate();
+
+                    break;
+                case 2:
+                    if(e.getSource()==timer) {
+                        panelPalabras.add(palabra);
+                        if (conter < game.getCantidadPalabrasDelNivel()) {
+                            palabra.setText(game.getPalabrasAMemorizar().get(conter));
+                            panelPalabras.add(palabra);
+                            verificarRespuesta=true;
+                        } else {
+                            conter = 0;
+                            removeAll();
+                            terminarNivel();
+                        }
+                    }
+                    repaint();
+                    revalidate();
+
+                    break;
+            }
         }
 
         @Override
         public void mousePressed(MouseEvent e) {
-            int conter = 0;
             GridBagConstraints constraints = new GridBagConstraints();
 
             if (e.getSource() == salir) {
@@ -626,17 +674,13 @@ public class GUIINowThatWord extends JFrame {
                 comenzarNivel();
                 empezarNivel.setVisible(false);
 
-            } else if (e.getSource()==timer) {
-                if (conter < game.getCantidadPalabrasDelNivel() / 2) {
-                    super.mousePressed(e);
-                } else {
-                    verificarPalabras();
-                }
-                conter++;
-                if(conter < game.getCantidadPalabrasDelNivel())
-                {
-                    super.mousePressed(e);
-                }
+            }
+            else if(verificarRespuesta)
+            {
+
+            }
+            else {
+
             }
         }
     }
