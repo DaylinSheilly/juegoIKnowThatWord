@@ -76,20 +76,22 @@ public class ModelINowThatWord {
         boolean correcta = false;
         int flag = 0;
         if (respuestaAfirmativa == true) {
-            for (flag = 0; flag < palabrasAMemorizar.size(); flag++) ;
+            for (flag = 0; flag < palabrasAMemorizar.size(); flag++)
             {
                 if (palabra == palabrasAMemorizar.get(flag)) {
                     correcta = true;
+                    break;
                 } else {
                     correcta = false;
                 }
             }
         } else {
             if (respuestaAfirmativa == false) {
-                for (flag = 0; flag < palabrasAMemorizar.size(); flag++) ;
+                for (flag = 0; flag < palabrasAMemorizar.size(); flag++)
                 {
                     if (palabra == palabrasAMemorizar.get(flag)) {
                         correcta = false;
+                        break;
                     } else {
                         correcta = true;
                     }
