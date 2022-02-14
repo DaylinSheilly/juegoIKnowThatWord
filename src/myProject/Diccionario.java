@@ -25,4 +25,5 @@ public class Diccionario {
     public ArrayList<String> getDiccionario() {
         return diccionario;
     }
+
 }

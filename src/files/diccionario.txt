@@ -79,10 +79,10 @@ Libro
 Caja
 Chico
 Muchacho
-Edificio
+Maleta
 Bus
-Negocio
-LLamada
+Agua
+Llamada
 Carro
 Gato
 Centavo
@@ -125,7 +125,7 @@ Finca
 Copia
 Campana
 Acampar
-Colot
+Color
 Nube
 Cielito
 Gasolina
@@ -151,7 +151,7 @@ Sombrero
 Cabeza
 Calor
 Pollo
-Damilia
+Familia
 Hogar
 Caballo
 Hora
@@ -160,7 +160,7 @@ Hielo
 Nieve
 Idea
 Isla
-Trabajo justicia
+Trabajo
 Llave
 Puente
 Ver
@@ -170,11 +170,11 @@ Lago
 Teclado
 Celular
 Internet
-Tierra
+Cepillo
 Tienda
 Planta
 Mar
-Cuaderno
+Biblioteca
 Nota
 Nariz
 Noche
