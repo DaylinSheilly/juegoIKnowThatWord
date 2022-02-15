@@ -353,6 +353,7 @@ public class GUIINowThatWord extends JFrame {
         panelPalabras.setPreferredSize(new Dimension(390, 240));
         panelPalabras.setBorder(BorderFactory.createTitledBorder("Palabras"));
         panelPalabras.setBackground(new Color(0,0,0,0));
+        panelPalabras.setLayout(new BorderLayout());
 
         constraints.gridx = 0;
         constraints.gridy = 2;
@@ -397,6 +398,7 @@ public class GUIINowThatWord extends JFrame {
         panelPalabras.setBackground(new Color(0,0,0,0));
         panelPalabras.setPreferredSize(new Dimension(390, 140));
         panelPalabras.setBorder(BorderFactory.createTitledBorder("Palabras"));
+        panelPalabras.setLayout(new BorderLayout());
 
         constraints.gridx = 0;
         constraints.gridy = 2;
@@ -693,7 +695,7 @@ public class GUIINowThatWord extends JFrame {
                         panelPalabras.removeAll();
                         if (conter < game.getCantidadPalabrasDelNivel() / 2) {
                             palabra.setText(game.getPalabrasAMemorizar().get(conter));
-                            panelPalabras.add(palabra);
+                            panelPalabras.add(palabra, BorderLayout.PAGE_END);
                             conter++;
                             palabra.revalidate();
                             palabra.repaint();
@@ -714,7 +716,7 @@ public class GUIINowThatWord extends JFrame {
                         panelPalabras.add(palabra);
                         if (conter < game.getCantidadPalabrasDelNivel()) {
                             palabra.setText(game.getPalabrasAMemorizar().get(conter));
-                            panelPalabras.add(palabra);
+                            panelPalabras.add(palabra, BorderLayout.PAGE_END);
                             conter++;
                             palabra.revalidate();
                             palabra.repaint();
