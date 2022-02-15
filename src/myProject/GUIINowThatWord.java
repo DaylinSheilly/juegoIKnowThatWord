@@ -9,13 +9,12 @@ import java.awt.event.MouseEvent;
 import java.util.Random;
 
 /**
- * This class is used for ...
- * @autor Paola-J Rodriguez-C paola.rodriguez@correounivalle.edu.co
- * @version v.1.0.0 date:21/11/2021
- *
- * (ejemplo v.17.3.8 se lee: versión 17 del sofware, la tercera actualización del software
- *  * y la octava corrección de errores)
+ * This class is used for to show game on screen and allow to play.
+ * @autor Juan Esteban Mazuera Yunda, juan.yunda@correounivalle.edu.co
+ * @autor Sheilly Daylin Ortega Granobles, sheilly.ortega@correounivalle.edu.co
+ * @version v.1.0.0 date: 05/02/2022
  */
+
 public class GUIINowThatWord extends JFrame {
 
     private Header headerProject;
@@ -35,6 +34,7 @@ public class GUIINowThatWord extends JFrame {
     /**
      * Constructor of GUI class
      */
+
     public GUIINowThatWord(){
         initGUI();
 
@@ -50,11 +50,14 @@ public class GUIINowThatWord extends JFrame {
         getContentPane().setBackground(new Color(255, 230, 153));
     }
 
+    //---------------------------------------------------------------------------------------------------------------------------------------
+
     /**
      * This method is used to set up the default JComponent Configuration,
      * create Listener and control Objects used for the GUI class
      *
      */
+
     private void initGUI() {
         //Set up JFrame Container's Layout
         this.getContentPane().setLayout(new GridBagLayout());
@@ -87,6 +90,12 @@ public class GUIINowThatWord extends JFrame {
         comenzarNivel();
     }
 
+    //---------------------------------------------------------------------------------------------------------------------------------------
+
+    /**
+     * This function starts a new level
+     */
+
     public void comenzarNivel()
     {
         cualGUI=1;
@@ -117,6 +126,13 @@ public class GUIINowThatWord extends JFrame {
         timer.start();
     }
 
+    //---------------------------------------------------------------------------------------------------------------------------------------
+
+    /**
+     * This function is responsible for displaying the interface in the window where the player indicates wether the
+     * word appeared or not
+     */
+
     public void verificarPalabras()
     {
         cualGUI=2;
@@ -141,6 +157,13 @@ public class GUIINowThatWord extends JFrame {
         timer = new Timer(7000,escucha);
         timer.start();
     }
+
+    //---------------------------------------------------------------------------------------------------------------------------------------
+
+    /**
+     * This function shows how many successes and errors there were, if the level was passed and the button to pass the level
+     */
+
     public void terminarNivel()
     {
         cualGUI=3;
@@ -158,7 +181,6 @@ public class GUIINowThatWord extends JFrame {
         empezarNivel.setBackground(new Color(255, 242, 204));
     }
 
-    //------------------------------------------------------------------------------------------------------------------------------------------
     //------------------------------------------------------------------------------------------------------------------------------------------
 
     /**
@@ -324,6 +346,7 @@ public class GUIINowThatWord extends JFrame {
      * This function creates the PanelPalabras panel.
      * @param constraints
      */
+
     public void createPanelPalabrasAMemorizar(GridBagConstraints constraints)
     {
         panelPalabras = new JPanel();
@@ -340,7 +363,6 @@ public class GUIINowThatWord extends JFrame {
         add(panelPalabras, constraints);
     }
 
-    //------------------------------------------------------------------------------------------------------------------------------------------
     //------------------------------------------------------------------------------------------------------------------------------------------
 
     /**
@@ -368,6 +390,7 @@ public class GUIINowThatWord extends JFrame {
      * This function repaint the PanelPalabras panel.
      * @param constraints
      */
+
     public void createPanelPalabrasAVerificar(GridBagConstraints constraints)
     {
         panelPalabras = new JPanel();
@@ -390,6 +413,7 @@ public class GUIINowThatWord extends JFrame {
      * This function create the BotonSI button.
      * @param constraints
      */
+
     public void createBotonSI(GridBagConstraints constraints)
     {
         botonSI = new JButton("\uF0FC\n");
@@ -415,6 +439,7 @@ public class GUIINowThatWord extends JFrame {
      * This function create the BotonNO button.
      * @param constraints
      */
+
     public void createBotonNO(GridBagConstraints constraints)
     {
         botonNO = new JButton("\uF0FB");
@@ -478,7 +503,6 @@ public class GUIINowThatWord extends JFrame {
         add(panelEspacioEnBlanco4, constraints);
     }
 
-    //------------------------------------------------------------------------------------------------------------------------------------------
     //------------------------------------------------------------------------------------------------------------------------------------------
 
     /**
@@ -645,6 +669,7 @@ public class GUIINowThatWord extends JFrame {
      * @param args Object used in order to send input data from command line when
      *             the program is execute by console.
      */
+
     public static void main(String[] args){
         EventQueue.invokeLater(() -> {
             GUIINowThatWord miProjectGUIINowThatWord = new GUIINowThatWord();
@@ -654,6 +679,7 @@ public class GUIINowThatWord extends JFrame {
     /**
      * inner class that extends an Adapter Class or implements Listeners used by GUI class
      */
+
     private class Escucha extends MouseAdapter implements ActionListener {
 
         @Override

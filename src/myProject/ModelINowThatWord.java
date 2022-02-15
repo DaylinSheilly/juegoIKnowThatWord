@@ -28,6 +28,12 @@ public class ModelINowThatWord {
         nombreUsuario = "";
     }
 
+    //---------------------------------------------------------------------------------------------------------------------------------------
+
+    /**
+     * This function
+     * @param nivel
+     */
     public void palabrasPorNivel(int nivel){
         if(nivel >= 1 && nivel <= 10) {
             switch (nivel) {
@@ -66,6 +72,8 @@ public class ModelINowThatWord {
 
         }
     }
+
+    //---------------------------------------------------------------------------------------------------------------------------------------
 
     /**
      * This function checks whether or not it came out in the list of words to be memorized.
@@ -106,10 +114,14 @@ public class ModelINowThatWord {
 
     }
 
+    //---------------------------------------------------------------------------------------------------------------------------------------
+
     public void pedirDatos(){
         usuario.pedirDatos();
         detectNewOrOldUser();
     }
+
+    //---------------------------------------------------------------------------------------------------------------------------------------
 
     /**
      * This function saves the information of a new user.
@@ -118,6 +130,8 @@ public class ModelINowThatWord {
     public void registrarUsuario(){
         usuario.registrarUsuario(suNivel);
     }
+
+    //---------------------------------------------------------------------------------------------------------------------------------------
 
     public void detectNewOrOldUser()
     {
@@ -143,12 +157,18 @@ public class ModelINowThatWord {
     }
 
     /**
-     * This function gets the user level.
+     * This method gets the user level.
      * @return new level
      */
+
     public int getSuNivel() {
         return suNivel;
     }
+
+    /**
+     *
+     * @return
+     */
 
     public int getCantidadPalabrasDelNivel() {
         return palabras.getCantidadPalabrasDelNivel();

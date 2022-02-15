@@ -14,6 +14,8 @@ public class PalabrasDelNivel {
         palabrasAMemorizar = new ArrayList<String>();
     }
 
+    //---------------------------------------------------------------------------------------------------------------------------------------
+
     /**
      * This function gets a random word from dictionary.
      * @return a word
@@ -55,6 +57,8 @@ public class PalabrasDelNivel {
         return palabrasAMemorizar;
     }
 
+    //---------------------------------------------------------------------------------------------------------------------------------------
+
     public ArrayList<String> palabrasAMemorizar()
     {
         for (int flag=0; flag < palabrasDelNivel.size()/2; flag++)
@@ -64,9 +68,14 @@ public class PalabrasDelNivel {
         return palabrasAMemorizar;
     }
 
+    //---------------------------------------------------------------------------------------------------------------------------------------
+
     public int getCantidadPalabrasDelNivel() {
         return palabrasDelNivel.size();
     }
+
+    //---------------------------------------------------------------------------------------------------------------------------------------
+
 
     public String getUnaPalabra(int cualPalabra)
     {
