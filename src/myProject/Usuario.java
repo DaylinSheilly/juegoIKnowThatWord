@@ -19,8 +19,8 @@ public class Usuario {
 
         unUsuario = 0;
         nivelUsuario = 1;
-        usuarioIngresado = "";
-        nombreUsuario = "";
+        usuarioIngresado = " ";
+        nombreUsuario = " ";
     }
 
     //---------------------------------------------------------------------------------------------------------------------------------------

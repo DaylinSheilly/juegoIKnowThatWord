@@ -27,7 +27,6 @@ public class GUIINowThatWord extends JFrame {
 
     int numeroNivel, numeroAciertos, numeroErrores, cualGUI, conter = 0;
     String INSTRUCCIONES = "instrucciones"; //RELLENAR
-    boolean verificarRespuesta;
 
     private ModelINowThatWord game;
     private Escucha escucha;
@@ -93,28 +92,25 @@ public class GUIINowThatWord extends JFrame {
         GridBagConstraints constraints = new GridBagConstraints();
 
         numeroNivel = game.getSuNivel();
+
         game.palabrasPorNivel(numeroNivel);
 
         createPalabrasAMemorizarGUI(constraints);
 
+        empezarNivel.setVisible(false);
         empezarNivel.removeMouseListener(escucha);
         empezarNivel.setBackground(Color.GRAY);
         empezarNivel.setForeground(Color.DARK_GRAY);
 
         palabra.setEditable(false);
         conter=0;
-        palabra.setText(game.getPalabrasAMemorizar().get(conter));
         panelPalabras.add(palabra);
-        conter++;
-        palabra.revalidate();
-        palabra.repaint();
-        panelPalabras.revalidate();
-        panelPalabras.repaint();
         revalidate();
         repaint();
+        pack();
 
         timer = new Timer(500,escucha);
-        timer.start();
+        escucha.printMemoryWords();
     }
 
     public void verificarPalabras()
@@ -128,18 +124,12 @@ public class GUIINowThatWord extends JFrame {
 
         palabra.setEditable(false);
         conter=0;
-        palabra.setText(game.getPalabrasAMemorizar().get(conter));
-        panelPalabras.add(palabra);
-        conter++;
-        palabra.revalidate();
-        palabra.repaint();
-        panelPalabras.revalidate();
-        panelPalabras.repaint();
         revalidate();
         repaint();
 
         timer = new Timer(7000,escucha);
-        timer.start();
+        escucha.printAllWords();
+        pack();
     }
     public void terminarNivel()
     {
@@ -153,9 +143,11 @@ public class GUIINowThatWord extends JFrame {
 
         createConclusionGUI(constraints);
 
+        empezarNivel.setVisible(true);
         empezarNivel.setForeground(Color.black);
         empezarNivel.addMouseListener(escucha);
         empezarNivel.setBackground(new Color(255, 242, 204));
+        pack();
     }
 
     //------------------------------------------------------------------------------------------------------------------------------------------
@@ -606,7 +598,7 @@ public class GUIINowThatWord extends JFrame {
         panelInfo.setPreferredSize(new Dimension(390, 240));
         panelInfo.setBorder(BorderFactory.createTitledBorder("Información"));
         panelInfo.setBackground(new Color(0,0,0,0));
-        panelInfo.setFont(new Font(Font.DIALOG,Font.BOLD,27));
+        panelInfo.setFont(new Font(Font.DIALOG,Font.BOLD,10));
 
         constraints.gridx = 0;
         constraints.gridy = 4;
@@ -666,17 +658,13 @@ public class GUIINowThatWord extends JFrame {
                     if(e.getSource()==timer) {
                         panelPalabras.removeAll();
                         if (conter < game.getCantidadPalabrasDelNivel() / 2) {
-                            palabra.setText(game.getPalabrasAMemorizar().get(conter));
-                            panelPalabras.add(palabra);
-                            conter++;
-                            palabra.revalidate();
-                            palabra.repaint();
-                            panelPalabras.revalidate();
-                            panelPalabras.repaint();
+                            printMemoryWords();
                         } else {
+                            panelPalabras.remove(palabra);
                             conter = 0;
                             remove(panelPalabras);
                             verificarPalabras();
+                            panelPalabras.add(palabra);
                         }
                     }
                     repaint();
@@ -685,17 +673,10 @@ public class GUIINowThatWord extends JFrame {
                     break;
                 case 2:
                     if(e.getSource()==timer) {
-                        panelPalabras.add(palabra);
                         if (conter < game.getCantidadPalabrasDelNivel()) {
-                            palabra.setText(game.getPalabrasAMemorizar().get(conter));
-                            panelPalabras.add(palabra);
-                            conter++;
-                            palabra.revalidate();
-                            palabra.repaint();
-                            panelPalabras.revalidate();
-                            panelPalabras.repaint();
-                            verificarRespuesta=true;
+                            game.noAnswer();
                         } else {
+                            panelPalabras.remove(palabra);
                             conter = 0;
                             remove(panelPalabras);
                             remove(panelEspacioEnBlanco3);
@@ -729,12 +710,9 @@ public class GUIINowThatWord extends JFrame {
                 JOptionPane.showMessageDialog(null, scroll, "Instrucciones del juego", JOptionPane.INFORMATION_MESSAGE);
 
             } else if (e.getSource() == empezarNivel) {
+
                 numeroNivel = game.subirNivelUsuario(game.getCantidadPalabrasDelNivel(), game.getAciertos());
 
-                createSpace5(constraints);
-                createSuccessCounter(constraints);
-                createMistakesCounter(constraints);
-                createPanelInfo(constraints);
                 remove(panelEspacioEnBlanco5);
                 remove(aciertos);
                 remove(errores);
@@ -744,16 +722,76 @@ public class GUIINowThatWord extends JFrame {
             }
             else if(e.getSource() == botonSI)
             {
-                game.validarPalabra(game.getPalabrasAMemorizar().get(conter),true);
-                //timer.restart();
-                System.out.println(conter);
+                timer.stop();
+                if(conter<game.getCantidadPalabrasDelNivel()) {
+                    panelPalabras.removeAll();
+                    game.validarPalabra(game.getPalabrasDelNivel().get(conter), true);
+                    printAllWords();
+                    System.out.println(conter);
+                } else {
+                    panelPalabras.remove(palabra);
+                    conter = 0;
+                    remove(panelPalabras);
+                    remove(panelEspacioEnBlanco3);
+                    remove(botonSI);
+                    remove(botonNO);
+                    remove(panelEspacioEnBlanco4);
+                    terminarNivel();
+                }
             }
             else if(e.getSource() == botonNO)
             {
-                game.validarPalabra(game.getPalabrasAMemorizar().get(conter),false);
-                //timer.restart();
-                System.out.println(conter);
+                timer.stop();
+                if(conter<game.getCantidadPalabrasDelNivel()) {
+                    panelPalabras.removeAll();
+                    game.validarPalabra(game.getPalabrasDelNivel().get(conter), false);
+                    printAllWords();
+                    System.out.println(conter);
+                } else {
+                    panelPalabras.remove(palabra);
+                    conter = 0;
+                    remove(panelPalabras);
+                    remove(panelEspacioEnBlanco3);
+                    remove(botonSI);
+                    remove(botonNO);
+                    remove(panelEspacioEnBlanco4);
+                    terminarNivel();
+                }
             }
+        }
+
+        public void printMemoryWords()
+        {
+            if(conter<game.getCantidadPalabrasDelNivel()/2) {
+                palabra.setText(game.getPalabrasAMemorizar().get(conter));
+                panelPalabras.add(palabra);
+                conter++;
+
+                palabra.revalidate();
+                palabra.repaint();
+                panelPalabras.revalidate();
+                panelPalabras.repaint();
+            }
+            timer.start();
+            repaint();
+            revalidate();
+        }
+
+        public void printAllWords()
+        {
+            if(conter<game.getCantidadPalabrasDelNivel()) {
+                palabra.setText(game.getPalabrasDelNivel().get(conter));
+                panelPalabras.add(palabra);
+                conter++;
+
+                palabra.revalidate();
+                palabra.repaint();
+                panelPalabras.revalidate();
+                panelPalabras.repaint();
+            }
+            timer.start();
+            repaint();
+            revalidate();
         }
     }
 }
