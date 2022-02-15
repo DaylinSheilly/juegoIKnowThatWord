@@ -88,66 +88,75 @@ public class GUIINowThatWord extends JFrame {
 
     public void comenzarNivel()
     {
-        cualGUI=1;
-        GridBagConstraints constraints = new GridBagConstraints();
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                cualGUI=1;
+                GridBagConstraints constraints = new GridBagConstraints();
 
-        numeroNivel = game.getSuNivel();
+                numeroNivel = game.getSuNivel();
 
-        game.palabrasPorNivel(numeroNivel);
+                game.palabrasPorNivel(numeroNivel);
 
-        createPalabrasAMemorizarGUI(constraints);
+                createPalabrasAMemorizarGUI(constraints);
 
-        empezarNivel.setVisible(false);
-        empezarNivel.removeMouseListener(escucha);
-        empezarNivel.setBackground(Color.GRAY);
-        empezarNivel.setForeground(Color.DARK_GRAY);
+                empezarNivel.setVisible(false);
 
-        palabra.setEditable(false);
-        conter=0;
-        panelPalabras.add(palabra);
-        revalidate();
-        repaint();
-        pack();
+                palabra.setEditable(false);
+                conter=0;
+                panelPalabras.add(palabra);
+                revalidate();
+                repaint();
+                pack();
 
-        timer = new Timer(500,escucha);
-        escucha.printMemoryWords();
+                timer = new Timer(500,escucha);
+                escucha.printMemoryWords();
+            }
+        });
     }
 
     public void verificarPalabras()
     {
-        cualGUI=2;
-        timer.stop();
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                cualGUI=2;
+                timer.stop();
 
-        GridBagConstraints constraints = new GridBagConstraints();
+                GridBagConstraints constraints = new GridBagConstraints();
 
-        createPalabrasAVerificarGUI(constraints);
+                createPalabrasAVerificarGUI(constraints);
 
-        palabra.setEditable(false);
-        conter=0;
-        revalidate();
-        repaint();
+                palabra.setEditable(false);
+                conter=0;
+                revalidate();
+                repaint();
 
-        timer = new Timer(7000,escucha);
-        escucha.printAllWords();
-        pack();
+                timer = new Timer(7000,escucha);
+                escucha.printAllWords();
+                pack();
+            }
+        });
     }
     public void terminarNivel()
     {
-        cualGUI=3;
-        timer.stop();
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                cualGUI=3;
+                timer.stop();
 
-        GridBagConstraints constraints = new GridBagConstraints();
+                GridBagConstraints constraints = new GridBagConstraints();
 
-        numeroAciertos = game.getAciertos();
-        numeroErrores = game.getErrores();
+                numeroAciertos = game.getAciertos();
+                numeroErrores = game.getErrores();
 
-        createConclusionGUI(constraints);
+                createConclusionGUI(constraints);
 
-        empezarNivel.setVisible(true);
-        empezarNivel.setForeground(Color.black);
-        empezarNivel.addMouseListener(escucha);
-        empezarNivel.setBackground(new Color(255, 242, 204));
-        pack();
+                empezarNivel.setVisible(true);
+                pack();
+            }
+        });
     }
 
     //------------------------------------------------------------------------------------------------------------------------------------------
@@ -496,18 +505,18 @@ public class GUIINowThatWord extends JFrame {
         {
             if(numeroAciertos>numeroErrores) {
                 panelInfo.setText("Has obtenido " + numeroAciertos + " respuestas correctas y " + numeroErrores + " repuestas incorrectas." +
-                        "\nLo hiciste muy bien. Puedes volver a intentar el maximo nivel dando click en el botón que dice ~Empezar Nivel~");
+                        "\nLo hiciste muy bien.\nPuedes volver a intentar el maximo nivel dando click en el botón\nque dice ~Empezar Nivel~");
             }
             else
             {
                 panelInfo.setText("Has obtenido " + numeroAciertos + " respuestas correctas y " + numeroErrores + " repuestas incorrectas." +
-                        "\nPodrias hacerlo mejor. Puedes volver a intentar el máximo nivel dando click en el botón que dice ~Empezar Nivel~");
+                        "\nPodrias hacerlo mejor.\nPuedes volver a intentar el máximo nivel dando click en el botón\nque dice ~Empezar Nivel~");
             }
         }
         else
         {
             panelInfo.setText("Has obtenido "+numeroAciertos+" respuestas correctas y "+numeroErrores+" repuestas incorrectas." +
-                    "\nDebes acertar al menos la mitad de las palabras para pasar de nivel... Intentalo de nuevo.");
+                    "\nDebes acertar al menos la mitad de las palabras para pasar de nivel...\nIntentalo de nuevo.");
         }
 
         revalidate();
@@ -619,7 +628,7 @@ public class GUIINowThatWord extends JFrame {
     public void createStartLevelButton(GridBagConstraints constraints) {
         empezarNivel = new JButton("~Empezar Nivel~");
         empezarNivel.setFont(new Font("SansSerif", Font.BOLD + Font.PLAIN, 14));
-        empezarNivel.setForeground(Color.white);
+        empezarNivel.setForeground(Color.black);
         empezarNivel.removeMouseListener(escucha);
         empezarNivel.addMouseListener(escucha);
         empezarNivel.setBackground(new Color(255, 242, 204));
@@ -712,7 +721,19 @@ public class GUIINowThatWord extends JFrame {
             } else if (e.getSource() == empezarNivel) {
 
                 numeroNivel = game.subirNivelUsuario(game.getCantidadPalabrasDelNivel(), game.getAciertos());
+                createHeader(constraints);
+                createHelpButton(constraints);
+                createLevelCounter(constraints);
+                createExitButton(constraints);
+                createSpace1(constraints);
+                createSpace2(constraints);
 
+                remove(headerProject);
+                remove(ayuda);
+                remove(nivel);
+                remove(salir);
+                remove(panelEspacioEnBlanco1);
+                remove(panelEspacioEnBlanco2);
                 remove(panelEspacioEnBlanco5);
                 remove(aciertos);
                 remove(errores);
