@@ -7,7 +7,6 @@ import java.util.Vector;
 public class Diccionario {
     private ArrayList<String> diccionario = new ArrayList <String> ();
     private ArrayList<String> palabrasDelNivel;
-
     private String nuevaPalabra;
 
     /**
@@ -22,6 +21,10 @@ public class Diccionario {
 
     //---------------------------------------------------------------------------------------------------------------------------------------
 
+    /**
+     * This method gets the list of words from diccionario.txt
+     * @return
+     */
     public ArrayList<String> getDiccionario() {
         return diccionario;
     }
