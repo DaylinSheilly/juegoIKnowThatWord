@@ -7,6 +7,10 @@ public class PalabrasDelNivel {
     private Diccionario diccionario;
     private ArrayList<String> todasLasPalabras, palabrasDelNivel, palabrasAMemorizar;
 
+    /**
+     * Constructor
+     */
+
     public PalabrasDelNivel(){
         diccionario = new Diccionario();
         todasLasPalabras = diccionario.getDiccionario();
@@ -59,6 +63,11 @@ public class PalabrasDelNivel {
 
     //---------------------------------------------------------------------------------------------------------------------------------------
 
+    /**
+     * This function returns half of the words in the level for the player to memorize
+     * @return the words to memorize
+     */
+
     public ArrayList<String> palabrasAMemorizar()
     {
         for (int flag=0; flag < palabrasDelNivel.size()/2; flag++)
@@ -70,12 +79,22 @@ public class PalabrasDelNivel {
 
     //---------------------------------------------------------------------------------------------------------------------------------------
 
+    /**
+     * This method gets the number of words that the level
+     * @return the number of words that the level
+     */
+
     public int getCantidadPalabrasDelNivel() {
         return palabrasDelNivel.size();
     }
 
     //---------------------------------------------------------------------------------------------------------------------------------------
 
+    /**
+     * This method gets a word
+     * @param cualPalabra
+     * @return the word
+     */
 
     public String getUnaPalabra(int cualPalabra)
     {

@@ -13,6 +13,7 @@ public class Usuario {
     /**
      * Constructor
      */
+
     public Usuario() {
         fileManager = new FileManager();
         usuarios = fileManager.lecturaUsuario();
@@ -28,6 +29,7 @@ public class Usuario {
     /**
      * This function ask an username at the user.
      */
+
     public void pedirDatos(){
         nombreUsuario = JOptionPane.showInputDialog(null, "Ingresa tu nombre",
                 "Solicitud de datos", JOptionPane.QUESTION_MESSAGE);
@@ -74,6 +76,7 @@ public class Usuario {
      * This function gets the user level.
      * @return user level
      */
+
     public int getNivelUsuario() {
         for (unUsuario = 0; unUsuario < usuarios.size(); unUsuario++) {
             if (usuarios.get(unUsuario).equals(nombreUsuario)) {
@@ -89,6 +92,7 @@ public class Usuario {
      * This function gets the user name.
      * @return user level
      */
+
     public String getUsuarioIngresado() {
         return usuarioIngresado;
     }
