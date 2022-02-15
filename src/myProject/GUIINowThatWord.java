@@ -18,16 +18,24 @@ import java.util.Random;
 public class GUIINowThatWord extends JFrame {
 
     private Header headerProject;
-    private JPanel panelPalabras, panelEspacioEnBlanco1, panelEspacioEnBlanco2, panelEspacioEnBlanco3, panelEspacioEnBlanco4, panelEspacioEnBlanco5,
-                    panelInstrucciones;
+    private JPanel panelPalabras, panelEspacioEnBlanco1, panelEspacioEnBlanco2, panelEspacioEnBlanco3,
+                   panelEspacioEnBlanco4, panelEspacioEnBlanco5, panelInstrucciones;
     private JButton ayuda, salir, botonSI, botonNO, empezarNivel;
-    private JTextArea nivel, aciertos,errores, instrucciones, palabra, panelInfo;
+    private JTextArea nivel, aciertos, errores, instrucciones, panelInfo;
     private Timer timer;
-
     int numeroNivel, numeroAciertos, numeroErrores, cualGUI, conter = 0;
-    String INSTRUCCIONES = "instrucciones"; //RELLENAR
+    private  static final String INSTRUCCIONES = "En la pantalla aparecerán palabras para memorizar, cuentas con 5 "
+            + "segundos para memorizar cada una de las palabras\n"
+            + "\nTras la serie de palabras a memorizar, el juego te presentará un listado con el doble de palabras que se "
+            + "mostraron. Por cada una las palabras debes indicar si la palabra estaba o no contenida en el "
+            + "listado a memorizar y tendrás un tiempo de 7 segundos para responder, en caso de no hacerlo se tomará "
+            + "como un error.\n"
+            + "\nInicias en el nivel 1 y solo puedes pasar al siguiente nivel si lo logras superar. Aquí están las"
+            + " condiciones para poder superar cada nivel: ";
+    private ImageIcon reglasDelNivel, imagenNuevoTamanho;
+    private Image imagenOtroTamanho;
+    private JLabel imagenReglas, palabra;
     boolean verificarRespuesta;
-
     private ModelINowThatWord game;
     private Escucha escucha;
 
@@ -67,6 +75,13 @@ public class GUIINowThatWord extends JFrame {
         game = new ModelINowThatWord();
         //Set up JComponents
 
+        reglasDelNivel = new ImageIcon(getClass().getResource("/resources/reglas.jpeg"));
+        imagenOtroTamanho = reglasDelNivel.getImage().getScaledInstance(410,805,Image.SCALE_SMOOTH);
+        imagenNuevoTamanho = new ImageIcon(imagenOtroTamanho);
+
+        imagenReglas = new JLabel(imagenNuevoTamanho);
+
+
         panelInstrucciones = new JPanel();
         panelInstrucciones.setPreferredSize(new Dimension(410,1005));
         panelInstrucciones.setBackground(Color.WHITE);
@@ -74,16 +89,20 @@ public class GUIINowThatWord extends JFrame {
         panelInstrucciones.setLayout(new BorderLayout());
 
         instrucciones = new JTextArea();
+        instrucciones.setBackground(null);
         instrucciones.setText(INSTRUCCIONES);
         instrucciones.setLineWrap(true);
-        instrucciones.setPreferredSize(new Dimension(408, 1000));
+        instrucciones.setPreferredSize(new Dimension(408, 200));
         instrucciones.setWrapStyleWord(true);
         instrucciones.setLineWrap(true);
         instrucciones.setEditable(false);
-        palabra = new JTextArea("");
+
+        palabra = new JLabel("");
         palabra.setBackground(null);
-        palabra.setEditable(false);
-        palabra.setFont(new Font(Font.DIALOG,Font.BOLD,27));
+        palabra.setAlignmentY(SwingConstants.CENTER);
+        palabra.setHorizontalAlignment(JLabel.CENTER);
+        palabra.setVerticalAlignment(JLabel.CENTER);
+        palabra.setFont(new Font(Font.DIALOG,Font.BOLD,60));
 
         game.pedirDatos();
 
@@ -110,10 +129,9 @@ public class GUIINowThatWord extends JFrame {
         empezarNivel.setBackground(Color.GRAY);
         empezarNivel.setForeground(Color.DARK_GRAY);
 
-        palabra.setEditable(false);
         conter=0;
         palabra.setText(game.getPalabrasAMemorizar().get(conter));
-        panelPalabras.add(palabra);
+        panelPalabras.add(palabra, BorderLayout.CENTER);
         conter++;
         palabra.revalidate();
         palabra.repaint();
@@ -142,10 +160,9 @@ public class GUIINowThatWord extends JFrame {
 
         createPalabrasAVerificarGUI(constraints);
 
-        palabra.setEditable(false);
         conter=0;
         palabra.setText(game.getPalabrasAMemorizar().get(conter));
-        panelPalabras.add(palabra);
+        panelPalabras.add(palabra, BorderLayout.CENTER);
         conter++;
         palabra.revalidate();
         palabra.repaint();
@@ -397,8 +414,9 @@ public class GUIINowThatWord extends JFrame {
         panelPalabras = new JPanel();
         panelPalabras.setBackground(new Color(0,0,0,0));
         panelPalabras.setPreferredSize(new Dimension(390, 140));
+        panelPalabras.setFont(new Font("SansSerif", Font.BOLD, 24));
         panelPalabras.setBorder(BorderFactory.createTitledBorder("Palabras"));
-        panelPalabras.setLayout(new BorderLayout());
+        //panelPalabras.setLayout(new BorderLayout());
 
         constraints.gridx = 0;
         constraints.gridy = 2;
@@ -695,7 +713,7 @@ public class GUIINowThatWord extends JFrame {
                         panelPalabras.removeAll();
                         if (conter < game.getCantidadPalabrasDelNivel() / 2) {
                             palabra.setText(game.getPalabrasAMemorizar().get(conter));
-                            panelPalabras.add(palabra, BorderLayout.PAGE_END);
+                            panelPalabras.add(palabra);
                             conter++;
                             palabra.revalidate();
                             palabra.repaint();
@@ -716,7 +734,7 @@ public class GUIINowThatWord extends JFrame {
                         panelPalabras.add(palabra);
                         if (conter < game.getCantidadPalabrasDelNivel()) {
                             palabra.setText(game.getPalabrasAMemorizar().get(conter));
-                            panelPalabras.add(palabra, BorderLayout.PAGE_END);
+                            panelPalabras.add(palabra);
                             conter++;
                             palabra.revalidate();
                             palabra.repaint();
@@ -749,7 +767,8 @@ public class GUIINowThatWord extends JFrame {
                 System.exit(0);
 
             } else if (e.getSource() == ayuda) {
-                panelInstrucciones.add(instrucciones, BorderLayout.LINE_START);
+                panelInstrucciones.add(instrucciones, BorderLayout.NORTH);
+                panelInstrucciones.add(imagenReglas, BorderLayout.CENTER);
 
                 JScrollPane scroll = new JScrollPane(panelInstrucciones);
                 scroll.setPreferredSize(new Dimension(440, 455));

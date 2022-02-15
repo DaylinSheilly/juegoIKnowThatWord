@@ -25,6 +25,7 @@ public class Diccionario {
      * This method gets the list of words from diccionario.txt
      * @return
      */
+
     public ArrayList<String> getDiccionario() {
         return diccionario;
     }
