@@ -7,12 +7,18 @@ public class PalabrasDelNivel {
     private Diccionario diccionario;
     private ArrayList<String> todasLasPalabras, palabrasDelNivel, palabrasAMemorizar;
 
+    /**
+     * Constructor
+     */
+
     public PalabrasDelNivel(){
         diccionario = new Diccionario();
         todasLasPalabras = diccionario.getDiccionario();
         palabrasDelNivel = new ArrayList<String>();
         palabrasAMemorizar = new ArrayList<String>();
     }
+
+    //---------------------------------------------------------------------------------------------------------------------------------------
 
     /**
      * This function gets a random word from dictionary.
@@ -55,6 +61,13 @@ public class PalabrasDelNivel {
         return palabrasDelNivel;
     }
 
+    //---------------------------------------------------------------------------------------------------------------------------------------
+
+    /**
+     * This function returns half of the words in the level for the player to memorize
+     * @return the words to memorize
+     */
+
     public ArrayList<String> palabrasAMemorizar(int cantidadPalabras)
     {
         Random aleatorio = new Random();
@@ -92,9 +105,24 @@ public class PalabrasDelNivel {
         return palabrasAMemorizar;
     }
 
+    //---------------------------------------------------------------------------------------------------------------------------------------
+
+    /**
+     * This method gets the number of words that the level
+     * @return the number of words that the level
+     */
+
     public int getCantidadPalabrasDelNivel() {
         return palabrasDelNivel.size();
     }
+
+    //---------------------------------------------------------------------------------------------------------------------------------------
+
+    /**
+     * This method gets a word
+     * @param cualPalabra
+     * @return the word
+     */
 
     public String getUnaPalabra(int cualPalabra)
     {

@@ -97,6 +97,8 @@ public class FileManager {
         }
     }
 
+    //---------------------------------------------------------------------------------------------------------------------------------------
+
     /**
      * This function change the level of an old user in usuario.txt
      * @param linea
@@ -120,6 +122,8 @@ public class FileManager {
         }
     }
 
+    //---------------------------------------------------------------------------------------------------------------------------------------
+
     /**
      * This function writes the user level in usuario.txt
      * @param linea
@@ -141,24 +145,5 @@ public class FileManager {
                 e.printStackTrace();
             }
         }
-    }
-
-    /**
-     * This function writes the user name in usuario.txt
-     * @param linea
-     */
-    public void borrarUsuario(String linea)
-    {
-
-    }
-
-    /**
-     * This function errase the user level in usuario.txt
-     * @param linea
-     */
-    public void borrarNivelUsuario(int linea)
-    {
-        String nivel = String.valueOf(linea);
-
     }
 }

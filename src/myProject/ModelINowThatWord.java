@@ -16,6 +16,7 @@ public class ModelINowThatWord {
     /**
      * Constructor
      */
+
     public ModelINowThatWord(){
         palabras = new PalabrasDelNivel();
         usuario = new Usuario();
@@ -27,6 +28,13 @@ public class ModelINowThatWord {
         palabrasAMemorizar = new ArrayList<String>();
         nombreUsuario = "";
     }
+
+    //---------------------------------------------------------------------------------------------------------------------------------------
+
+    /**
+     * This function show the words of the level that is indicated
+     * @param nivel
+     */
 
     public void palabrasPorNivel(int nivel){
         if(nivel >= 1 && nivel <= 10) {
@@ -75,6 +83,8 @@ public class ModelINowThatWord {
         }
     }
 
+    //---------------------------------------------------------------------------------------------------------------------------------------
+
     /**
      * This function checks whether or not it came out in the list of words to be memorized.
      * @param palabra
@@ -114,10 +124,17 @@ public class ModelINowThatWord {
 
     }
 
+    //---------------------------------------------------------------------------------------------------------------------------------------
+
+    /**
+     * This function calls the pedirDatos functions of the Model class to request the name of the player in the GUI
+     */
     public void pedirDatos(){
         usuario.pedirDatos();
         detectNewOrOldUser();
     }
+
+    //---------------------------------------------------------------------------------------------------------------------------------------
 
     /**
      * This function saves the information of a new user.
@@ -127,15 +144,24 @@ public class ModelINowThatWord {
         usuario.registrarUsuario(suNivel);
     }
 
+    //---------------------------------------------------------------------------------------------------------------------------------------
+
+    /**
+     * This function detects if the player has already played or not
+     */
+
     public void detectNewOrOldUser()
     {
         elUsuario = usuario.getUsuarioIngresado();
         suNivel = usuario.getNivelUsuario();
     }
 
+    //---------------------------------------------------------------------------------------------------------------------------------------
+
     /**
      * This function level ups user.
      */
+
     public int subirNivelUsuario(int totalPalabras, int palabrasAcertadas){
         if(suNivel==10) {
             suNivel=suNivel;
@@ -155,29 +181,67 @@ public class ModelINowThatWord {
         conteoErrores++;
     }
 
+    //---------------------------------------------------------------------------------------------------------------------------------------
+
     /**
-     * This function gets the user level.
+     * This method gets the user level.
      * @return new level
      */
+
     public int getSuNivel() {
         return suNivel;
     }
+
+    //---------------------------------------------------------------------------------------------------------------------------------------
+
+    /**
+     * This method returns the number of words that the level
+     * @return the number of words that the level
+     */
 
     public int getCantidadPalabrasDelNivel() {
         return palabras.getCantidadPalabrasDelNivel();
     }
 
+    //---------------------------------------------------------------------------------------------------------------------------------------
+
+    /**
+     * This method returns the number of the errors that were made
+     * @return the number of the errors
+     */
+
     public int getErrores() {
         return conteoErrores;
     }
+
+    //---------------------------------------------------------------------------------------------------------------------------------------
+
+    /**
+     * This method returns the number of the hits that were made
+     * @return the number of the hits
+     */
 
     public int getAciertos() {
         return conteoAciertos;
     }
 
+    //---------------------------------------------------------------------------------------------------------------------------------------
+
+    /**
+     * This function returns all words in the level
+     * @return an array with the words
+     */
+
     public ArrayList<String> getPalabrasDelNivel() {
         return palabrasDelNivel;
     }
+
+    //---------------------------------------------------------------------------------------------------------------------------------------
+
+    /**
+     * This function returns only the words to be menorized from the level
+     * @return an array with the words
+     */
 
     public ArrayList<String> getPalabrasAMemorizar() {
         return palabrasAMemorizar;
