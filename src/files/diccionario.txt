@@ -189,7 +189,7 @@ Dinero
 Leche
 Carne
 Miel
-hombre
+Hombre
 Mujer
 Lista
 Cita

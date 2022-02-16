@@ -543,7 +543,7 @@ public class GUIIKnowThatWord extends JFrame {
         if(game.isGanar())
         {
             panelInfo.setText("Has obtenido "+numeroAciertos+" respuestas correctas y "+numeroErrores+" repuestas incorrectas.\n" +
-                    "\nEs decir ¡puedes pasar al próximo nivel! Da click en ~Empezar nivel~");
+                    "\nEs decir, ¡puedes pasar al próximo nivel! Da click en ~Empezar nivel~");
         }
         else if(numeroNivel==10)
         {
@@ -650,7 +650,7 @@ public class GUIIKnowThatWord extends JFrame {
         panelInfo.setWrapStyleWord(true);
         panelInfo.setLineWrap(true);
         panelInfo.setPreferredSize(new Dimension(390, 240));
-        panelInfo.setFont(new Font(Font.DIALOG,Font.BOLD,24));
+        panelInfo.setFont(new Font(Font.DIALOG,Font.BOLD,20));
         panelInfo.setBorder(BorderFactory.createTitledBorder("Información"));
         panelInfo.setBackground(new Color(0,0,0,0));
         panelInfo.setEditable(false);
@@ -740,6 +740,7 @@ public class GUIIKnowThatWord extends JFrame {
                     if(e.getSource()==timer) {
                         if (conter < game.getCantidadPalabrasDelNivel()) {
                             game.noAnswer();
+                            conter++;
                         } else {
                             panelPalabras.remove(palabra);
                             conter = 0;
@@ -777,7 +778,7 @@ public class GUIIKnowThatWord extends JFrame {
 
             } else if (e.getSource() == empezarNivel) {
 
-                numeroNivel = game.subirNivelUsuario(game.getAciertos());
+                numeroNivel = game.subirNivelUsuario(game.getCantidadPalabrasDelNivel(), game.getAciertos());
                 createHeader(constraints);
                 createHelpButton(constraints);
                 createLevelCounter(constraints);
@@ -805,7 +806,8 @@ public class GUIIKnowThatWord extends JFrame {
                     panelPalabras.removeAll();
                     game.validarPalabra(game.getPalabrasDelNivel().get(conter), true);
                     printAllWords();
-                    System.out.println(conter);
+                    conter++;
+                    //System.out.println(conter);
                 } else {
                     panelPalabras.remove(palabra);
                     conter = 0;
@@ -824,7 +826,8 @@ public class GUIIKnowThatWord extends JFrame {
                     panelPalabras.removeAll();
                     game.validarPalabra(game.getPalabrasDelNivel().get(conter), false);
                     printAllWords();
-                    System.out.println(conter);
+                    conter++;
+                    //System.out.println(conter);
                 } else {
                     panelPalabras.remove(palabra);
                     conter = 0;
@@ -857,15 +860,18 @@ public class GUIIKnowThatWord extends JFrame {
 
         public void printAllWords()
         {
+            //System.out.println(conter);
             if(conter<game.getCantidadPalabrasDelNivel()) {
                 palabra.setText(game.getPalabrasDelNivel().get(conter));
                 panelPalabras.add(palabra);
-                conter++;
+                //conter++;
 
                 palabra.revalidate();
                 palabra.repaint();
                 panelPalabras.revalidate();
                 panelPalabras.repaint();
+            }else{
+
             }
             timer.start();
             repaint();
