@@ -6,7 +6,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.Random;
 
 /**
  * This class is used for to show game on screen and allow to play.
@@ -15,7 +14,7 @@ import java.util.Random;
  * @version v.1.0.0 date: 05/02/2022
  */
 
-public class GUIINowThatWord extends JFrame {
+public class GUIIKnowThatWord extends JFrame {
 
     private Header headerProject;
     private JPanel panelPalabras, panelEspacioEnBlanco1, panelEspacioEnBlanco2, panelEspacioEnBlanco3,
@@ -36,14 +35,14 @@ public class GUIINowThatWord extends JFrame {
     private Image imagenOtroTamanho;
     private JLabel imagenReglas, palabra, info;
     boolean verificarRespuesta;
-    private ModelINowThatWord game;
+    private ModelIKnowThatWord game;
     private Escucha escucha;
 
     /**
      * Constructor of GUI class
      */
 
-    public GUIINowThatWord(){
+    public GUIIKnowThatWord(){
         initGUI();
 
         //Default JFrame configuration
@@ -72,7 +71,7 @@ public class GUIINowThatWord extends JFrame {
         GridBagConstraints constraints = new GridBagConstraints();
         //Create Listener Object and Control Object
         escucha = new Escucha();
-        game = new ModelINowThatWord();
+        game = new ModelIKnowThatWord();
         //Set up JComponents
 
         reglasDelNivel = new ImageIcon(getClass().getResource("/resources/reglas.jpeg"));
@@ -704,7 +703,7 @@ public class GUIINowThatWord extends JFrame {
 
     public static void main(String[] args){
         EventQueue.invokeLater(() -> {
-            GUIINowThatWord miProjectGUIINowThatWord = new GUIINowThatWord();
+            GUIIKnowThatWord miProjectGUIIKnowThatWord = new GUIIKnowThatWord();
         });
     }
 

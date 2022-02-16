@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class ModelINowThatWord {
+public class ModelIKnowThatWord {
 
     private PalabrasDelNivel palabras;
     private Usuario usuario;
@@ -17,7 +17,7 @@ public class ModelINowThatWord {
      * Constructor
      */
 
-    public ModelINowThatWord(){
+    public ModelIKnowThatWord(){
         palabras = new PalabrasDelNivel();
         usuario = new Usuario();
         conteoErrores = 0;
