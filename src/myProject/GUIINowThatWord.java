@@ -50,7 +50,7 @@ public class GUIINowThatWord extends JFrame {
         this.setTitle("I Know That Word");
         //this.setSize(200,100);
         this.pack();
-        //this.setUndecorated(true);
+        this.setUndecorated(true);
         this.setResizable(false);
         this.setVisible(true);
         this.setLocationRelativeTo(null);

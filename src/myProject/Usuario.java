@@ -7,7 +7,6 @@ public class Usuario {
     private ArrayList<String> usuarios, editarUsuarios = new ArrayList<String>();
     private int unUsuario, nivelUsuario;
     private String usuarioIngresado, nombreUsuario;
-
     private FileManager fileManager;
 
     /**
@@ -19,7 +18,7 @@ public class Usuario {
         usuarios = fileManager.lecturaUsuario();
 
         unUsuario = 0;
-        nivelUsuario = 1;
+        nivelUsuario = 0;
         usuarioIngresado = "";
         nombreUsuario = "";
     }
@@ -87,6 +86,8 @@ public class Usuario {
         }
         return nivelUsuario;
     }
+
+    //---------------------------------------------------------------------------------------------------------------------------------------
 
     /**
      * This function gets the user name.
