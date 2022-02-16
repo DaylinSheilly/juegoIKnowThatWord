@@ -34,7 +34,7 @@ public class GUIINowThatWord extends JFrame {
             + " condiciones para poder superar cada nivel: ";
     private ImageIcon reglasDelNivel, imagenNuevoTamanho;
     private Image imagenOtroTamanho;
-    private JLabel imagenReglas, palabra;
+    private JLabel imagenReglas, palabra, info;
     boolean verificarRespuesta;
     private ModelINowThatWord game;
     private Escucha escucha;
@@ -416,7 +416,7 @@ public class GUIINowThatWord extends JFrame {
         panelPalabras = new JPanel();
         panelPalabras.setBackground(new Color(0,0,0,0));
         panelPalabras.setPreferredSize(new Dimension(390, 140));
-        panelPalabras.setFont(new Font("SansSerif", Font.BOLD, 24));
+        panelPalabras.setFont(new Font("SansSerif", Font.BOLD, 40));
         panelPalabras.setBorder(BorderFactory.createTitledBorder("Palabras"));
         panelPalabras.setLayout(new BorderLayout());
 
@@ -543,27 +543,26 @@ public class GUIINowThatWord extends JFrame {
 
         if(numeroAciertos>numeroErrores)
         {
-            panelInfo.setText("Has obtenido "+numeroAciertos+" respuestas correctas y "+numeroErrores+" repuestas incorrectas." +
+            info.setText("Has obtenido "+numeroAciertos+" respuestas correctas y "+numeroErrores+" repuestas incorrectas.\n" +
                     "\nEs decir ¡puedes pasar al próximo nivel!");
         }
         else if(numeroNivel==10)
         {
             if(numeroAciertos>numeroErrores) {
-                panelInfo.setText("Has obtenido " + numeroAciertos + " respuestas correctas y " + numeroErrores + " repuestas incorrectas." +
-                        "\nLo hiciste muy bien.\nPuedes volver a intentar el maximo nivel dando click en el botón\nque dice ~Empezar Nivel~");
+                info.setText("Has obtenido " + numeroAciertos + " respuestas correctas y " + numeroErrores + " repuestas incorrectas.\n" +
+                        "\nLo hiciste muy bien.\nPuedes volver a intentar el maximo nivel dando click en el botón<br>que dice ~Empezar Nivel~");
             }
             else
             {
-                panelInfo.setText("Has obtenido " + numeroAciertos + " respuestas correctas y " + numeroErrores + " repuestas incorrectas." +
+                info.setText("Has obtenido " + numeroAciertos + " respuestas correctas y " + numeroErrores + " repuestas incorrectas.\n" +
                         "\nPodrias hacerlo mejor.\nPuedes volver a intentar el máximo nivel dando click en el botón\nque dice ~Empezar Nivel~");
             }
         }
         else
         {
-            panelInfo.setText("Has obtenido "+numeroAciertos+" respuestas correctas y "+numeroErrores+" repuestas incorrectas." +
+            info.setText("Has obtenido "+numeroAciertos+" respuestas correctas y "+numeroErrores+" repuestas incorrectas.\n" +
                     "\nDebes acertar al menos la mitad de las palabras para pasar de nivel...\nIntentalo de nuevo.");
         }
-
         revalidate();
         repaint();
     }
@@ -648,11 +647,22 @@ public class GUIINowThatWord extends JFrame {
      */
     public void createPanelInfo(GridBagConstraints constraints)
     {
-        panelInfo = new JTextArea();
+        /*panelInfo = new JTextArea();
+        panelInfo.setWrapStyleWord(true);
+        panelInfo.setLineWrap(true);
         panelInfo.setPreferredSize(new Dimension(390, 240));
+        panelInfo.setFont(new Font(Font.DIALOG,Font.BOLD,24));
         panelInfo.setBorder(BorderFactory.createTitledBorder("Información"));
         panelInfo.setBackground(new Color(0,0,0,0));
-        panelInfo.setFont(new Font(Font.DIALOG,Font.BOLD,10));
+        panelInfo.setEditable(false);
+        panelInfo.setVisible(true);*/
+
+        info = new JLabel();
+        info.setPreferredSize(new Dimension(390, 240));
+        info.setFont(new Font(Font.DIALOG,Font.BOLD,20));
+        info.setBorder(BorderFactory.createTitledBorder("Información"));
+        info.setBackground(new Color(0,0,0,0));
+        info.setVisible(true);
 
         constraints.gridx = 0;
         constraints.gridy = 4;
@@ -660,7 +670,7 @@ public class GUIINowThatWord extends JFrame {
         constraints.fill = GridBagConstraints.CENTER;
         constraints.anchor = GridBagConstraints.CENTER;
 
-        add(panelInfo, constraints);
+        add(info, constraints);
     }
 
     //------------------------------------------------------------------------------------------------------------------------------------------
