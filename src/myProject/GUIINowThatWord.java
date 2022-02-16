@@ -543,24 +543,24 @@ public class GUIINowThatWord extends JFrame {
 
         if(numeroAciertos>numeroErrores)
         {
-            info.setText("Has obtenido "+numeroAciertos+" respuestas correctas y "+numeroErrores+" repuestas incorrectas.\n" +
+            panelInfo.setText("Has obtenido "+numeroAciertos+" respuestas correctas y "+numeroErrores+" repuestas incorrectas.\n" +
                     "\nEs decir ¡puedes pasar al próximo nivel!");
         }
         else if(numeroNivel==10)
         {
             if(numeroAciertos>numeroErrores) {
-                info.setText("Has obtenido " + numeroAciertos + " respuestas correctas y " + numeroErrores + " repuestas incorrectas.\n" +
+                panelInfo.setText("Has obtenido " + numeroAciertos + " respuestas correctas y " + numeroErrores + " repuestas incorrectas.\n" +
                         "\nLo hiciste muy bien.\nPuedes volver a intentar el maximo nivel dando click en el botón<br>que dice ~Empezar Nivel~");
             }
             else
             {
-                info.setText("Has obtenido " + numeroAciertos + " respuestas correctas y " + numeroErrores + " repuestas incorrectas.\n" +
+                panelInfo.setText("Has obtenido " + numeroAciertos + " respuestas correctas y " + numeroErrores + " repuestas incorrectas.\n" +
                         "\nPodrias hacerlo mejor.\nPuedes volver a intentar el máximo nivel dando click en el botón\nque dice ~Empezar Nivel~");
             }
         }
         else
         {
-            info.setText("Has obtenido "+numeroAciertos+" respuestas correctas y "+numeroErrores+" repuestas incorrectas.\n" +
+            panelInfo.setText("Has obtenido "+numeroAciertos+" respuestas correctas y "+numeroErrores+" repuestas incorrectas.\n" +
                     "\nDebes acertar al menos la mitad de las palabras para pasar de nivel...\nIntentalo de nuevo.");
         }
         revalidate();
@@ -647,7 +647,7 @@ public class GUIINowThatWord extends JFrame {
      */
     public void createPanelInfo(GridBagConstraints constraints)
     {
-        /*panelInfo = new JTextArea();
+        panelInfo = new JTextArea();
         panelInfo.setWrapStyleWord(true);
         panelInfo.setLineWrap(true);
         panelInfo.setPreferredSize(new Dimension(390, 240));
@@ -655,14 +655,14 @@ public class GUIINowThatWord extends JFrame {
         panelInfo.setBorder(BorderFactory.createTitledBorder("Información"));
         panelInfo.setBackground(new Color(0,0,0,0));
         panelInfo.setEditable(false);
-        panelInfo.setVisible(true);*/
+        panelInfo.setVisible(true);
 
-        info = new JLabel();
+        /*info = new JLabel();
         info.setPreferredSize(new Dimension(390, 240));
         info.setFont(new Font(Font.DIALOG,Font.BOLD,20));
         info.setBorder(BorderFactory.createTitledBorder("Información"));
         info.setBackground(new Color(0,0,0,0));
-        info.setVisible(true);
+        info.setVisible(true);*/
 
         constraints.gridx = 0;
         constraints.gridy = 4;
@@ -670,7 +670,7 @@ public class GUIINowThatWord extends JFrame {
         constraints.fill = GridBagConstraints.CENTER;
         constraints.anchor = GridBagConstraints.CENTER;
 
-        add(info, constraints);
+        add(panelInfo, constraints);
     }
 
     //------------------------------------------------------------------------------------------------------------------------------------------
