@@ -540,27 +540,27 @@ public class GUIIKnowThatWord extends JFrame {
 
         cualGUI=3;
 
-        if(numeroAciertos>numeroErrores)
+        if(game.isGanar())
         {
             panelInfo.setText("Has obtenido "+numeroAciertos+" respuestas correctas y "+numeroErrores+" repuestas incorrectas.\n" +
-                    "\nEs decir ¡puedes pasar al próximo nivel!");
+                    "\nEs decir ¡puedes pasar al próximo nivel! Da click en ~Empezar nivel~");
         }
         else if(numeroNivel==10)
         {
-            if(numeroAciertos>numeroErrores) {
+            if(game.isGanar()) {
                 panelInfo.setText("Has obtenido " + numeroAciertos + " respuestas correctas y " + numeroErrores + " repuestas incorrectas.\n" +
-                        "\nLo hiciste muy bien.\nPuedes volver a intentar el maximo nivel dando click en el botón<br>que dice ~Empezar Nivel~");
+                        "\n¡Lo hiciste muy bien!\nPuedes volver a intentar el máximo nivel dando click en el botón ~Empezar Nivel~");
             }
             else
             {
                 panelInfo.setText("Has obtenido " + numeroAciertos + " respuestas correctas y " + numeroErrores + " repuestas incorrectas.\n" +
-                        "\nPodrias hacerlo mejor.\nPuedes volver a intentar el máximo nivel dando click en el botón\nque dice ~Empezar Nivel~");
+                        "\nPuedes hacerlo mejor.\nSi quieres ganar el máximo nivel, inténtalo de nuevo dando click en el botón ~Empezar Nivel~");
             }
         }
         else
         {
             panelInfo.setText("Has obtenido "+numeroAciertos+" respuestas correctas y "+numeroErrores+" repuestas incorrectas.\n" +
-                    "\nDebes acertar al menos la mitad de las palabras para pasar de nivel...\nIntentalo de nuevo.");
+                    "\nEsto no es suficiente para pasar el nivel. Inténtalo de nuevo dando click en el botón ~Empezar nivel~");
         }
         revalidate();
         repaint();
@@ -777,7 +777,7 @@ public class GUIIKnowThatWord extends JFrame {
 
             } else if (e.getSource() == empezarNivel) {
 
-                numeroNivel = game.subirNivelUsuario(game.getCantidadPalabrasDelNivel(), game.getAciertos());
+                numeroNivel = game.subirNivelUsuario(game.getAciertos());
                 createHeader(constraints);
                 createHelpButton(constraints);
                 createLevelCounter(constraints);

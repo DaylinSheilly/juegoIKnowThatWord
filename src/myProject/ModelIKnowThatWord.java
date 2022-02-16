@@ -32,6 +32,20 @@ public class ModelIKnowThatWord {
     //---------------------------------------------------------------------------------------------------------------------------------------
 
     /**
+     *
+     */
+
+    public boolean esGanador(int nivel){
+        switch (nivel){
+            case 1: if(conteoAciertos == 7){
+                subirNivelUsuario(10, 7);
+            }
+        }
+        return ganar;
+    }
+    //---------------------------------------------------------------------------------------------------------------------------------------
+
+    /**
      * This function show the words of the level that is indicated
      * @param nivel
      */
@@ -159,20 +173,101 @@ public class ModelIKnowThatWord {
     //---------------------------------------------------------------------------------------------------------------------------------------
 
     /**
-     * This function level ups user.
+     * This function level ups user and determinates if the user win or lose
      */
 
-    public int subirNivelUsuario(int totalPalabras, int palabrasAcertadas){
-        if(suNivel==10) {
-            suNivel=suNivel;
-        }
-        else {
-            if (palabrasAcertadas >= totalPalabras / 2) {
-                suNivel++;
-            } else {
-                suNivel = suNivel;
-            }
-        }
+    public int subirNivelUsuario(int palabrasAcertadas){
+         switch (suNivel) {
+             case 1:
+                 if (palabrasAcertadas >= 10 * 0.7) {
+                     suNivel++;
+                     ganar = true;
+                 } else {
+                     suNivel = suNivel;
+                     ganar = false;
+                 }
+                 break;
+             case 2:
+                 if (palabrasAcertadas >= 20 * 0.7) {
+                     suNivel++;
+                     ganar = true;
+                 } else {
+                     suNivel = suNivel;
+                     ganar = false;
+                 }
+                 break;
+             case 3:
+                 if (palabrasAcertadas >= 25 * 0.75) {
+                     suNivel++;
+                     ganar = true;
+                 } else {
+                     suNivel = suNivel;
+                     ganar = false;
+                 }
+                 break;
+             case 4:
+                 if (palabrasAcertadas >= 30 * 0.8) {
+                     suNivel++;
+                     ganar = true;
+                 } else {
+                     suNivel = suNivel;
+                     ganar = false;
+                 }
+                 break;
+             case 5:
+                 if (palabrasAcertadas >= 35 * 0.8) {
+                     suNivel++;
+                     ganar = true;
+                 } else {
+                     suNivel = suNivel;
+                     ganar = false;
+                 }
+                 break;
+             case 6:
+                 if (palabrasAcertadas >= 40 * 0.85) {
+                     suNivel++;
+                     ganar = true;
+                 } else {
+                     suNivel = suNivel;
+                     ganar = false;
+                 }
+                 break;
+             case 7:
+                 if (palabrasAcertadas >= 50 * 0.9) {
+                     suNivel++;
+                     ganar = true;
+                 } else {
+                     suNivel = suNivel;
+                     ganar = false;
+                 }
+                 break;
+             case 8:
+                 if (palabrasAcertadas >= 60 * 0.9) {
+                     suNivel++;
+                     ganar = true;
+                 } else {
+                     suNivel = suNivel;
+                     ganar = false;
+                 }
+                 break;
+             case 9:
+                 if (palabrasAcertadas >= 70 * 0.95) {
+                     suNivel++;
+                     ganar = true;
+                 } else {
+                     suNivel = suNivel;
+                     ganar = false;
+                 }
+                 break;
+             case 10:
+                 if (palabrasAcertadas == 100) {
+                     ganar = true;
+                 } else {
+                     suNivel = suNivel;
+                     ganar = false;
+                 }
+                 break;
+         }
         return suNivel;
     }
 
@@ -223,6 +318,17 @@ public class ModelIKnowThatWord {
 
     public int getAciertos() {
         return conteoAciertos;
+    }
+
+    //---------------------------------------------------------------------------------------------------------------------------------------
+
+    /**
+     * This method gets the ganar value
+     * @return ganar
+     */
+
+    public boolean isGanar() {
+        return ganar;
     }
 
     //---------------------------------------------------------------------------------------------------------------------------------------
