@@ -193,7 +193,7 @@ hombre
 Mujer
 Lista
 Cita
-Luz Marina
+Luz
 Mentira
 Letra
 Palabra

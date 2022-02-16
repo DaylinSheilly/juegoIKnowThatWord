@@ -18,9 +18,9 @@ public class Usuario {
         usuarios = fileManager.lecturaUsuario();
 
         unUsuario = 0;
-        nivelUsuario = 0;
-        usuarioIngresado = "";
-        nombreUsuario = "";
+        nivelUsuario = 1;
+        usuarioIngresado = " ";
+        nombreUsuario = " ";
     }
 
     //---------------------------------------------------------------------------------------------------------------------------------------
