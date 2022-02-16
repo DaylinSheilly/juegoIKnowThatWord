@@ -161,13 +161,12 @@ public class GUIIKnowThatWord extends JFrame {
 
                 createPalabrasAVerificarGUI(constraints);
 
-                conter=0;
                 revalidate();
                 repaint();
 
+                conter=0;
                 timer = new Timer(70000,escucha);
                 escucha.printAllWords();
-                conter++;
                 pack();
             }
         });
@@ -806,8 +805,8 @@ public class GUIIKnowThatWord extends JFrame {
                 if(conter<game.getCantidadPalabrasDelNivel()) {
                     panelPalabras.removeAll();
                     game.validarPalabra(game.getPalabrasDelNivel().get(conter), true);
-                    printAllWords();
                     conter++;
+                    printAllWords();
                 } else {
                     panelPalabras.remove(palabra);
                     conter = 0;
@@ -825,8 +824,8 @@ public class GUIIKnowThatWord extends JFrame {
                 if(conter<game.getCantidadPalabrasDelNivel()) {
                     panelPalabras.removeAll();
                     game.validarPalabra(game.getPalabrasDelNivel().get(conter), false);
-                    printAllWords();
                     conter++;
+                    printAllWords();
                 } else {
                     panelPalabras.remove(palabra);
                     conter = 0;
@@ -868,7 +867,14 @@ public class GUIIKnowThatWord extends JFrame {
                 panelPalabras.revalidate();
                 panelPalabras.repaint();
             }else{
-
+                panelPalabras.remove(palabra);
+                conter = 0;
+                remove(panelPalabras);
+                remove(panelEspacioEnBlanco3);
+                remove(botonSI);
+                remove(botonNO);
+                remove(panelEspacioEnBlanco4);
+                terminarNivel();
             }
             timer.start();
             repaint();

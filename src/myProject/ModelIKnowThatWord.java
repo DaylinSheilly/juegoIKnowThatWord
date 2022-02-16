@@ -93,11 +93,11 @@ public class ModelIKnowThatWord {
     public void validarPalabra(String palabra, boolean respuestaAfirmativa) {
         boolean correcta = false;
         int flag = 0;
-        if (respuestaAfirmativa == true) {
+        if (respuestaAfirmativa) {
             correcta = false;
-            for (flag = 0; flag < palabrasDelNivel.size(); flag++)
+            for (flag = 0; flag < palabrasAMemorizar.size(); flag++)
             {
-                if (palabra == palabrasAMemorizar.get(flag)) {
+                if (palabrasAMemorizar.get(flag).equals(palabra)) {
                     correcta = true;
 
                 } else {
@@ -105,21 +105,17 @@ public class ModelIKnowThatWord {
                 }
             }
         } else {
-            if (respuestaAfirmativa == false) {
-                correcta = true;
-                for (flag = 0; flag < palabrasDelNivel.size(); flag++)
-                {
-                    if (palabra == palabrasAMemorizar.get(flag)) {
-                        correcta = false;
-                    } else {
+            correcta = true;
+            for (flag = 0; flag < palabrasAMemorizar.size(); flag++) {
+                if (palabrasAMemorizar.get(flag).equals(palabra)) {
+                    correcta = false;
+                } else {
 
-                    }
                 }
             }
         }
         if (correcta) {
             conteoAciertos++;
-            System.out.print(conteoAciertos);
         } else {
             conteoErrores++;
         }
