@@ -102,6 +102,9 @@ public class PalabrasDelNivel {
                 palabrasAMemorizar.add(unaPalabra);
             }
         }
+        for(int trampa=0;trampa<palabrasAMemorizar.size();trampa++){
+            System.out.println(palabrasAMemorizar.get(trampa));
+        }
         return palabrasAMemorizar;
     }
 

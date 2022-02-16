@@ -165,8 +165,9 @@ public class GUIIKnowThatWord extends JFrame {
                 revalidate();
                 repaint();
 
-                timer = new Timer(7000,escucha);
+                timer = new Timer(70000,escucha);
                 escucha.printAllWords();
+                conter++;
                 pack();
             }
         });
@@ -807,7 +808,6 @@ public class GUIIKnowThatWord extends JFrame {
                     game.validarPalabra(game.getPalabrasDelNivel().get(conter), true);
                     printAllWords();
                     conter++;
-                    //System.out.println(conter);
                 } else {
                     panelPalabras.remove(palabra);
                     conter = 0;
@@ -827,7 +827,6 @@ public class GUIIKnowThatWord extends JFrame {
                     game.validarPalabra(game.getPalabrasDelNivel().get(conter), false);
                     printAllWords();
                     conter++;
-                    //System.out.println(conter);
                 } else {
                     panelPalabras.remove(palabra);
                     conter = 0;
@@ -860,11 +859,9 @@ public class GUIIKnowThatWord extends JFrame {
 
         public void printAllWords()
         {
-            //System.out.println(conter);
             if(conter<game.getCantidadPalabrasDelNivel()) {
                 palabra.setText(game.getPalabrasDelNivel().get(conter));
                 panelPalabras.add(palabra);
-                //conter++;
 
                 palabra.revalidate();
                 palabra.repaint();

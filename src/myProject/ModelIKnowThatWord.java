@@ -94,30 +94,32 @@ public class ModelIKnowThatWord {
         boolean correcta = false;
         int flag = 0;
         if (respuestaAfirmativa == true) {
-            for (flag = 0; flag < palabrasAMemorizar.size(); flag++)
+            correcta = false;
+            for (flag = 0; flag < palabrasDelNivel.size(); flag++)
             {
                 if (palabra == palabrasAMemorizar.get(flag)) {
                     correcta = true;
-                    break;
+
                 } else {
-                    correcta = false;
+
                 }
             }
         } else {
             if (respuestaAfirmativa == false) {
-                for (flag = 0; flag < palabrasAMemorizar.size(); flag++)
+                correcta = true;
+                for (flag = 0; flag < palabrasDelNivel.size(); flag++)
                 {
                     if (palabra == palabrasAMemorizar.get(flag)) {
                         correcta = false;
-                        break;
                     } else {
-                        correcta = true;
+
                     }
                 }
             }
         }
         if (correcta) {
             conteoAciertos++;
+            System.out.print(conteoAciertos);
         } else {
             conteoErrores++;
         }
@@ -164,7 +166,7 @@ public class ModelIKnowThatWord {
     public int subirNivelUsuario(int totalPalabras, int palabrasAcertadas){
          switch (suNivel) {
              case 1:
-                 if (palabrasAcertadas >= totalPalabras * 0.7) {
+                 if (palabrasAcertadas >= (totalPalabras * 0.7)) {
                      suNivel++;
                      ganar = true;
                  } else {
@@ -173,7 +175,7 @@ public class ModelIKnowThatWord {
                  }
                  break;
              case 2:
-                 if (palabrasAcertadas >= totalPalabras * 0.7) {
+                 if (palabrasAcertadas >= (totalPalabras * 0.7)) {
                      suNivel++;
                      ganar = true;
                  } else {
@@ -182,7 +184,7 @@ public class ModelIKnowThatWord {
                  }
                  break;
              case 3:
-                 if (palabrasAcertadas >= totalPalabras * 0.75) {
+                 if (palabrasAcertadas >= (totalPalabras * 0.75)) {
                      suNivel++;
                      ganar = true;
                  } else {
@@ -191,7 +193,7 @@ public class ModelIKnowThatWord {
                  }
                  break;
              case 4:
-                 if (palabrasAcertadas >= totalPalabras * 0.8) {
+                 if (palabrasAcertadas >= (totalPalabras * 0.8)) {
                      suNivel++;
                      ganar = true;
                  } else {
@@ -200,7 +202,7 @@ public class ModelIKnowThatWord {
                  }
                  break;
              case 5:
-                 if (palabrasAcertadas >= totalPalabras * 0.8) {
+                 if (palabrasAcertadas >= (totalPalabras * 0.8)) {
                      suNivel++;
                      ganar = true;
                  } else {
@@ -209,7 +211,7 @@ public class ModelIKnowThatWord {
                  }
                  break;
              case 6:
-                 if (palabrasAcertadas >= totalPalabras * 0.85) {
+                 if (palabrasAcertadas >= (totalPalabras * 0.85)) {
                      suNivel++;
                      ganar = true;
                  } else {
@@ -218,7 +220,7 @@ public class ModelIKnowThatWord {
                  }
                  break;
              case 7:
-                 if (palabrasAcertadas >= totalPalabras * 0.9) {
+                 if (palabrasAcertadas >= (totalPalabras * 0.9)) {
                      suNivel++;
                      ganar = true;
                  } else {
@@ -227,7 +229,7 @@ public class ModelIKnowThatWord {
                  }
                  break;
              case 8:
-                 if (palabrasAcertadas >= totalPalabras * 0.9) {
+                 if (palabrasAcertadas >= (totalPalabras * 0.9)) {
                      suNivel++;
                      ganar = true;
                  } else {
@@ -236,7 +238,7 @@ public class ModelIKnowThatWord {
                  }
                  break;
              case 9:
-                 if (palabrasAcertadas >= totalPalabras * 0.95) {
+                 if (palabrasAcertadas >= (totalPalabras * 0.95)) {
                      suNivel++;
                      ganar = true;
                  } else {
