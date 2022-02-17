@@ -38,15 +38,11 @@ public class ModelIKnowThatWord {
      */
 
     public void palabrasPorNivel(int nivel){
-        System.out.println("[0]");
         if(nivel >= 1 && nivel <= 10) {
-            System.out.println("[1]");
             switch (nivel) {
                 case 1:
                     palabrasDelNivel=palabras.getPalabrasDelNivel(20); //del 0 al 19
-                    System.out.println("[2]");
                     palabrasAMemorizar=palabras.palabrasAMemorizar(20/2);
-                    System.out.println("[3]");
                     break;
                 case 2:
                     palabrasDelNivel=palabras.getPalabrasDelNivel(40); //del 0 al 39
