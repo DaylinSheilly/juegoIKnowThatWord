@@ -33,8 +33,7 @@ public class GUIIKnowThatWord extends JFrame {
             + " condiciones para poder superar cada nivel: ";
     private ImageIcon reglasDelNivel, imagenNuevoTamanho;
     private Image imagenOtroTamanho;
-    private JLabel imagenReglas, palabra, info;
-    boolean verificarRespuesta;
+    private JLabel imagenReglas, palabra;
     private ModelIKnowThatWord game;
     private Escucha escucha;
 
@@ -80,7 +79,6 @@ public class GUIIKnowThatWord extends JFrame {
 
         imagenReglas = new JLabel(imagenNuevoTamanho);
 
-
         panelInstrucciones = new JPanel();
         panelInstrucciones.setPreferredSize(new Dimension(410,1005));
         panelInstrucciones.setBackground(Color.WHITE);
@@ -105,6 +103,16 @@ public class GUIIKnowThatWord extends JFrame {
 
         game.pedirDatos();
 
+
+        numeroNivel = game.getSuNivel();
+        game.palabrasPorNivel(numeroNivel);
+        createPalabrasAMemorizarGUI(constraints);
+        System.out.println("[1]");
+        createPalabrasAVerificarGUI(constraints);
+        System.out.println("[2]");
+        createConclusionGUI(constraints);
+        System.out.println("[3]");
+
         comenzarNivel();
     }
 
@@ -114,32 +122,28 @@ public class GUIIKnowThatWord extends JFrame {
      * This function starts a new level
      */
 
-    public void comenzarNivel()
-    {
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                cualGUI=1;
-                GridBagConstraints constraints = new GridBagConstraints();
+    public void comenzarNivel() {
+        cualGUI = 1;
 
-                numeroNivel = game.getSuNivel();
+        numeroNivel = game.getSuNivel();
+        System.out.println("[0]");
 
-                game.palabrasPorNivel(numeroNivel);
+        game.palabrasPorNivel(numeroNivel);
+        System.out.println("[1]");
 
-                createPalabrasAMemorizarGUI(constraints);
+        empezarNivel.setVisible(false);
 
-                empezarNivel.setVisible(false);
+        conter = 0;
+        panelPalabras.add(palabra, BorderLayout.CENTER);
+        System.out.println("[2]");
+        revalidate();
+        repaint();
+        pack();
 
-                conter=0;
-                panelPalabras.add(palabra, BorderLayout.CENTER);
-                revalidate();
-                repaint();
-                pack();
-
-                timer = new Timer(500,escucha);
-                escucha.printMemoryWords();
-            }
-        });
+        System.out.println("[3]");
+        timer = new Timer(500, escucha);
+        System.out.println("[4]");
+        escucha.printMemoryWords();
     }
 
     //---------------------------------------------------------------------------------------------------------------------------------------
@@ -149,27 +153,17 @@ public class GUIIKnowThatWord extends JFrame {
      * word appeared or not
      */
 
-    public void verificarPalabras()
-    {
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                cualGUI=2;
-                timer.stop();
+    public void verificarPalabras() {
+        cualGUI = 2;
+        timer.stop();
 
-                GridBagConstraints constraints = new GridBagConstraints();
+        revalidate();
+        repaint();
 
-                createPalabrasAVerificarGUI(constraints);
-
-                revalidate();
-                repaint();
-
-                conter=0;
-                timer = new Timer(70000,escucha);
-                escucha.printAllWords();
-                pack();
-            }
-        });
+        conter = 0;
+        timer = new Timer(7000, escucha);
+        escucha.printAllWords();
+        pack();
     }
 
     //---------------------------------------------------------------------------------------------------------------------------------------
@@ -178,25 +172,15 @@ public class GUIIKnowThatWord extends JFrame {
      * This function shows how many successes and errors there were, if the level was passed and the button to pass the level
      */
 
-    public void terminarNivel()
-    {
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                cualGUI=3;
-                timer.stop();
+    public void terminarNivel() {
+        cualGUI = 3;
+        timer.stop();
 
-                GridBagConstraints constraints = new GridBagConstraints();
+        numeroAciertos = game.getAciertos();
+        numeroErrores = game.getErrores();
 
-                numeroAciertos = game.getAciertos();
-                numeroErrores = game.getErrores();
-
-                createConclusionGUI(constraints);
-
-                empezarNivel.setVisible(true);
-                pack();
-            }
-        });
+        empezarNivel.setVisible(true);
+        pack();
     }
 
     //------------------------------------------------------------------------------------------------------------------------------------------
@@ -221,6 +205,8 @@ public class GUIIKnowThatWord extends JFrame {
 
         revalidate();
         repaint();
+
+        System.out.println("panel construido");
     }
 
     //------------------------------------------------------------------------------------------------------------------------------------------
@@ -396,11 +382,6 @@ public class GUIIKnowThatWord extends JFrame {
         createBotonSI(constraints);
         createBotonNO(constraints);
         createSpace4(constraints);
-
-        cualGUI=2;
-
-        revalidate();
-        repaint();
     }
 
     //------------------------------------------------------------------------------------------------------------------------------------------
@@ -424,8 +405,6 @@ public class GUIIKnowThatWord extends JFrame {
         constraints.gridwidth = 5;
         constraints.fill = GridBagConstraints.CENTER;
         constraints.anchor = GridBagConstraints.CENTER;
-
-        add(panelPalabras, constraints);
     }
 
     //------------------------------------------------------------------------------------------------------------------------------------------
@@ -450,8 +429,6 @@ public class GUIIKnowThatWord extends JFrame {
         constraints.gridwidth = 1;
         constraints.fill = GridBagConstraints.CENTER;
         constraints.anchor = GridBagConstraints.CENTER;
-
-        add(botonSI, constraints);
     }
 
     //------------------------------------------------------------------------------------------------------------------------------------------
@@ -476,8 +453,6 @@ public class GUIIKnowThatWord extends JFrame {
         constraints.gridwidth = 1;
         constraints.fill = GridBagConstraints.CENTER;
         constraints.anchor = GridBagConstraints.CENTER;
-
-        add(botonNO, constraints);
     }
 
     //------------------------------------------------------------------------------------------------------------------------------------------
@@ -498,8 +473,6 @@ public class GUIIKnowThatWord extends JFrame {
         constraints.gridheight = 1;
         constraints.fill = GridBagConstraints.NONE;
         constraints.anchor = GridBagConstraints.CENTER;
-
-        add(panelEspacioEnBlanco3, constraints);
     }
 
     //------------------------------------------------------------------------------------------------------------------------------------------
@@ -520,8 +493,6 @@ public class GUIIKnowThatWord extends JFrame {
         constraints.gridheight = 1;
         constraints.fill = GridBagConstraints.NONE;
         constraints.anchor = GridBagConstraints.CENTER;
-
-        add(panelEspacioEnBlanco4, constraints);
     }
 
     //------------------------------------------------------------------------------------------------------------------------------------------
@@ -540,28 +511,6 @@ public class GUIIKnowThatWord extends JFrame {
 
         cualGUI=3;
 
-        if(game.isGanar())
-        {
-            panelInfo.setText("Has obtenido "+numeroAciertos+" respuestas correctas y "+numeroErrores+" repuestas incorrectas.\n" +
-                    "\nEs decir, ¡puedes pasar al próximo nivel! Da click en ~Empezar nivel~");
-        }
-        else if(numeroNivel==10)
-        {
-            if(game.isGanar()) {
-                panelInfo.setText("Has obtenido " + numeroAciertos + " respuestas correctas y " + numeroErrores + " repuestas incorrectas.\n" +
-                        "\n¡Lo hiciste muy bien!\nPuedes volver a intentar el máximo nivel dando click en el botón ~Empezar Nivel~");
-            }
-            else
-            {
-                panelInfo.setText("Has obtenido " + numeroAciertos + " respuestas correctas y " + numeroErrores + " repuestas incorrectas.\n" +
-                        "\nPuedes hacerlo mejor.\nSi quieres ganar el máximo nivel, inténtalo de nuevo dando click en el botón ~Empezar Nivel~");
-            }
-        }
-        else
-        {
-            panelInfo.setText("Has obtenido "+numeroAciertos+" respuestas correctas y "+numeroErrores+" repuestas incorrectas.\n" +
-                    "\nEsto no es suficiente para pasar el nivel. Inténtalo de nuevo dando click en el botón ~Empezar nivel~");
-        }
         revalidate();
         repaint();
     }
@@ -584,8 +533,6 @@ public class GUIIKnowThatWord extends JFrame {
         constraints.gridheight = 1;
         constraints.fill = GridBagConstraints.NONE;
         constraints.anchor = GridBagConstraints.CENTER;
-
-        add(panelEspacioEnBlanco5, constraints);
     }
 
     //------------------------------------------------------------------------------------------------------------------------------------------
@@ -610,7 +557,6 @@ public class GUIIKnowThatWord extends JFrame {
         constraints.gridwidth = 1;
         constraints.fill = GridBagConstraints.NONE;
         constraints.anchor = GridBagConstraints.CENTER;
-        add(aciertos, constraints);
     }
 
     //------------------------------------------------------------------------------------------------------------------------------------------
@@ -635,7 +581,6 @@ public class GUIIKnowThatWord extends JFrame {
         constraints.gridwidth = 1;
         constraints.fill = GridBagConstraints.NONE;
         constraints.anchor = GridBagConstraints.CENTER;
-        add(errores, constraints);
     }
 
     //------------------------------------------------------------------------------------------------------------------------------------------
@@ -668,8 +613,6 @@ public class GUIIKnowThatWord extends JFrame {
         constraints.gridwidth = 5;
         constraints.fill = GridBagConstraints.CENTER;
         constraints.anchor = GridBagConstraints.CENTER;
-
-        add(panelInfo, constraints);
     }
 
     //------------------------------------------------------------------------------------------------------------------------------------------
@@ -691,8 +634,6 @@ public class GUIIKnowThatWord extends JFrame {
         constraints.gridwidth = 3;
         constraints.fill = GridBagConstraints.CENTER;
         constraints.anchor = GridBagConstraints.CENTER;
-
-        add(empezarNivel, constraints);
     }
 
     /**
@@ -713,9 +654,10 @@ public class GUIIKnowThatWord extends JFrame {
 
     private class Escucha extends MouseAdapter implements ActionListener {
 
+        GridBagConstraints constraints = new GridBagConstraints();
+
         @Override
         public void actionPerformed(ActionEvent e) {
-            int flag = 0;
 
             switch (cualGUI)
             {
@@ -727,9 +669,11 @@ public class GUIIKnowThatWord extends JFrame {
                         } else {
                             panelPalabras.remove(palabra);
                             conter = 0;
-                            remove(panelPalabras);
-                            verificarPalabras();
+
+                            buildGUI2();
                             panelPalabras.add(palabra);
+
+                            verificarPalabras();
                         }
                     }
                     repaint();
@@ -744,12 +688,12 @@ public class GUIIKnowThatWord extends JFrame {
                         } else {
                             panelPalabras.remove(palabra);
                             conter = 0;
-                            remove(panelPalabras);
-                            remove(panelEspacioEnBlanco3);
-                            remove(botonSI);
-                            remove(botonNO);
-                            remove(panelEspacioEnBlanco4);
+
+                            buildGUI3();
+
                             terminarNivel();
+
+                            conclusion();
                         }
                     }
                     repaint();
@@ -779,23 +723,8 @@ public class GUIIKnowThatWord extends JFrame {
             } else if (e.getSource() == empezarNivel) {
 
                 numeroNivel = game.subirNivelUsuario(game.getCantidadPalabrasDelNivel(), game.getAciertos());
-                createHeader(constraints);
-                createHelpButton(constraints);
-                createLevelCounter(constraints);
-                createExitButton(constraints);
-                createSpace1(constraints);
-                createSpace2(constraints);
 
-                remove(headerProject);
-                remove(ayuda);
-                remove(nivel);
-                remove(salir);
-                remove(panelEspacioEnBlanco1);
-                remove(panelEspacioEnBlanco2);
-                remove(panelEspacioEnBlanco5);
-                remove(aciertos);
-                remove(errores);
-                remove(panelInfo);
+                buildGUI1();
 
                 comenzarNivel();
             }
@@ -808,14 +737,8 @@ public class GUIIKnowThatWord extends JFrame {
                     conter++;
                     printAllWords();
                 } else {
-                    panelPalabras.remove(palabra);
-                    conter = 0;
-                    remove(panelPalabras);
-                    remove(panelEspacioEnBlanco3);
-                    remove(botonSI);
-                    remove(botonNO);
-                    remove(panelEspacioEnBlanco4);
-                    terminarNivel();
+                    printAllWords();
+                    timer.stop();
                 }
             }
             else if(e.getSource() == botonNO)
@@ -827,14 +750,8 @@ public class GUIIKnowThatWord extends JFrame {
                     conter++;
                     printAllWords();
                 } else {
-                    panelPalabras.remove(palabra);
-                    conter = 0;
-                    remove(panelPalabras);
-                    remove(panelEspacioEnBlanco3);
-                    remove(botonSI);
-                    remove(botonNO);
-                    remove(panelEspacioEnBlanco4);
-                    terminarNivel();
+                    printAllWords();
+                    timer.stop();
                 }
             }
         }
@@ -854,6 +771,7 @@ public class GUIIKnowThatWord extends JFrame {
             timer.start();
             repaint();
             revalidate();
+            System.out.println("todo correcto");
         }
 
         public void printAllWords()
@@ -869,16 +787,156 @@ public class GUIIKnowThatWord extends JFrame {
             }else{
                 panelPalabras.remove(palabra);
                 conter = 0;
-                remove(panelPalabras);
-                remove(panelEspacioEnBlanco3);
-                remove(botonSI);
-                remove(botonNO);
-                remove(panelEspacioEnBlanco4);
+
+                buildGUI3();
+
                 terminarNivel();
+
+                conclusion();
             }
             timer.start();
             repaint();
             revalidate();
+        }
+
+        public void buildGUI1()
+        {
+            remove(panelEspacioEnBlanco5);
+            remove(aciertos);
+            remove(errores);
+            remove(panelInfo);
+
+            constraints.gridx = 0;
+            constraints.gridy = 2;
+            constraints.gridwidth = 5;
+            constraints.fill = GridBagConstraints.CENTER;
+            constraints.anchor = GridBagConstraints.CENTER;
+
+            add(panelPalabras, constraints);
+
+            revalidate();
+            repaint();
+        }
+
+        public void buildGUI2()
+        {
+            remove(panelPalabras);
+
+            constraints.gridx = 0;
+            constraints.gridy = 2;
+            constraints.gridwidth = 5;
+            constraints.fill = GridBagConstraints.CENTER;
+            constraints.anchor = GridBagConstraints.CENTER;
+
+            add(panelPalabras, constraints);
+
+            constraints.gridx = 0;
+            constraints.gridy = 5;
+            constraints.gridwidth = 5;
+            constraints.gridheight = 1;
+            constraints.fill = GridBagConstraints.NONE;
+            constraints.anchor = GridBagConstraints.CENTER;
+
+            add(panelEspacioEnBlanco3, constraints);
+
+            constraints.gridx = 1;
+            constraints.gridy = 4;
+            constraints.gridwidth = 1;
+            constraints.fill = GridBagConstraints.CENTER;
+            constraints.anchor = GridBagConstraints.CENTER;
+
+            add(botonSI, constraints);
+
+            constraints.gridx = 3;
+            constraints.gridy = 4;
+            constraints.gridwidth = 1;
+            constraints.fill = GridBagConstraints.CENTER;
+            constraints.anchor = GridBagConstraints.CENTER;
+
+            add(botonNO, constraints);
+
+            constraints.gridx = 0;
+            constraints.gridy = 3;
+            constraints.gridwidth = 5;
+            constraints.gridheight = 1;
+            constraints.fill = GridBagConstraints.NONE;
+            constraints.anchor = GridBagConstraints.CENTER;
+
+            add(panelEspacioEnBlanco4, constraints);
+
+            revalidate();
+            repaint();
+        }
+
+        public void buildGUI3()
+        {
+            remove(panelPalabras);
+            remove(panelEspacioEnBlanco3);
+            remove(botonSI);
+            remove(botonNO);
+            remove(panelEspacioEnBlanco4);
+
+            constraints.gridx = 0;
+            constraints.gridy = 2;
+            constraints.gridwidth = 5;
+            constraints.gridheight = 1;
+            constraints.fill = GridBagConstraints.NONE;
+            constraints.anchor = GridBagConstraints.CENTER;
+
+            add(panelEspacioEnBlanco5, constraints);
+
+            constraints.gridx = 1;
+            constraints.gridy = 3;
+            constraints.gridwidth = 1;
+            constraints.fill = GridBagConstraints.NONE;
+            constraints.anchor = GridBagConstraints.CENTER;
+
+            add(aciertos, constraints);
+
+            constraints.gridx = 3;
+            constraints.gridy = 3;
+            constraints.gridwidth = 1;
+            constraints.fill = GridBagConstraints.NONE;
+            constraints.anchor = GridBagConstraints.CENTER;
+
+            add(errores, constraints);
+
+            constraints.gridx = 0;
+            constraints.gridy = 4;
+            constraints.gridwidth = 5;
+            constraints.fill = GridBagConstraints.CENTER;
+            constraints.anchor = GridBagConstraints.CENTER;
+
+            add(panelInfo, constraints);
+
+            revalidate();
+            repaint();
+        }
+
+        public void conclusion()
+        {
+            if(game.isGanar())
+            {
+                panelInfo.setText("Has obtenido "+numeroAciertos+" respuestas correctas y "+numeroErrores+" repuestas incorrectas.\n" +
+                        "\nEs decir, ¡puedes pasar al próximo nivel! Da click en ~Empezar nivel~");
+            }
+            else if(numeroNivel==10)
+            {
+                if(game.isGanar()) {
+                    panelInfo.setText("Has obtenido " + numeroAciertos + " respuestas correctas y " + numeroErrores + " repuestas incorrectas.\n" +
+                            "\n¡Lo hiciste muy bien!\nPuedes volver a intentar el máximo nivel dando click en el botón ~Empezar Nivel~");
+                }
+                else
+                {
+                    panelInfo.setText("Has obtenido " + numeroAciertos + " respuestas correctas y " + numeroErrores + " repuestas incorrectas.\n" +
+                            "\nPuedes hacerlo mejor.\nSi quieres ganar el máximo nivel, inténtalo de nuevo dando click en el botón ~Empezar Nivel~");
+                }
+            }
+            else
+            {
+                panelInfo.setText("Has obtenido "+numeroAciertos+" respuestas correctas y "+numeroErrores+" repuestas incorrectas.\n" +
+                        "\nEsto no es suficiente para pasar el nivel. Inténtalo de nuevo dando click en el botón ~Empezar nivel~");
+            }
         }
     }
 }

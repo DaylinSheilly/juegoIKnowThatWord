@@ -58,6 +58,7 @@ public class PalabrasDelNivel {
                 palabrasDelNivel.add(unaPalabra);
             }
         }
+        System.out.println("palabras");
         return palabrasDelNivel;
     }
 
@@ -70,11 +71,13 @@ public class PalabrasDelNivel {
 
     public ArrayList<String> palabrasAMemorizar(int cantidadPalabras)
     {
+        System.out.println("[0]");
         Random aleatorio = new Random();
         boolean añadir = true;
         //diccionario.size() obtiene el tamaño del arraylist, comienza en 0
         for(int flag=0;flag<cantidadPalabras;flag++)
         {
+            System.out.println("[1]");
             String unaPalabra = palabrasDelNivel.get(aleatorio.nextInt((cantidadPalabras*2)-1));
             if(palabrasAMemorizar.size() != 0)
             {
@@ -105,6 +108,7 @@ public class PalabrasDelNivel {
         for(int trampa=0;trampa<palabrasAMemorizar.size();trampa++){
             System.out.println(palabrasAMemorizar.get(trampa));
         }
+        System.out.println("memoria");
         return palabrasAMemorizar;
     }
 
