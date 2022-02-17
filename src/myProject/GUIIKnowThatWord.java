@@ -674,6 +674,8 @@ public class GUIIKnowThatWord extends JFrame {
                         } else {
                             conter = 0;
 
+                            numeroNivel = game.subirNivelUsuario(game.getCantidadPalabrasDelNivel(), game.getAciertos());
+
                             buildGUI3();
 
                             terminarNivel();
@@ -706,8 +708,6 @@ public class GUIIKnowThatWord extends JFrame {
                 JOptionPane.showMessageDialog(null, scroll, "Instrucciones del juego", JOptionPane.INFORMATION_MESSAGE);
 
             } else if (e.getSource() == empezarNivel) {
-
-                numeroNivel = game.subirNivelUsuario(game.getCantidadPalabrasDelNivel(), game.getAciertos());
 
                 buildGUI1();
 
@@ -749,6 +749,7 @@ public class GUIIKnowThatWord extends JFrame {
                 palabra.repaint();
                 panelPalabras.revalidate();
                 panelPalabras.repaint();
+                JOptionPane.showMessageDialog(null, palabra);
             }
             timer.start();
             repaint();
@@ -764,8 +765,11 @@ public class GUIIKnowThatWord extends JFrame {
                 palabra.repaint();
                 panelPalabras.revalidate();
                 panelPalabras.repaint();
+                JOptionPane.showMessageDialog(null, palabra);
             }else{
                 conter = 0;
+
+                numeroNivel = game.subirNivelUsuario(game.getCantidadPalabrasDelNivel(), game.getAciertos());
 
                 buildGUI3();
 
@@ -894,14 +898,15 @@ public class GUIIKnowThatWord extends JFrame {
 
         public void conclusion()
         {
-            if(game.isGanar())
+            System.out.println(game.isGanar());
+            if(game.isGanar() == true)
             {
                 panelInfo.setText("Has obtenido "+numeroAciertos+" respuestas correctas y "+numeroErrores+" repuestas incorrectas.\n" +
                         "\nEs decir, ¡puedes pasar al próximo nivel! Da click en ~Empezar nivel~");
             }
             else if(numeroNivel==10)
             {
-                if(game.isGanar()) {
+                if(game.isGanar() == true) {
                     panelInfo.setText("Has obtenido " + numeroAciertos + " respuestas correctas y " + numeroErrores + " repuestas incorrectas.\n" +
                             "\n¡Lo hiciste muy bien!\nPuedes volver a intentar el máximo nivel dando click en el botón ~Empezar Nivel~");
                 }

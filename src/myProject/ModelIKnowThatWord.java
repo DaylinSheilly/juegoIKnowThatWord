@@ -27,7 +27,7 @@ public class ModelIKnowThatWord {
         palabrasDelNivel = new ArrayList<String>();
         palabrasAMemorizar = new ArrayList<String>();
         nombreUsuario = "";
-        ganar=false;
+        ganar = false;
     }
 
     //---------------------------------------------------------------------------------------------------------------------------------------
@@ -131,7 +131,11 @@ public class ModelIKnowThatWord {
      */
 
     public int subirNivelUsuario(int totalPalabras, int palabrasAcertadas){
-         switch (suNivel) {
+        System.out.println(palabrasAcertadas);
+        System.out.println(totalPalabras * 0.7);
+        System.out.println(ganar);
+        System.out.println(suNivel);
+        switch (suNivel) {
              case 1:
                  if (palabrasAcertadas >= (totalPalabras * 0.7)){
                      suNivel++;
@@ -221,6 +225,10 @@ public class ModelIKnowThatWord {
                  }
                  break;
          }
+        System.out.println(palabrasAcertadas);
+        System.out.println(totalPalabras * 0.7);
+        System.out.println(ganar);
+        System.out.println(suNivel);
         return suNivel;
     }
 
