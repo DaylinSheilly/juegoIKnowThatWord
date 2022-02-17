@@ -133,7 +133,7 @@ public class GUIIKnowThatWord extends JFrame {
         repaint();
         pack();
 
-        timer = new Timer(500, escucha);
+        timer = new Timer(5000, escucha);
         escucha.printMemoryWords();
     }
 
@@ -671,6 +671,7 @@ public class GUIIKnowThatWord extends JFrame {
                         if (conter < game.getCantidadPalabrasDelNivel()) {
                             game.noAnswer();
                             conter++;
+                            printAllWords();
                         } else {
                             conter = 0;
 
@@ -741,6 +742,8 @@ public class GUIIKnowThatWord extends JFrame {
 
         public void printMemoryWords()
         {
+            panelPalabras.removeAll();
+            panelPalabras.add(palabra, BorderLayout.CENTER);
             if(conter<game.getCantidadPalabrasDelNivel()/2) {
                 palabra.setText(game.getPalabrasAMemorizar().get(conter));
                 conter++;
@@ -749,7 +752,6 @@ public class GUIIKnowThatWord extends JFrame {
                 palabra.repaint();
                 panelPalabras.revalidate();
                 panelPalabras.repaint();
-                JOptionPane.showMessageDialog(null, palabra);
             }
             timer.start();
             repaint();
@@ -758,6 +760,8 @@ public class GUIIKnowThatWord extends JFrame {
 
         public void printAllWords()
         {
+            panelPalabras.removeAll();
+            panelPalabras.add(palabra, BorderLayout.CENTER);
             if(conter<game.getCantidadPalabrasDelNivel()) {
                 palabra.setText(game.getPalabrasDelNivel().get(conter));
 
@@ -765,7 +769,6 @@ public class GUIIKnowThatWord extends JFrame {
                 palabra.repaint();
                 panelPalabras.revalidate();
                 panelPalabras.repaint();
-                JOptionPane.showMessageDialog(null, palabra);
             }else{
                 conter = 0;
 
@@ -788,6 +791,7 @@ public class GUIIKnowThatWord extends JFrame {
             remove(aciertos);
             remove(errores);
             remove(panelInfo);
+            remove(empezarNivel);
 
             constraints.gridx = 0;
             constraints.gridy = 2;
@@ -859,6 +863,9 @@ public class GUIIKnowThatWord extends JFrame {
             remove(botonNO);
             remove(panelEspacioEnBlanco4);
 
+            numeroAciertos = game.getAciertos();
+            numeroErrores = game.getErrores();
+
             constraints.gridx = 0;
             constraints.gridy = 2;
             constraints.gridwidth = 5;
@@ -875,6 +882,7 @@ public class GUIIKnowThatWord extends JFrame {
             constraints.anchor = GridBagConstraints.CENTER;
 
             add(aciertos, constraints);
+            aciertos.setText("Aciertos: " + numeroAciertos);
 
             constraints.gridx = 3;
             constraints.gridy = 3;
@@ -883,6 +891,7 @@ public class GUIIKnowThatWord extends JFrame {
             constraints.anchor = GridBagConstraints.CENTER;
 
             add(errores, constraints);
+            errores.setText("Errores: " + numeroErrores);
 
             constraints.gridx = 0;
             constraints.gridy = 4;
@@ -891,6 +900,14 @@ public class GUIIKnowThatWord extends JFrame {
             constraints.anchor = GridBagConstraints.CENTER;
 
             add(panelInfo, constraints);
+
+            constraints.gridx = 1;
+            constraints.gridy = 5;
+            constraints.gridwidth = 3;
+            constraints.fill = GridBagConstraints.CENTER;
+            constraints.anchor = GridBagConstraints.CENTER;
+
+            add(empezarNivel);
 
             revalidate();
             repaint();

@@ -131,10 +131,6 @@ public class ModelIKnowThatWord {
      */
 
     public int subirNivelUsuario(int totalPalabras, int palabrasAcertadas){
-        System.out.println(palabrasAcertadas);
-        System.out.println(totalPalabras * 0.7);
-        System.out.println(ganar);
-        System.out.println(suNivel);
         switch (suNivel) {
              case 1:
                  if (palabrasAcertadas >= (totalPalabras * 0.7)){
@@ -225,10 +221,6 @@ public class ModelIKnowThatWord {
                  }
                  break;
          }
-        System.out.println(palabrasAcertadas);
-        System.out.println(totalPalabras * 0.7);
-        System.out.println(ganar);
-        System.out.println(suNivel);
         return suNivel;
     }
 

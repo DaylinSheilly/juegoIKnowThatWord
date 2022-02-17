@@ -6,7 +6,7 @@ import java.util.ArrayList;
 public class Usuario {
     private ArrayList<String> usuarios, editarUsuarios = new ArrayList<String>();
     private int unUsuario, nivelUsuario;
-    private String usuarioIngresado, nombreUsuario;
+    private String nombreUsuario;
     private FileManager fileManager;
 
     /**
@@ -19,7 +19,6 @@ public class Usuario {
 
         unUsuario = 0;
         nivelUsuario = 1;
-        usuarioIngresado = " ";
         nombreUsuario = " ";
     }
 
@@ -55,6 +54,7 @@ public class Usuario {
                     conservarUsuarios = true;
                     añadir = false;
                 }
+                break;
             }
             else
             {
@@ -80,6 +80,7 @@ public class Usuario {
         for (unUsuario = 0; unUsuario < usuarios.size(); unUsuario++) {
             if (usuarios.get(unUsuario).equals(nombreUsuario)) {
                 nivelUsuario = Integer.parseInt(usuarios.get(unUsuario+1));
+                break;
             } else {
                 nivelUsuario = 1;
             }
@@ -95,6 +96,6 @@ public class Usuario {
      */
 
     public String getUsuarioIngresado() {
-        return usuarioIngresado;
+        return nombreUsuario;
     }
 }
