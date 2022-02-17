@@ -27,6 +27,7 @@ public class ModelIKnowThatWord {
         palabrasDelNivel = new ArrayList<String>();
         palabrasAMemorizar = new ArrayList<String>();
         nombreUsuario = "";
+        ganar=false;
     }
 
     //---------------------------------------------------------------------------------------------------------------------------------------
@@ -121,37 +122,7 @@ public class ModelIKnowThatWord {
         }
     }
 
-    //---------------------------------------------------------------------------------------------------------------------------------------
 
-    /**
-     * This function calls the pedirDatos functions of the Model class to request the name of the player in the GUI
-     */
-    public void pedirDatos(){
-        usuario.pedirDatos();
-        detectNewOrOldUser();
-    }
-
-    //---------------------------------------------------------------------------------------------------------------------------------------
-
-    /**
-     * This function saves the information of a new user.
-     */
-
-    public void registrarUsuario(){
-        usuario.registrarUsuario(suNivel);
-    }
-
-    //---------------------------------------------------------------------------------------------------------------------------------------
-
-    /**
-     * This function detects if the player has already played or not
-     */
-
-    public void detectNewOrOldUser()
-    {
-        elUsuario = usuario.getUsuarioIngresado();
-        suNivel = usuario.getNivelUsuario();
-    }
 
     //---------------------------------------------------------------------------------------------------------------------------------------
 
@@ -162,7 +133,7 @@ public class ModelIKnowThatWord {
     public int subirNivelUsuario(int totalPalabras, int palabrasAcertadas){
          switch (suNivel) {
              case 1:
-                 if (palabrasAcertadas >= (totalPalabras * 0.7)) {
+                 if (palabrasAcertadas >= (totalPalabras * 0.7)){
                      suNivel++;
                      ganar = true;
                  } else {
@@ -171,7 +142,7 @@ public class ModelIKnowThatWord {
                  }
                  break;
              case 2:
-                 if (palabrasAcertadas >= (totalPalabras * 0.7)) {
+                 if (palabrasAcertadas >= (totalPalabras * 0.7)){
                      suNivel++;
                      ganar = true;
                  } else {
@@ -246,7 +217,6 @@ public class ModelIKnowThatWord {
                  if (palabrasAcertadas == totalPalabras) {
                      ganar = true;
                  } else {
-                     suNivel = suNivel;
                      ganar = false;
                  }
                  break;
@@ -257,6 +227,38 @@ public class ModelIKnowThatWord {
     public void noAnswer()
     {
         conteoErrores++;
+    }
+
+    //---------------------------------------------------------------------------------------------------------------------------------------
+
+    /**
+     * This function calls the pedirDatos functions of the Model class to request the name of the player in the GUI
+     */
+    public void pedirDatos(){
+        usuario.pedirDatos();
+        detectNewOrOldUser();
+    }
+
+    //---------------------------------------------------------------------------------------------------------------------------------------
+
+    /**
+     * This function saves the information of a new user.
+     */
+
+    public void registrarUsuario(){
+        usuario.registrarUsuario(suNivel);
+    }
+
+    //---------------------------------------------------------------------------------------------------------------------------------------
+
+    /**
+     * This function detects if the player has already played or not
+     */
+
+    public void detectNewOrOldUser()
+    {
+        elUsuario = usuario.getUsuarioIngresado();
+        suNivel = usuario.getNivelUsuario();
     }
 
     //---------------------------------------------------------------------------------------------------------------------------------------
