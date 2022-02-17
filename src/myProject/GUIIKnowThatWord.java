@@ -105,7 +105,6 @@ public class GUIIKnowThatWord extends JFrame {
 
 
         numeroNivel = game.getSuNivel();
-        game.palabrasPorNivel(numeroNivel);
         createPalabrasAMemorizarGUI(constraints);
         createPalabrasAVerificarGUI(constraints);
         createConclusionGUI(constraints);
@@ -127,9 +126,9 @@ public class GUIIKnowThatWord extends JFrame {
         game.palabrasPorNivel(numeroNivel);
 
         empezarNivel.setVisible(false);
+        escucha.buildGUI1();
 
         conter = 0;
-        panelPalabras.add(palabra, BorderLayout.CENTER);
         revalidate();
         repaint();
         pack();
@@ -197,8 +196,6 @@ public class GUIIKnowThatWord extends JFrame {
 
         revalidate();
         repaint();
-
-        System.out.println("panel construido");
     }
 
     //------------------------------------------------------------------------------------------------------------------------------------------
@@ -357,7 +354,7 @@ public class GUIIKnowThatWord extends JFrame {
         constraints.fill = GridBagConstraints.CENTER;
         constraints.anchor = GridBagConstraints.CENTER;
 
-        add(panelPalabras, constraints);
+        panelPalabras.add(palabra, BorderLayout.CENTER);
     }
 
     //------------------------------------------------------------------------------------------------------------------------------------------
@@ -655,16 +652,12 @@ public class GUIIKnowThatWord extends JFrame {
             {
                 case 1:
                     if(e.getSource()==timer) {
-                        panelPalabras.removeAll();
                         if (conter < game.getCantidadPalabrasDelNivel() / 2) {
-                            panelPalabras.remove(palabra);
                             printMemoryWords();
                         } else {
-                            panelPalabras.remove(palabra);
                             conter = 0;
 
                             buildGUI2();
-                            panelPalabras.add(palabra, BorderLayout.CENTER);
 
                             verificarPalabras();
                         }
@@ -679,7 +672,6 @@ public class GUIIKnowThatWord extends JFrame {
                             game.noAnswer();
                             conter++;
                         } else {
-                            panelPalabras.remove(palabra);
                             conter = 0;
 
                             buildGUI3();
@@ -725,7 +717,6 @@ public class GUIIKnowThatWord extends JFrame {
             {
                 timer.stop();
                 if(conter<game.getCantidadPalabrasDelNivel()) {
-                    panelPalabras.removeAll();
                     game.validarPalabra(game.getPalabrasDelNivel().get(conter), true);
                     conter++;
                     printAllWords();
@@ -738,7 +729,6 @@ public class GUIIKnowThatWord extends JFrame {
             {
                 timer.stop();
                 if(conter<game.getCantidadPalabrasDelNivel()) {
-                    panelPalabras.removeAll();
                     game.validarPalabra(game.getPalabrasDelNivel().get(conter), false);
                     conter++;
                     printAllWords();
@@ -751,10 +741,8 @@ public class GUIIKnowThatWord extends JFrame {
 
         public void printMemoryWords()
         {
-            panelPalabras.removeAll();
             if(conter<game.getCantidadPalabrasDelNivel()/2) {
                 palabra.setText(game.getPalabrasAMemorizar().get(conter));
-                panelPalabras.add(palabra, BorderLayout.CENTER);
                 conter++;
 
                 palabra.revalidate();
@@ -771,14 +759,12 @@ public class GUIIKnowThatWord extends JFrame {
         {
             if(conter<game.getCantidadPalabrasDelNivel()) {
                 palabra.setText(game.getPalabrasDelNivel().get(conter));
-                panelPalabras.add(palabra, BorderLayout.CENTER);
 
                 palabra.revalidate();
                 palabra.repaint();
                 panelPalabras.revalidate();
                 panelPalabras.repaint();
             }else{
-                panelPalabras.remove(palabra);
                 conter = 0;
 
                 buildGUI3();
