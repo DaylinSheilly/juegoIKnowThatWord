@@ -49,7 +49,6 @@ public class PalabrasDelNivel {
             palabrasAMemorizar.clear();
         }
         boolean añadir = true;
-        //diccionario.size() obtiene el tamaño del arraylist, comienza en 0
         for(int flag=0;flag<cantidadPalabras;flag++)
         {
             String unaPalabra = palabrasDelNivel.get(aleatorio.nextInt(getCantidadPalabrasDelNivel()-1));

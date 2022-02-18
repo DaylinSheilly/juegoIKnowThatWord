@@ -46,9 +46,7 @@ public class GUIIKnowThatWord extends JFrame {
 
         //Default JFrame configuration
         this.setTitle("I Know That Word");
-        //this.setSize(200,100);
         this.pack();
-        //this.setUndecorated(true);
         this.setResizable(false);
         this.setVisible(true);
         this.setLocationRelativeTo(null);
@@ -313,6 +311,7 @@ public class GUIIKnowThatWord extends JFrame {
     }
 
     //------------------------------------------------------------------------------------------------------------------------------------------
+
     /**
      * This function creates the salir button.
      * @param constraints
@@ -579,6 +578,7 @@ public class GUIIKnowThatWord extends JFrame {
      * This function create the PanelInfo pane.
      * @param constraints
      */
+
     public void createPanelInfo(GridBagConstraints constraints)
     {
         panelInfo = new JTextArea();
@@ -590,13 +590,6 @@ public class GUIIKnowThatWord extends JFrame {
         panelInfo.setBackground(new Color(0,0,0,0));
         panelInfo.setEditable(false);
         panelInfo.setVisible(true);
-
-        /*info = new JLabel();
-        info.setPreferredSize(new Dimension(390, 240));
-        info.setFont(new Font(Font.DIALOG,Font.BOLD,20));
-        info.setBorder(BorderFactory.createTitledBorder("Información"));
-        info.setBackground(new Color(0,0,0,0));
-        info.setVisible(true);*/
 
         constraints.gridx = 0;
         constraints.gridy = 4;
@@ -818,6 +811,11 @@ public class GUIIKnowThatWord extends JFrame {
             pack();
         }
 
+        /**
+         * This function shows the second interface of the game where the user chooses the words that appeared and
+         * discards the ones that did not
+         */
+
         public void buildGUI2()
         {
             remove(panelPalabras);
@@ -868,6 +866,10 @@ public class GUIIKnowThatWord extends JFrame {
             repaint();
             pack();
         }
+
+        /**
+         * This function shows the results at the end of the game level
+         */
 
         public void buildGUI3()
         {
@@ -927,6 +929,10 @@ public class GUIIKnowThatWord extends JFrame {
             repaint();
             pack();
         }
+
+        /**
+         * This function shows the information at the end of the level
+         */
 
         public void conclusion()
         {
