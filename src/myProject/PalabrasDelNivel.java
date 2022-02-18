@@ -26,40 +26,11 @@ public class PalabrasDelNivel {
      */
 
     public ArrayList<String> getPalabrasDelNivel(int cantidadPalabras){
-        if(palabrasDelNivel.size()==0) {
+        if(palabrasDelNivel.size() != 0) {
             palabrasDelNivel.clear();
         }
-        Random aleatorio = new Random();
-        boolean añadir = true;
-        //diccionario.size() obtiene el tamaño del arraylist, comienza en 0
-        for(int flag=0;flag<cantidadPalabras;flag++)
-        {
-            String unaPalabra = todasLasPalabras.get(aleatorio.nextInt(199));
-            if(palabrasDelNivel.size() != 0)
-            {
-                añadir=true;
-                for(int flag1=0;flag1<palabrasDelNivel.size();flag1++)
-                {
-                    if(palabrasDelNivel.get(flag1)==unaPalabra)
-                    {
-                        unaPalabra = todasLasPalabras.get(aleatorio.nextInt(199));
-                        añadir = false;
-                        break;
-                    }
-                }
-                if(añadir)
-                {
-                    palabrasDelNivel.add(unaPalabra);
-                }
-                else
-                {
-                    flag--;
-                }
-            }
-            else
-            {
-                palabrasDelNivel.add(unaPalabra);
-            }
+        for(int flag=0; flag < cantidadPalabras; flag++){
+            palabrasDelNivel.add(todasLasPalabras.get(flag));
         }
         return palabrasDelNivel;
     }
@@ -74,11 +45,10 @@ public class PalabrasDelNivel {
     public ArrayList<String> palabrasAMemorizar(int cantidadPalabras)
     {
         Random aleatorio = new Random();
-        if(palabrasAMemorizar.size()==0) {
+        if(palabrasAMemorizar.size() != 0) {
             palabrasAMemorizar.clear();
         }
         boolean añadir = true;
-        //diccionario.size() obtiene el tamaño del arraylist, comienza en 0
         for(int flag=0;flag<cantidadPalabras;flag++)
         {
             String unaPalabra = palabrasDelNivel.get(aleatorio.nextInt(getCantidadPalabrasDelNivel()-1));
@@ -111,6 +81,7 @@ public class PalabrasDelNivel {
         for(int trampa=0;trampa<palabrasAMemorizar.size();trampa++){
             System.out.println(palabrasAMemorizar.get(trampa));
         }
+        System.out.println("----------------------------------------------------------------------------------------------------------------------------");
         return palabrasAMemorizar;
     }
 

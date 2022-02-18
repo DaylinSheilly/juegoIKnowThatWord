@@ -46,6 +46,7 @@ public class Usuario {
         for (int flag = 0; flag < usuarios.size(); flag++) {
             if(usuarios.get(flag).equals(nombreUsuario)) {
                 boolean conservarUsuarios = false;
+                añadir = false;
                 usuarios.remove(flag+1);
                 usuarios.add(flag+1,String.valueOf(nivelUsuario));
                 for(int flag1=0;flag1<usuarios.size();flag1++)
@@ -60,7 +61,6 @@ public class Usuario {
             {
                 añadir =true;
             }
-            break;
         }
         if(añadir)
         {

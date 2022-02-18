@@ -1,16 +1,14 @@
 package myProject;
-
-import javax.swing.*;
 import java.util.ArrayList;
-import java.util.Random;
+
 
 public class ModelIKnowThatWord {
 
     private PalabrasDelNivel palabras;
     private Usuario usuario;
-    private int conteoErrores, conteoAciertos, unaPalabra, suNivel;
-    private boolean fallo, ganar;
-    private String palabra, nuevaPalabra, elUsuario, nombreUsuario;
+    private String elUsuario;
+    private int conteoErrores, conteoAciertos, suNivel;
+    private boolean ganar;
     private ArrayList<String> palabrasDelNivel, palabrasAMemorizar;
 
     /**
@@ -22,11 +20,9 @@ public class ModelIKnowThatWord {
         usuario = new Usuario();
         conteoErrores = 0;
         conteoAciertos = 0;
-        unaPalabra = 0;
         suNivel = usuario.getNivelUsuario();
         palabrasDelNivel = new ArrayList<String>();
         palabrasAMemorizar = new ArrayList<String>();
-        nombreUsuario = "";
         ganar = false;
     }
 
@@ -234,6 +230,7 @@ public class ModelIKnowThatWord {
     /**
      * This function calls the pedirDatos functions of the Model class to request the name of the player in the GUI
      */
+
     public void pedirDatos(){
         usuario.pedirDatos();
         detectNewOrOldUser();
