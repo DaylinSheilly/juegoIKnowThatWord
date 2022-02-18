@@ -57,7 +57,7 @@ Vibrar
 Desconocido
 Valor
 Tortuga
-Desafortunadamente
+Afortunado
 Vida
 Criatura
 Especie

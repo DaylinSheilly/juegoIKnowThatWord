@@ -83,6 +83,7 @@ public class GUIIKnowThatWord extends JFrame {
         panelInstrucciones.setPreferredSize(new Dimension(410,1005));
         panelInstrucciones.setBackground(Color.WHITE);
         panelInstrucciones.setBorder(BorderFactory.createTitledBorder("Instrucciones del juego."));
+        panelInstrucciones.setFont(new Font(Font.DIALOG,Font.BOLD,40));
         panelInstrucciones.setLayout(new BorderLayout());
 
         instrucciones = new JTextArea();
@@ -99,7 +100,7 @@ public class GUIIKnowThatWord extends JFrame {
         palabra.setAlignmentY(SwingConstants.CENTER);
         palabra.setHorizontalAlignment(JLabel.CENTER);
         palabra.setVerticalAlignment(JLabel.CENTER);
-        palabra.setFont(new Font(Font.DIALOG,Font.BOLD,60));
+        palabra.setFont(new Font(Font.DIALOG,Font.BOLD,40));
 
         game.pedirDatos();
 
@@ -675,8 +676,6 @@ public class GUIIKnowThatWord extends JFrame {
                         } else {
                             conter = 0;
 
-                            numeroNivel = game.subirNivelUsuario(game.getCantidadPalabrasDelNivel(), game.getAciertos());
-
                             buildGUI3();
 
                             terminarNivel();
@@ -710,6 +709,7 @@ public class GUIIKnowThatWord extends JFrame {
 
             } else if (e.getSource() == empezarNivel) {
 
+                nivel.setText("Nivel: " + numeroNivel);
                 buildGUI1();
 
                 comenzarNivel();
@@ -740,6 +740,10 @@ public class GUIIKnowThatWord extends JFrame {
             }
         }
 
+        /**
+         * This function shows the words to memorize
+         */
+
         public void printMemoryWords()
         {
             panelPalabras.removeAll();
@@ -757,6 +761,10 @@ public class GUIIKnowThatWord extends JFrame {
             repaint();
             revalidate();
         }
+
+        /**
+         * This function shows all the words of the level
+         */
 
         public void printAllWords()
         {
@@ -785,6 +793,10 @@ public class GUIIKnowThatWord extends JFrame {
             revalidate();
         }
 
+        /**
+         * This function builds the first interface of the game where the words to be memorized are displayed
+         */
+
         public void buildGUI1()
         {
             remove(panelEspacioEnBlanco5);
@@ -803,6 +815,7 @@ public class GUIIKnowThatWord extends JFrame {
 
             revalidate();
             repaint();
+            pack();
         }
 
         public void buildGUI2()
@@ -853,6 +866,7 @@ public class GUIIKnowThatWord extends JFrame {
 
             revalidate();
             repaint();
+            pack();
         }
 
         public void buildGUI3()
@@ -907,31 +921,28 @@ public class GUIIKnowThatWord extends JFrame {
             constraints.fill = GridBagConstraints.CENTER;
             constraints.anchor = GridBagConstraints.CENTER;
 
-            add(empezarNivel);
+            add(empezarNivel, constraints);
 
             revalidate();
             repaint();
+            pack();
         }
 
         public void conclusion()
         {
-            System.out.println(game.isGanar());
-            if(game.isGanar() == true)
-            {
-                panelInfo.setText("Has obtenido "+numeroAciertos+" respuestas correctas y "+numeroErrores+" repuestas incorrectas.\n" +
-                        "\nEs decir, ¡puedes pasar al próximo nivel! Da click en ~Empezar nivel~");
-            }
-            else if(numeroNivel==10)
-            {
-                if(game.isGanar() == true) {
+            if(numeroNivel==10) {
+                if (game.isGanar()) {
                     panelInfo.setText("Has obtenido " + numeroAciertos + " respuestas correctas y " + numeroErrores + " repuestas incorrectas.\n" +
                             "\n¡Lo hiciste muy bien!\nPuedes volver a intentar el máximo nivel dando click en el botón ~Empezar Nivel~");
-                }
-                else
-                {
+                } else {
                     panelInfo.setText("Has obtenido " + numeroAciertos + " respuestas correctas y " + numeroErrores + " repuestas incorrectas.\n" +
                             "\nPuedes hacerlo mejor.\nSi quieres ganar el máximo nivel, inténtalo de nuevo dando click en el botón ~Empezar Nivel~");
                 }
+            }
+            else if(game.isGanar())
+            {
+                panelInfo.setText("Has obtenido "+numeroAciertos+" respuestas correctas y "+numeroErrores+" repuestas incorrectas.\n" +
+                        "\nEs decir, ¡puedes pasar al próximo nivel! Da click en ~Empezar nivel~");
             }
             else
             {

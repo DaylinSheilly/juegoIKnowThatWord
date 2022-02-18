@@ -234,6 +234,7 @@ public class ModelIKnowThatWord {
     /**
      * This function calls the pedirDatos functions of the Model class to request the name of the player in the GUI
      */
+
     public void pedirDatos(){
         usuario.pedirDatos();
         detectNewOrOldUser();
