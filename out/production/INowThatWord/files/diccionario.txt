@@ -57,7 +57,7 @@ Vibrar
 Desconocido
 Valor
 Tortuga
-Afortunado
+Desafortunadamente
 Vida
 Criatura
 Especie
@@ -189,7 +189,7 @@ Dinero
 Leche
 Carne
 Miel
-Hombre
+hombre
 Mujer
 Lista
 Cita
