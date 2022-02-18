@@ -264,6 +264,18 @@ public class ModelIKnowThatWord {
     //---------------------------------------------------------------------------------------------------------------------------------------
 
     /**
+     * This function restablish the point conters
+     */
+
+    public void restartPoints()
+    {
+        conteoAciertos=0;
+        conteoErrores=0;
+    }
+
+    //---------------------------------------------------------------------------------------------------------------------------------------
+
+    /**
      * This method gets the user level.
      * @return new level
      */
