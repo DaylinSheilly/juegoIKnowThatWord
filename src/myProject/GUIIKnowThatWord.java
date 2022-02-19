@@ -702,6 +702,7 @@ public class GUIIKnowThatWord extends JFrame {
 
             } else if (e.getSource() == empezarNivel) {
 
+                game.restartPoints();
                 nivel.setText("Nivel: " + numeroNivel);
                 buildGUI1();
 
